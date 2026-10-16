@@ -1,0 +1,21 @@
+{
+  "bloco": "11R.4R.25",
+  "versao": "v2",
+  "status": "PRONTO_PARA_TESTE_GITHUB_PAGES",
+  "municipios": 497,
+  "locais_tse": 7883,
+  "pontos_geograficos": 7748,
+  "locais_em_revisao": 135,
+  "candidaturas_municipais_json": 497,
+  "rankings_estaduais": 5,
+  "modos_mapa": [
+    "areas",
+    "pontos",
+    "calor_de_locais",
+    "clusters"
+  ],
+  "partidos": "CARGOS_6_E_7",
+  "dados_v1_e_v2_identicos": true,
+  "votos_modificados": 0,
+  "publicado": false
+}

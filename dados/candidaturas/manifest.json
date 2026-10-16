@@ -1,0 +1,2031 @@
+{
+  "bloco": "11R.4R.21",
+  "versao": "v2",
+  "gerado_em_utc": "2026-10-16T18:10:07.274113+00:00",
+  "status": "STAGING_NAO_PUBLICADO",
+  "registros_origem": 503461,
+  "registros_exportados": 503461,
+  "municipios": 497,
+  "arquivos_municipais": 497,
+  "arquivos_estaduais": 5,
+  "cargos": [
+    "1",
+    "3",
+    "5",
+    "6",
+    "7"
+  ],
+  "politica_nulos": "NaN/NA -> null; nunca zero automatico",
+  "votos_modificados": 0,
+  "arquivos_originais_modificados": 0,
+  "arquivos": {
+    "candidaturas/municipios/4300034.json": {
+      "bytes": 422163,
+      "sha256": "c0379c3bf1a9b73895c8d86cdb0c8b00d2a5241b533ac45bd6f8f23cfe837f85"
+    },
+    "candidaturas/municipios/4300059.json": {
+      "bytes": 421417,
+      "sha256": "cbc9ff2fec62cf7675f3357153a97e6267cbf2bca63c03dbc537e634c0ccbfe8"
+    },
+    "candidaturas/municipios/4300109.json": {
+      "bytes": 427987,
+      "sha256": "d5e688c38a5ab428efbfd44b1b654cb7a827f31ff56f4b5211714b0d3ecddc2a"
+    },
+    "candidaturas/municipios/4300208.json": {
+      "bytes": 423967,
+      "sha256": "7c20f268675326ec8bc6407c4fa1837c3ef0bf08f5eed3f10cefa95ebc30c758"
+    },
+    "candidaturas/municipios/4300307.json": {
+      "bytes": 422617,
+      "sha256": "4ef408f9f7856b848a8e4c3304466d0b99f58507b68363bfe3fe5292c9341a90"
+    },
+    "candidaturas/municipios/4300406.json": {
+      "bytes": 437069,
+      "sha256": "2f48b7dbc63233e3926d23e7ff220eade3d4496a7f7e4d9b2c2d5b4199faa191"
+    },
+    "candidaturas/municipios/4300455.json": {
+      "bytes": 421253,
+      "sha256": "f2cf995c80744e13b095933bb0c18d2da725ae676ad51b6bc5d47711f5df4b61"
+    },
+    "candidaturas/municipios/4300471.json": {
+      "bytes": 420911,
+      "sha256": "cb8af72b309d39f4fb7169c896363d8eb22a15f44f31f0f1c5187dc51e77815f"
+    },
+    "candidaturas/municipios/4300505.json": {
+      "bytes": 423607,
+      "sha256": "892635baa8bb2a7be5e90e0105a31398148adb97578c7a1b561d4dd3e70e08ee"
+    },
+    "candidaturas/municipios/4300554.json": {
+      "bytes": 420009,
+      "sha256": "d7f59737751eb278a617cb4989a749b0f0673e22e17f5919d497655dfcae29c3"
+    },
+    "candidaturas/municipios/4300570.json": {
+      "bytes": 421900,
+      "sha256": "e8b7e470ac0745c936e1fde537654d22fd5a018b3308cb013c86db188a74a9ce"
+    },
+    "candidaturas/municipios/4300604.json": {
+      "bytes": 447750,
+      "sha256": "2072fc7114391c0c7f101814cdfc7cccc35aee1f8d5393e5fc65a73fbb17af30"
+    },
+    "candidaturas/municipios/4300638.json": {
+      "bytes": 421797,
+      "sha256": "586b169d0e20ee5b9218b776b6c4fcdb5b3af64be95bcad282ea9d448d3242cf"
+    },
+    "candidaturas/municipios/4300646.json": {
+      "bytes": 422611,
+      "sha256": "1a8bb24c6f10f3d8dd8e2e37330c66a3e7576ea5e7939e346fa8264c827003ff"
+    },
+    "candidaturas/municipios/4300661.json": {
+      "bytes": 419663,
+      "sha256": "a9668d552d891002f10f99a0e2b77aedf2a0f2227187d329e1e1db017bfe8b9a"
+    },
+    "candidaturas/municipios/4300703.json": {
+      "bytes": 423136,
+      "sha256": "b0d52e32b171ed7df73b5a2237c111bd375da4651c8563a3101a433e571eb78b"
+    },
+    "candidaturas/municipios/4300802.json": {
+      "bytes": 426266,
+      "sha256": "9770b90055388272495945f220634c922463ecc715e1be1f0c3d1c3558fd9474"
+    },
+    "candidaturas/municipios/4300851.json": {
+      "bytes": 422971,
+      "sha256": "58243d8763ad18d2e336c23b8b5a7d6b72bfd158e0baf4bc8404e0a9af89639d"
+    },
+    "candidaturas/municipios/4300877.json": {
+      "bytes": 426115,
+      "sha256": "0409e28b5d7d545f544e24010273e01752f3b11e0996472cc4573e619f149300"
+    },
+    "candidaturas/municipios/4300901.json": {
+      "bytes": 422853,
+      "sha256": "b70ce6bb768ec84aa811eef0c3dde775ffe4ad6485e6b41c1aa5310d27246b56"
+    },
+    "candidaturas/municipios/4301008.json": {
+      "bytes": 431418,
+      "sha256": "2fef9ec56cb1ac5c2053aaa7826d5ae4b36fd1dbda65a0d071245c3eebecf843"
+    },
+    "candidaturas/municipios/4301057.json": {
+      "bytes": 431316,
+      "sha256": "575136122ac5d575e7c7ba2a2e43e372c5dab4098f3fcf386d274a9142f23580"
+    },
+    "candidaturas/municipios/4301073.json": {
+      "bytes": 419856,
+      "sha256": "74f981e30414799704a792e8c7dbaa7a9ae1e99f3cb02ab93772f24a64e7bad6"
+    },
+    "candidaturas/municipios/4301107.json": {
+      "bytes": 429791,
+      "sha256": "23ab47c64dec1cfb127f2e320b04d990d2973902d81ea332aca074b463f4d300"
+    },
+    "candidaturas/municipios/4301206.json": {
+      "bytes": 425504,
+      "sha256": "0ef33aab17b958b048566a71c6f604576bfe9546e8e8306330a2b3b6d731f1bf"
+    },
+    "candidaturas/municipios/4301305.json": {
+      "bytes": 430569,
+      "sha256": "d4e6b6df6e9076df1678d923bf054d5273b6a10fe4c6170733e099edc1d1c9ff"
+    },
+    "candidaturas/municipios/4301404.json": {
+      "bytes": 425825,
+      "sha256": "81cdbcd77766ee77e2e50efb6cdaafb8c2cbe9a7aaf922cc6f3a9ea5930974f4"
+    },
+    "candidaturas/municipios/4301503.json": {
+      "bytes": 424448,
+      "sha256": "c4523b959c81303a1106894f22ca185cb4741d0ad33e516c05327f42d1e5e532"
+    },
+    "candidaturas/municipios/4301552.json": {
+      "bytes": 420819,
+      "sha256": "dbe043099544f305d6fc467493941e0225e19f63a5a0bb1d02da162d72afa244"
+    },
+    "candidaturas/municipios/4301602.json": {
+      "bytes": 441419,
+      "sha256": "6e860d6f13ec536602dae21a8b63e6a18a5ed9352ac8c141aec562e9b83b5298"
+    },
+    "candidaturas/municipios/4301636.json": {
+      "bytes": 431848,
+      "sha256": "e14555c33b61b6c69606a0b6fcce57a199c188859b0712ce9d4346bad5229ac8"
+    },
+    "candidaturas/municipios/4301651.json": {
+      "bytes": 425352,
+      "sha256": "b5a7c832cd06903300ee54fbf2376fa144580bf11688e615b43b3a681bc7e9b2"
+    },
+    "candidaturas/municipios/4301701.json": {
+      "bytes": 422807,
+      "sha256": "7cb25fbacc4d4558728662a21610ab935812029f7e2174089aa29b08bb712458"
+    },
+    "candidaturas/municipios/4301750.json": {
+      "bytes": 423186,
+      "sha256": "9c76f1d5566a5795b44c45ba7595875fe2c6f7e873623e5f3974c56ca8f603e0"
+    },
+    "candidaturas/municipios/4301800.json": {
+      "bytes": 423542,
+      "sha256": "9e358fbb233e13587970cd6dc090098a515e73c182b4be61df7b33132f14540b"
+    },
+    "candidaturas/municipios/4301859.json": {
+      "bytes": 420835,
+      "sha256": "4997281accc96cfd861fcb6dfc47060f8c9fe2d4d5f50d09f92df623be32aeb8"
+    },
+    "candidaturas/municipios/4301875.json": {
+      "bytes": 422176,
+      "sha256": "02320fb04be216c4ae47249fa7a4a7ede867b4a23e01677d333faa97094c635c"
+    },
+    "candidaturas/municipios/4301909.json": {
+      "bytes": 429640,
+      "sha256": "a7a332bd956fb6b5b52cdc70088c9a2611919b6b89f1e2ffdf03cd28e3f2f42d"
+    },
+    "candidaturas/municipios/4301925.json": {
+      "bytes": 418108,
+      "sha256": "e041c370d6220e72ed8e2c418edf2f7ba7711427a509719ddce83acbabab0508"
+    },
+    "candidaturas/municipios/4301958.json": {
+      "bytes": 422026,
+      "sha256": "d396cd824cb625c072ed61ca417ea0e332b83af33193e28883e7d0600ca3e8d6"
+    },
+    "candidaturas/municipios/4302006.json": {
+      "bytes": 424564,
+      "sha256": "9ba837c484bfa52efdc4dc75aae08ea20b31aa95a8cab6c56b3f1ecff323269e"
+    },
+    "candidaturas/municipios/4302055.json": {
+      "bytes": 418964,
+      "sha256": "fcb7d7c76b37972ec8029d4bfa4fd9920cb55925c368abb569c7fde72c653dff"
+    },
+    "candidaturas/municipios/4302105.json": {
+      "bytes": 442162,
+      "sha256": "54ffd9be1bf6906bde9e4f1a000b35118d1933f669be7abf2e3c3e4a20afbf4b"
+    },
+    "candidaturas/municipios/4302154.json": {
+      "bytes": 421123,
+      "sha256": "74706c90fc15a4dceef7921abbee250259b938de318cb72d10a0cf496b9fdc62"
+    },
+    "candidaturas/municipios/4302204.json": {
+      "bytes": 422771,
+      "sha256": "0e033bf5155e6a3c08b0880e0f89f9e3dad4f303c3ea67815a87ceea6c4f9cad"
+    },
+    "candidaturas/municipios/4302220.json": {
+      "bytes": 420047,
+      "sha256": "4c0a051cf289c8426c25079b1289505374dad2f6131adbfa27151b3c90741274"
+    },
+    "candidaturas/municipios/4302238.json": {
+      "bytes": 420571,
+      "sha256": "d8a16aafe7865c24da8fc0557df2561bb85878d6fe0b9c1c0f8f70c46863f18f"
+    },
+    "candidaturas/municipios/4302253.json": {
+      "bytes": 421509,
+      "sha256": "6e3a6443b26f1ba60070031206f4d50dface0a7fe489ac7efb9829c25022cb9a"
+    },
+    "candidaturas/municipios/4302303.json": {
+      "bytes": 425635,
+      "sha256": "937f944ee53fa6c1c422bcb3987e8635edf1824b94ee29268e8a0ec98b9d4dcc"
+    },
+    "candidaturas/municipios/4302352.json": {
+      "bytes": 429083,
+      "sha256": "7ec928671734cb7580b6a5cfc2ced097cac55c9b433f3eb76f4ea27e0f23de4d"
+    },
+    "candidaturas/municipios/4302378.json": {
+      "bytes": 419766,
+      "sha256": "79d0bf6ea7b36c3ce3d518ff2bb84fdc4bfc9324df2e7e5d015aef54644b3557"
+    },
+    "candidaturas/municipios/4302402.json": {
+      "bytes": 428319,
+      "sha256": "ac04fdf67493b6d5f0aea315f820cb21eeb66332a14a04f2ca664e6538eca849"
+    },
+    "candidaturas/municipios/4302451.json": {
+      "bytes": 422899,
+      "sha256": "c6fabb157ad51c409055c3339e5fb764c9861877f314a65e099656c80d325fe3"
+    },
+    "candidaturas/municipios/4302501.json": {
+      "bytes": 422875,
+      "sha256": "d9513c66e7e5d76ab1ae20932e0768417b3ca26b5b5a471946476eabb8cc6dda"
+    },
+    "candidaturas/municipios/4302584.json": {
+      "bytes": 421316,
+      "sha256": "373cea5fc366683eda4ba66607bb0ec18acaf0c5e2b6b3369dd74f7a64b1a31c"
+    },
+    "candidaturas/municipios/4302600.json": {
+      "bytes": 420364,
+      "sha256": "9928fb9d4348f4bb990a1cb22e535035b8e0594e69073dcbc279efe2788eceab"
+    },
+    "candidaturas/municipios/4302659.json": {
+      "bytes": 423245,
+      "sha256": "16fd6e0f7e0154f8f176ba1cebfefa0f14ffa046f1c6dd926f5a9b4efcfa8a37"
+    },
+    "candidaturas/municipios/4302709.json": {
+      "bytes": 432490,
+      "sha256": "89e9e50a04e6169413f3d2f0c0c61f94cab8fc4b09936761b9283f235fbbd940"
+    },
+    "candidaturas/municipios/4302808.json": {
+      "bytes": 435338,
+      "sha256": "9ebbddf2e6a18687bfb49abc8483dbe3193e07da17f1f61391aab89d3e31b6c3"
+    },
+    "candidaturas/municipios/4302907.json": {
+      "bytes": 426081,
+      "sha256": "734dcaddd8b1a1f19e5c5f8ae8022dc04e0ff83334cf81205e27e90e4890f46c"
+    },
+    "candidaturas/municipios/4303004.json": {
+      "bytes": 439756,
+      "sha256": "59f5eb84e50accdcd4b5f54a04a1f3b89b6fbd5ff71e83f9e321086fb278b1a1"
+    },
+    "candidaturas/municipios/4303103.json": {
+      "bytes": 445313,
+      "sha256": "87ba203b5e86704b32fcd64c51bea7dcbe79b7465a8f07d398803ceb72c52eb2"
+    },
+    "candidaturas/municipios/4303202.json": {
+      "bytes": 422588,
+      "sha256": "9f93a58e1fc67ed74c0aef4e7811d1bf4d9714af6e282f352dfd793e9c93d475"
+    },
+    "candidaturas/municipios/4303301.json": {
+      "bytes": 422218,
+      "sha256": "f09fc9ec6f30b658e79498680b4e39109e8a626b182d9fe5c655e629993ece6f"
+    },
+    "candidaturas/municipios/4303400.json": {
+      "bytes": 421919,
+      "sha256": "4ede8410092760ce1d9abebf64ca1419e364b7b563c926257c9681d524a71865"
+    },
+    "candidaturas/municipios/4303509.json": {
+      "bytes": 437063,
+      "sha256": "e2d7b1c08a6100ccae7de5ecb8aed5f3ff6afded9cab5cc62be27366dcf1865d"
+    },
+    "candidaturas/municipios/4303558.json": {
+      "bytes": 420881,
+      "sha256": "99bc65e7187e4c11d13fc4015be35216b0a4451b149abe05285f9352dc51bcf1"
+    },
+    "candidaturas/municipios/4303608.json": {
+      "bytes": 423773,
+      "sha256": "b8e5ecdf97904f579a3c00d3f7a265c9d769eddeee4bfa2936db44597d2bec10"
+    },
+    "candidaturas/municipios/4303673.json": {
+      "bytes": 420674,
+      "sha256": "3694c6b8cb0317f1a9dc383db5ce209dbda10f7fbac03d6b522bb9e04d53424b"
+    },
+    "candidaturas/municipios/4303707.json": {
+      "bytes": 422758,
+      "sha256": "b226f2749029c6dbe9954b1aee72ccd9f29835c236adf2d5fe65beb137c8e69d"
+    },
+    "candidaturas/municipios/4303806.json": {
+      "bytes": 421569,
+      "sha256": "66c4552cff6f7c7e3fedb6c4f41fd15567ab0ab6362ee236de058f5efc37bd48"
+    },
+    "candidaturas/municipios/4303905.json": {
+      "bytes": 439184,
+      "sha256": "cd76c3b56437f41209e13a78b7f678b212180966e24c146ad9b08dd1b8235898"
+    },
+    "candidaturas/municipios/4304002.json": {
+      "bytes": 422270,
+      "sha256": "e91196fbdd406a8c83fe5c818d20bb016d485dc6fe15377653f63c27534ce54f"
+    },
+    "candidaturas/municipios/4304101.json": {
+      "bytes": 421682,
+      "sha256": "8710d49e0c390e651981aed51b5d0cc5c2fbcb33f30af3f8112bd5dd1fb705d1"
+    },
+    "candidaturas/municipios/4304200.json": {
+      "bytes": 432585,
+      "sha256": "de44fc44ea7bb9b73e409c3b37d0c57745662dfbffec3a1be85808f97d72f6e0"
+    },
+    "candidaturas/municipios/4304309.json": {
+      "bytes": 422682,
+      "sha256": "a8d66ad1f4740ec55441d23c4a806c5e1097d04f70375d3da512054cc5b3db42"
+    },
+    "candidaturas/municipios/4304358.json": {
+      "bytes": 426068,
+      "sha256": "585ffb94bb60710500e3b8a61565138ea62f0d47b4051aa141103ae293cad220"
+    },
+    "candidaturas/municipios/4304408.json": {
+      "bytes": 439555,
+      "sha256": "4576caea882ea92be141156af90168f753e90f4e22f137410910b9568717f026"
+    },
+    "candidaturas/municipios/4304507.json": {
+      "bytes": 432722,
+      "sha256": "c862a49633e798bd9b58c4beb25838c209b85c994fedae7354a787598fc3c627"
+    },
+    "candidaturas/municipios/4304606.json": {
+      "bytes": 451832,
+      "sha256": "0bd573db2ed6752dbab4743bddf64149f5afe4165e223f7783c6773da5079071"
+    },
+    "candidaturas/municipios/4304614.json": {
+      "bytes": 419569,
+      "sha256": "342b806cb4c02f4de51efe1810480de81a5f0dc32f64ee7d533c9095531c4943"
+    },
+    "candidaturas/municipios/4304622.json": {
+      "bytes": 419837,
+      "sha256": "a808cbd9da2a3d123caf6b025ee501ad8788f28d05368744c2fa30b9d3d7ab0b"
+    },
+    "candidaturas/municipios/4304630.json": {
+      "bytes": 440206,
+      "sha256": "c86c6e282288b26d0f7c31a0f593d1af143ad16e013df00ac0ba139549306d52"
+    },
+    "candidaturas/municipios/4304655.json": {
+      "bytes": 421085,
+      "sha256": "ea2767291bb2b227769507671f14717c6eab9c23cebea55629bb3d29e1cf46ea"
+    },
+    "candidaturas/municipios/4304663.json": {
+      "bytes": 432410,
+      "sha256": "56f52cab061a5e028f5ee6b61464b296d46b70f31967af3ecdacaa4f51bc87c4"
+    },
+    "candidaturas/municipios/4304671.json": {
+      "bytes": 423091,
+      "sha256": "2d555e232dec0197ee3f16a8f91969efd76b20da22ba0bab9c90ed8c776e9e81"
+    },
+    "candidaturas/municipios/4304689.json": {
+      "bytes": 427067,
+      "sha256": "71936bc2bdd87ec42b413482938768097d95c498b3231752f78990053702c393"
+    },
+    "candidaturas/municipios/4304697.json": {
+      "bytes": 421108,
+      "sha256": "347f32b8b0bea124be9c86b31a38df309acb4318e76917411946570103f746c4"
+    },
+    "candidaturas/municipios/4304705.json": {
+      "bytes": 437804,
+      "sha256": "8547665927d9345b358d85430b889d0bd494dec3ec802bfca459ca1e123eb573"
+    },
+    "candidaturas/municipios/4304713.json": {
+      "bytes": 425333,
+      "sha256": "c8d6fe152662dc12cbf3bbf5162c6897de87a85964fd6701be9ba82fc15faffa"
+    },
+    "candidaturas/municipios/4304804.json": {
+      "bytes": 436549,
+      "sha256": "22e8e22c6d01916179e3905e7f6818daef1f836b1360ae2a2e47645e93933665"
+    },
+    "candidaturas/municipios/4304853.json": {
+      "bytes": 417670,
+      "sha256": "9ca6f600bb1d7ac48ca4164f5b6dde58e23880b6dab98c69686dcd86b927d841"
+    },
+    "candidaturas/municipios/4304903.json": {
+      "bytes": 425205,
+      "sha256": "94d1af2f0a6dd08421f15fec01212fdc4eeeb078d13a9f0a7e076b6edcb53ee8"
+    },
+    "candidaturas/municipios/4304952.json": {
+      "bytes": 421802,
+      "sha256": "6bcaaafff99cbc3a926f6999c3823b25d85b46481d8e67edcef72b2d512a369c"
+    },
+    "candidaturas/municipios/4305009.json": {
+      "bytes": 425484,
+      "sha256": "3735f62fb1488d364eb5136157f388176b603c0089aca572aed06f4c94090153"
+    },
+    "candidaturas/municipios/4305108.json": {
+      "bytes": 451146,
+      "sha256": "5689a09482667cd0b368105ac0055aef57d38f8df228e7fd03a975199cc801b3"
+    },
+    "candidaturas/municipios/4305116.json": {
+      "bytes": 419633,
+      "sha256": "71e44520ce016760938c7888eb2d00ab886ac4f78e8727585de3fcbb0f606a9f"
+    },
+    "candidaturas/municipios/4305124.json": {
+      "bytes": 424338,
+      "sha256": "4b10dbf7c32ceca53863ad80e9e96c45c54917b3b3f11d37fe2de64a51050d57"
+    },
+    "candidaturas/municipios/4305132.json": {
+      "bytes": 421414,
+      "sha256": "7847aa965787a0044059ae876e2b19dcecd88c6376cf8c8901cd3ad62ee4ea17"
+    },
+    "candidaturas/municipios/4305157.json": {
+      "bytes": 419991,
+      "sha256": "5d01ef85db467a5b59cfe8e5dc1a668e6d3f178f7ea1e5a3736ded0fe8ea3851"
+    },
+    "candidaturas/municipios/4305173.json": {
+      "bytes": 423923,
+      "sha256": "d084a7e55556493506f17c368c4b0f6a1e01f87cd4b791c590b5c6f2bdb758a2"
+    },
+    "candidaturas/municipios/4305207.json": {
+      "bytes": 426971,
+      "sha256": "b4d147495971e653210692a2ace9774ca6dccd6543ac1f8c4047b2ba739220ce"
+    },
+    "candidaturas/municipios/4305306.json": {
+      "bytes": 425554,
+      "sha256": "26aae9b503f0938e139371d8c6566a837667f17c967e44803a85ebda4877c8fe"
+    },
+    "candidaturas/municipios/4305355.json": {
+      "bytes": 436766,
+      "sha256": "2e53eec36e89809ae8a207ac6d70b89fb1dbdce4cad5e74db2f226b0a390c6e1"
+    },
+    "candidaturas/municipios/4305371.json": {
+      "bytes": 420180,
+      "sha256": "d294f04b965ad0f7bf151a2012d72387efda252431d2a7146602a92d42831a2e"
+    },
+    "candidaturas/municipios/4305405.json": {
+      "bytes": 421782,
+      "sha256": "e0b9e7479529dd2eb3f9ffe8998521ed61d372a925aec31f6d3391fc26b711ae"
+    },
+    "candidaturas/municipios/4305439.json": {
+      "bytes": 424053,
+      "sha256": "a08d7ab5c910bab0f46beceabaf5ea36fe35dc12bb40ed8999c92649e8f64c6f"
+    },
+    "candidaturas/municipios/4305447.json": {
+      "bytes": 421262,
+      "sha256": "f7f51f03930d3f6f92be3c9fb12d9cfaae9268e707161ff9674f7a05fd2ef64f"
+    },
+    "candidaturas/municipios/4305454.json": {
+      "bytes": 433038,
+      "sha256": "cab80a942c9c8628b0740285189d01a95db8dbd7a1818e3b1576b334acffb5c7"
+    },
+    "candidaturas/municipios/4305504.json": {
+      "bytes": 420561,
+      "sha256": "7338cb477f712648673dab81e2ab9342bfc80c3f87649ffbebcfeb7e23f3ebf4"
+    },
+    "candidaturas/municipios/4305587.json": {
+      "bytes": 421669,
+      "sha256": "394ed3dd29442fba5802b80b7cffa45014a62a17b86fa78930ed5ab6f0b999b6"
+    },
+    "candidaturas/municipios/4305603.json": {
+      "bytes": 420876,
+      "sha256": "d33fe12ccbfc08ebb1ad1f7daa6319d3d39c4a91463e480b09b05fe5a4607269"
+    },
+    "candidaturas/municipios/4305702.json": {
+      "bytes": 423743,
+      "sha256": "311579922c29b73366c394497998e93c34070f55876d1dc6ad9ebd6c8218da97"
+    },
+    "candidaturas/municipios/4305801.json": {
+      "bytes": 424788,
+      "sha256": "119f89ed9fa9ce0aa8270e6513726caa2fa856355a6cbcac365468084003b393"
+    },
+    "candidaturas/municipios/4305835.json": {
+      "bytes": 418157,
+      "sha256": "2ab2b5d00fb2ab87cca27dcbafb8561a53098716e73299afa9787d9bb2d131e7"
+    },
+    "candidaturas/municipios/4305850.json": {
+      "bytes": 421269,
+      "sha256": "7a0afc53f283d3ba9e23cef54f75f77885bfce1cfd2c6fa91bd0d745c48997bb"
+    },
+    "candidaturas/municipios/4305871.json": {
+      "bytes": 421278,
+      "sha256": "87565e41a5ecd5d57431489770b95c69aea54d15b2fc45a72bce6915f30f415b"
+    },
+    "candidaturas/municipios/4305900.json": {
+      "bytes": 424564,
+      "sha256": "82d9636f6a16628ec7247152064916c237822530001040088f7455ffbfce8842"
+    },
+    "candidaturas/municipios/4305934.json": {
+      "bytes": 419078,
+      "sha256": "ba10a02e70705b060c99417ded103ad946cd4d2315683a3f46fb23ab3f8232c7"
+    },
+    "candidaturas/municipios/4305959.json": {
+      "bytes": 421813,
+      "sha256": "59e1e292b9628e6681f3e588d569116b78f15079ac9e6bb21cb5a19251097df1"
+    },
+    "candidaturas/municipios/4305975.json": {
+      "bytes": 421580,
+      "sha256": "81d12c0568f5120a125ccdb4994cf3a970ebae06c1d0ef2e6d15932a604203f2"
+    },
+    "candidaturas/municipios/4306007.json": {
+      "bytes": 426138,
+      "sha256": "a0ddc324108cc8fcf601ff40e80c6aa44ce1c5c3a878e1894f9e96c87c30ab1f"
+    },
+    "candidaturas/municipios/4306056.json": {
+      "bytes": 423704,
+      "sha256": "5284a6a89925987ef486c2c6de67e1fe4db3ab959fe7c6ead75ab3ea73c31405"
+    },
+    "candidaturas/municipios/4306072.json": {
+      "bytes": 420379,
+      "sha256": "a3394a1087cf37c59a9ce7410e78a015b605ccd067da669d0bc9ea296d3d5f1d"
+    },
+    "candidaturas/municipios/4306106.json": {
+      "bytes": 435543,
+      "sha256": "4d60c273979200768ba297ef8ca9f8fab57e7590847c36e9b5766f76b4698a89"
+    },
+    "candidaturas/municipios/4306130.json": {
+      "bytes": 419322,
+      "sha256": "435f291aae69011f0ce174be501d18a95a69d58b182a524597f232139ee2899b"
+    },
+    "candidaturas/municipios/4306205.json": {
+      "bytes": 427346,
+      "sha256": "863ab7c609894b98269ee212ea29cba7e2a44e89f53f72d089d1a00f4d42ac74"
+    },
+    "candidaturas/municipios/4306304.json": {
+      "bytes": 421971,
+      "sha256": "3a12679340880f9dc35b1a023e6559093d2490e8e0aa6b3d036aa5216e16e580"
+    },
+    "candidaturas/municipios/4306320.json": {
+      "bytes": 420955,
+      "sha256": "3dd235f54290020d63b983ac39ec5d7a5be5d502c3c5b82ff9155cdd62bac5d8"
+    },
+    "candidaturas/municipios/4306353.json": {
+      "bytes": 420450,
+      "sha256": "c8637723fde0d4ce783f719221499b8af0a544a9dfeae51879c9f38e5fad8cbe"
+    },
+    "candidaturas/municipios/4306379.json": {
+      "bytes": 421890,
+      "sha256": "32e52464a250ab68bec4d8bdcfbe79924806f8568bd33bdd9fbe842e7a30813d"
+    },
+    "candidaturas/municipios/4306403.json": {
+      "bytes": 436013,
+      "sha256": "960759ab91ceb970fdc22d60a652071098d5c14f1df59d477f79725c6788758e"
+    },
+    "candidaturas/municipios/4306429.json": {
+      "bytes": 419797,
+      "sha256": "055719ee525c110cf5e1791f928d935c0c49d86c1629bd5f475aa6658c91dc24"
+    },
+    "candidaturas/municipios/4306452.json": {
+      "bytes": 421383,
+      "sha256": "2aeca3bd5b90b3bbb492d5f2bd18ed3e0ab97214b2682a6b2671ad19041a3e23"
+    },
+    "candidaturas/municipios/4306502.json": {
+      "bytes": 426011,
+      "sha256": "58487a2105b0c6a77896ba86608f3d1434d9b0279038e628b69c7b635ed0741d"
+    },
+    "candidaturas/municipios/4306551.json": {
+      "bytes": 421344,
+      "sha256": "b88d9a7a99c80701ede632022feedd3738965daa91bd1b3d21cd535235db11eb"
+    },
+    "candidaturas/municipios/4306601.json": {
+      "bytes": 431742,
+      "sha256": "0a1f3d48c6f0ff3a52991959c6d7d45eb879fe68737895f1638e99e6afa59330"
+    },
+    "candidaturas/municipios/4306700.json": {
+      "bytes": 421645,
+      "sha256": "9d754ad50596f94dbe8e08aba9d209e98e5745722fa716b45339f365e4ba7d12"
+    },
+    "candidaturas/municipios/4306734.json": {
+      "bytes": 421549,
+      "sha256": "2a363396b3365237fd5c0ac2d469a62460c01167cbdcfea7094e255949b1d674"
+    },
+    "candidaturas/municipios/4306759.json": {
+      "bytes": 420123,
+      "sha256": "709ae5c5288c305c756100b03ddc2d939cf2bb1efa6cb7372cbf1aea98939c05"
+    },
+    "candidaturas/municipios/4306767.json": {
+      "bytes": 439280,
+      "sha256": "16b1602cdf40729301933c3063fed960c77c1eb98760b792a0af470ab0d648fb"
+    },
+    "candidaturas/municipios/4306809.json": {
+      "bytes": 431408,
+      "sha256": "51359c4b60f4f299442a019c5bd9e5290b2b626d7dd5257c167988174c40fbf1"
+    },
+    "candidaturas/municipios/4306908.json": {
+      "bytes": 433139,
+      "sha256": "d64c596443b018100d474bd8bcab4334a943ed1d30e55454b2ce08358cd8a73d"
+    },
+    "candidaturas/municipios/4306924.json": {
+      "bytes": 416253,
+      "sha256": "46ede868ee0511c6858398324b4a3dca8fa2c760766e9dbc1cf75be0d1f88553"
+    },
+    "candidaturas/municipios/4306932.json": {
+      "bytes": 424906,
+      "sha256": "2623248aa9f897702d7ace619a54060e5f1b878378d8d3021f64b6864558c23b"
+    },
+    "candidaturas/municipios/4306957.json": {
+      "bytes": 419995,
+      "sha256": "f7f2fe7af732293cbd202964a39c3d465969919a97046942a57a69c78a7a2af3"
+    },
+    "candidaturas/municipios/4306973.json": {
+      "bytes": 419949,
+      "sha256": "a3e4c1266e07a13da002f46e972926b97b44f639ba66bd9fd5da00353dae8993"
+    },
+    "candidaturas/municipios/4307005.json": {
+      "bytes": 439381,
+      "sha256": "5896633080e65d808c594201b0421c16ab954e9d2f966547aa0fbcd6fa80bb0a"
+    },
+    "candidaturas/municipios/4307054.json": {
+      "bytes": 421523,
+      "sha256": "80d43124d96b4aa0cb7d8674e993e7e82f818b248f3ccb0b6985dbbd8fbff170"
+    },
+    "candidaturas/municipios/4307104.json": {
+      "bytes": 424305,
+      "sha256": "4c55405b626ad909d56af6d9bcd2a5b0afc524e5d7e92db5f7fbe0d727b27d86"
+    },
+    "candidaturas/municipios/4307203.json": {
+      "bytes": 421220,
+      "sha256": "36d002de77c06d9ba3cebfb6e0cab559dbf373cd4d9753d58f6f28fe4bacc1ef"
+    },
+    "candidaturas/municipios/4307302.json": {
+      "bytes": 423457,
+      "sha256": "9812a72ecfe34f8e805c86b0e3d3c683c1148212648e2b0760b84f282a43a024"
+    },
+    "candidaturas/municipios/4307401.json": {
+      "bytes": 421003,
+      "sha256": "f5b382b2ef3d853e7c3bba68f3cfa0c1d28cbc09911f56d2123dc0821725ced2"
+    },
+    "candidaturas/municipios/4307450.json": {
+      "bytes": 421215,
+      "sha256": "62bde3b942712299d6ebf0a91efd93a8937769f8cbca7ac8f4f63575cc7b622c"
+    },
+    "candidaturas/municipios/4307500.json": {
+      "bytes": 428784,
+      "sha256": "07172ec2551e0769773e09fa37f8e52f0a0e5e95d0dd47493401b43bfcd20efe"
+    },
+    "candidaturas/municipios/4307559.json": {
+      "bytes": 422912,
+      "sha256": "835a0b65f0a9b6370e48bb47e757e4f64397a8314b27b4b63a4e8aa1a1a69d8a"
+    },
+    "candidaturas/municipios/4307609.json": {
+      "bytes": 439785,
+      "sha256": "62d79a27e0c0efe4053655d455a753f923d2a644eb25ac56d580b125751f9ee6"
+    },
+    "candidaturas/municipios/4307708.json": {
+      "bytes": 443598,
+      "sha256": "e421cc1dae219f98d09916c9d58e62db7d19d956a39e125f922daeef6a038d06"
+    },
+    "candidaturas/municipios/4307807.json": {
+      "bytes": 435442,
+      "sha256": "abb01bbf95f30c0bd3f3f741fe54583dda6a06796ec5d7abbb4904674b01f76d"
+    },
+    "candidaturas/municipios/4307815.json": {
+      "bytes": 420857,
+      "sha256": "423d7648c7c6626c589a94626c6a19646fb57db3808c2b8d8e71cf6fe58c7849"
+    },
+    "candidaturas/municipios/4307831.json": {
+      "bytes": 421228,
+      "sha256": "198c3bf491afd09fbd7edf1f42026cac92520e33ea42de71f7487d04cfbc00d7"
+    },
+    "candidaturas/municipios/4307864.json": {
+      "bytes": 420765,
+      "sha256": "64fa8c5adee8686ada4f960fb9c413afa591c7cd93aca01ae0b3dd4fb6b017a2"
+    },
+    "candidaturas/municipios/4307906.json": {
+      "bytes": 439267,
+      "sha256": "7fe91e5301bec445246c28c5448324b7d35e78bbdcb96c276cace9a7388f82c0"
+    },
+    "candidaturas/municipios/4308003.json": {
+      "bytes": 424400,
+      "sha256": "8185581db4b56bd36b3de68444b21ce4fef8b92d6fc487d6febe9470018bf8d4"
+    },
+    "candidaturas/municipios/4308052.json": {
+      "bytes": 419474,
+      "sha256": "e4fb84cad2ef981c4a6d70c0ef09368b274ce409edaf624c57d59cebb2fae648"
+    },
+    "candidaturas/municipios/4308078.json": {
+      "bytes": 423802,
+      "sha256": "d1fc34c08ca8f1f8c385eb137aa20e7886ae5a77c3e2171b6e8f21415b10e2a2"
+    },
+    "candidaturas/municipios/4308102.json": {
+      "bytes": 428900,
+      "sha256": "80857c1c0ab10585f0a63465a8af26c0af219a150ebf74965b7698203fb053b7"
+    },
+    "candidaturas/municipios/4308201.json": {
+      "bytes": 434411,
+      "sha256": "be3d6336144bf15c6cb5db44e523a467aecb7dec3ecf3fee56a1514fea86fc6a"
+    },
+    "candidaturas/municipios/4308250.json": {
+      "bytes": 418963,
+      "sha256": "9f27f039e57eb6845a9cbe0fd73ad823b29d03bb0660485b5ec6f79b90a59805"
+    },
+    "candidaturas/municipios/4308300.json": {
+      "bytes": 425220,
+      "sha256": "c4e4fba21f7dc3ef53b8ac504b90228accb900308aa1f88b98ea1e35b56389ee"
+    },
+    "candidaturas/municipios/4308409.json": {
+      "bytes": 423524,
+      "sha256": "ec0d12aac6ce277ac34090d3da310d034dee3ba2535938ec06440f88ccafe7b6"
+    },
+    "candidaturas/municipios/4308433.json": {
+      "bytes": 420200,
+      "sha256": "fdcfa8cab0ac0aad5d4a4af83636e9f05579535b6eef0bf52ab78432b670692c"
+    },
+    "candidaturas/municipios/4308458.json": {
+      "bytes": 421602,
+      "sha256": "037b44c748e249b5647eca091413c4532b88e05d3c4559ef65ab6974becf0a2c"
+    },
+    "candidaturas/municipios/4308508.json": {
+      "bytes": 434095,
+      "sha256": "f63b1d2259476c00797aa4d2718eb4c8ddf2728693c0b962390d301e95437156"
+    },
+    "candidaturas/municipios/4308607.json": {
+      "bytes": 435535,
+      "sha256": "0c4b0564fece07b752eb23e1e0eb044b478a88e5bbc89c8d709f20a94727bfe2"
+    },
+    "candidaturas/municipios/4308656.json": {
+      "bytes": 420498,
+      "sha256": "427bd1740d6c9811b6450274260d425a6e99a64baf13e69cef1ab430fc7e67aa"
+    },
+    "candidaturas/municipios/4308706.json": {
+      "bytes": 422929,
+      "sha256": "73c06dc4e4dcaf29b287871d8f9591aa08c5859313fd7a213f03e577f38dfb2e"
+    },
+    "candidaturas/municipios/4308805.json": {
+      "bytes": 426105,
+      "sha256": "e66ef492209d517a44e4743e21f4bc24e5bffca9b944a5532fdb33a654a2a0e3"
+    },
+    "candidaturas/municipios/4308854.json": {
+      "bytes": 419262,
+      "sha256": "da1c0bf27e98302cd357ec9ca590adebc1e8e9ae87cdff03467fbfe5a9189be3"
+    },
+    "candidaturas/municipios/4308904.json": {
+      "bytes": 428000,
+      "sha256": "b1cc1dd4aca4a83f6847f9af4868f8dc116d5ee6c08635497e2e8b8c1f235943"
+    },
+    "candidaturas/municipios/4309001.json": {
+      "bytes": 428437,
+      "sha256": "3e10abf8750f2c73176a1b28457dd3cf3162aa9153b5ef70f6542153331481c1"
+    },
+    "candidaturas/municipios/4309050.json": {
+      "bytes": 427166,
+      "sha256": "05808f30a5c6673d1812643c3dcc694faa9649a0f22179d19529159163f76d36"
+    },
+    "candidaturas/municipios/4309100.json": {
+      "bytes": 438788,
+      "sha256": "9a849ed4a528088274e21a4c80ae877403af4a1c6da221369145ccc84420169a"
+    },
+    "candidaturas/municipios/4309126.json": {
+      "bytes": 419210,
+      "sha256": "f06ba2df864c9aacc133405ef612c058502926e2e6e04024f5879ec8e2227090"
+    },
+    "candidaturas/municipios/4309159.json": {
+      "bytes": 420979,
+      "sha256": "50973a70189eefeb473c1ca848c6b5185ca0f89353a4b90bcb22e631dc45a7e5"
+    },
+    "candidaturas/municipios/4309209.json": {
+      "bytes": 450219,
+      "sha256": "3d03ef5c807670ee090128a12fc20a2dfbc081c0c8dfbd931dc461a78e1fdd11"
+    },
+    "candidaturas/municipios/4309258.json": {
+      "bytes": 419444,
+      "sha256": "8205e86dd7bc83ff28d70eb1ba138d41986c09df45a8ceb5f7d4b842de537b3a"
+    },
+    "candidaturas/municipios/4309308.json": {
+      "bytes": 444843,
+      "sha256": "bd55da7ac559fdd356716cfcadc60292ebd341d9913e96f4e4f6034493ecd188"
+    },
+    "candidaturas/municipios/4309407.json": {
+      "bytes": 432504,
+      "sha256": "94eaf5d30ef5df93060928b26cf835b7bec950c67c4777a726df1af953f2ca07"
+    },
+    "candidaturas/municipios/4309506.json": {
+      "bytes": 423324,
+      "sha256": "8abeac7f815be33eb32fc3aa52782b116e05defd956e224fd4588dacd3bccae6"
+    },
+    "candidaturas/municipios/4309555.json": {
+      "bytes": 424356,
+      "sha256": "02530cb0ac4bff8c9912ba9aea69b5f533212094e893a57559294c352e59d5b2"
+    },
+    "candidaturas/municipios/4309571.json": {
+      "bytes": 418953,
+      "sha256": "11a053581d0e2422e22df3884c909b7e377058bf3720d6cc7f0266c28df96c0a"
+    },
+    "candidaturas/municipios/4309605.json": {
+      "bytes": 430017,
+      "sha256": "eb4d4d7cedaae671cadc0b463a763155e4a8785b874f7ac6df3d795c3e6feb9a"
+    },
+    "candidaturas/municipios/4309654.json": {
+      "bytes": 423003,
+      "sha256": "27d63508b8d7541c41b34e789acf26f3b799b57d9caeac27e6e631bfa77381d3"
+    },
+    "candidaturas/municipios/4309704.json": {
+      "bytes": 422065,
+      "sha256": "7caff1786356fd6a23d748e57f2938cd2b414e856d1128c929928d9321cef97e"
+    },
+    "candidaturas/municipios/4309753.json": {
+      "bytes": 420926,
+      "sha256": "e80ac2f20e8ad61228c25f13dca2583fdbed81c6bca272fbaf622d55488b50de"
+    },
+    "candidaturas/municipios/4309803.json": {
+      "bytes": 422027,
+      "sha256": "3be9c6644b3c1fed7d6b44e35b949c2ef65b5b982163473fc89cf8fcd512068c"
+    },
+    "candidaturas/municipios/4309902.json": {
+      "bytes": 423118,
+      "sha256": "d0c7f7206f0867c5ed19532f4c5066e30180f1c6a5196bfd8a5657c23db01f58"
+    },
+    "candidaturas/municipios/4309951.json": {
+      "bytes": 421228,
+      "sha256": "050c6343ae230a9e41ecfa917e62113d0af05cc69b57f1558b4d715f869d62af"
+    },
+    "candidaturas/municipios/4310009.json": {
+      "bytes": 430657,
+      "sha256": "de9908ad99e7da309a9f3bf02886f58307dcb801461e30b05db52d0bd3d224e6"
+    },
+    "candidaturas/municipios/4310108.json": {
+      "bytes": 434493,
+      "sha256": "91bef029028bd6bb77a78c12886c4a4376eceb1561fb6daee789978bf8dda8e2"
+    },
+    "candidaturas/municipios/4310207.json": {
+      "bytes": 438612,
+      "sha256": "03c5e3c8790e182352324f582d63d1a2ad5ac67e676086c55b5f31a3fc4cbe03"
+    },
+    "candidaturas/municipios/4310306.json": {
+      "bytes": 422611,
+      "sha256": "7739a1178dcedd2e03209d2443033011fc2519a0dfb91621a0a1c4dbcda93c69"
+    },
+    "candidaturas/municipios/4310330.json": {
+      "bytes": 438758,
+      "sha256": "3b98611565219e42a95b662e57ea74d68f2a0c43d1667663167ce378c839f3f0"
+    },
+    "candidaturas/municipios/4310363.json": {
+      "bytes": 421405,
+      "sha256": "18b4d52f40cc98123205c10d1dad985b5fd64695f6da4bcc2f9883b5e8c75b29"
+    },
+    "candidaturas/municipios/4310405.json": {
+      "bytes": 424021,
+      "sha256": "ec4ab3000c2e7cac6076d48033c567a234161416f32cfe5ad6aaa37237c2505c"
+    },
+    "candidaturas/municipios/4310413.json": {
+      "bytes": 419296,
+      "sha256": "b8c35bffdda79c6f986d644dc7b55974678923b52bd460938920105b49cccc46"
+    },
+    "candidaturas/municipios/4310439.json": {
+      "bytes": 423871,
+      "sha256": "cc7c3db8efcd1e08af73d450d7bb947054096d84384eb7a0a73bceb9019d767d"
+    },
+    "candidaturas/municipios/4310462.json": {
+      "bytes": 419889,
+      "sha256": "426ee2ad8669b0fffacfdef9e45faf889b82e289a6ed113a16a2fcf4b3cad2cd"
+    },
+    "candidaturas/municipios/4310504.json": {
+      "bytes": 423636,
+      "sha256": "f1f8dacb30765621a808fa2e2385726126c4bdbc17aff9fbd88d0e99f3c33fc5"
+    },
+    "candidaturas/municipios/4310538.json": {
+      "bytes": 424968,
+      "sha256": "0afe04d472e76c9e7d3df67353d48c255b2822acb6e3fd149d68a2fdbdf85799"
+    },
+    "candidaturas/municipios/4310553.json": {
+      "bytes": 419841,
+      "sha256": "1f6ab3f22279ee0d30c4c016647a485acdf6201463512d1ce32b1862cc8a0442"
+    },
+    "candidaturas/municipios/4310579.json": {
+      "bytes": 419074,
+      "sha256": "ef9e3ce8b37b45af975c94da483e2272d1745d444f54a73b57813299cc0c1f8d"
+    },
+    "candidaturas/municipios/4310603.json": {
+      "bytes": 433638,
+      "sha256": "81b0e1a3972c6604f1c005eb3ec3947aa8f30c7a7ba03e0c39569d8cfd6d00fa"
+    },
+    "candidaturas/municipios/4310652.json": {
+      "bytes": 421808,
+      "sha256": "d39b5bce766f30ed82770de0fb191afb409543bebe64b5cf943054674c0746ad"
+    },
+    "candidaturas/municipios/4310702.json": {
+      "bytes": 419685,
+      "sha256": "bd0c37e956a4051ecd4e334d94b8d6dc8fee2c132535d2e90035de579ced53fa"
+    },
+    "candidaturas/municipios/4310751.json": {
+      "bytes": 420455,
+      "sha256": "c659610ca205bd7c2d65f634de775b7ce3689806ad39769ea295a5bb7c6c968c"
+    },
+    "candidaturas/municipios/4310801.json": {
+      "bytes": 434879,
+      "sha256": "a2db5b9baafa2bdf54694c35da1e50001d038dc232cec0b0b22193810eb89928"
+    },
+    "candidaturas/municipios/4310850.json": {
+      "bytes": 421645,
+      "sha256": "3da1b491ebe8e5afb688ce212a59f2cc493d43a5240beaa0deddbf7a8975b48b"
+    },
+    "candidaturas/municipios/4310876.json": {
+      "bytes": 420790,
+      "sha256": "e786c65f01a199b0d4f0a5a2df6804c400a7d25bcb8ee9bee66f986af6910b59"
+    },
+    "candidaturas/municipios/4310900.json": {
+      "bytes": 421511,
+      "sha256": "b3ba144f9bc9f64ea4f8008a9e82a40ed365f155d2bd420d404e169511e7a07c"
+    },
+    "candidaturas/municipios/4311007.json": {
+      "bytes": 433364,
+      "sha256": "45a099e9937d3788a84480a857c2b10cc65438ee5d7b2bb129423aca4b0dd02d"
+    },
+    "candidaturas/municipios/4311106.json": {
+      "bytes": 425879,
+      "sha256": "ae8a30b41da2e634c475542302ddd475a89f888c3559824f8e2eeee07c060107"
+    },
+    "candidaturas/municipios/4311122.json": {
+      "bytes": 421685,
+      "sha256": "6e223bf63dac4bc4c34f8022a89301c22234fec875efdace288edb3256816e51"
+    },
+    "candidaturas/municipios/4311130.json": {
+      "bytes": 421168,
+      "sha256": "367e6a3208daaf50da219c2bee9f1ae7a4883c3c7943b740a2930afc4c9a4b78"
+    },
+    "candidaturas/municipios/4311155.json": {
+      "bytes": 424089,
+      "sha256": "dd281c58e93d0778f253c0fb56d61354d020d4b546ee8d6ade088102e7f8ad59"
+    },
+    "candidaturas/municipios/4311205.json": {
+      "bytes": 430060,
+      "sha256": "6f889d3cb75632b54f05980f089926a5785a3ff68f6ae4a085ef6f51eec3fcd9"
+    },
+    "candidaturas/municipios/4311239.json": {
+      "bytes": 419455,
+      "sha256": "c5737932e9c86f96e866fea81e70cd13ef60f693c8f6eb8db0319ddfa782534d"
+    },
+    "candidaturas/municipios/4311254.json": {
+      "bytes": 421534,
+      "sha256": "956db26e5c9413949ac39babcc618372874fe6283d61841dbb313572efb9c7a1"
+    },
+    "candidaturas/municipios/4311270.json": {
+      "bytes": 419861,
+      "sha256": "e7122975660bb946a17fe830fd6c03ea726ad325a4f3d4ec8b0a7d59a2d6c038"
+    },
+    "candidaturas/municipios/4311304.json": {
+      "bytes": 430684,
+      "sha256": "29a09590604a51e6c2a633015b6b7ee2c4bdf8f37c159a0a348ad93a811cc2a4"
+    },
+    "candidaturas/municipios/4311403.json": {
+      "bytes": 439483,
+      "sha256": "a47a0cfe6588191ed4ac88864019d370a2581d7d9fbb535881944a3ccd2f2585"
+    },
+    "candidaturas/municipios/4311429.json": {
+      "bytes": 419155,
+      "sha256": "5eede8e5d8938028839a46fd2692234d4060eb25ad962be87eeaa8406a034e2f"
+    },
+    "candidaturas/municipios/4311502.json": {
+      "bytes": 424270,
+      "sha256": "fd40b5a02f3f81bcca96507e0b91518c89f96e49e0f0d40d768cd241a3cb5232"
+    },
+    "candidaturas/municipios/4311601.json": {
+      "bytes": 421531,
+      "sha256": "0016bb6b8c88f351e882b6d1122400aeaf6312817a40b3e8eebb9277c17c48e7"
+    },
+    "candidaturas/municipios/4311627.json": {
+      "bytes": 424819,
+      "sha256": "1510582004d97ad47c05c445b9493739e0779042ce77b5a767b00da45d5ec35f"
+    },
+    "candidaturas/municipios/4311643.json": {
+      "bytes": 420425,
+      "sha256": "75de798813b064edcb061e07deaff5b59d616acd41c2ac818c30d8696938174e"
+    },
+    "candidaturas/municipios/4311700.json": {
+      "bytes": 421901,
+      "sha256": "4731070502205d20d24480af45b27e5aa0ffe9b4ad89924b0d7ebd0ddadc91e6"
+    },
+    "candidaturas/municipios/4311718.json": {
+      "bytes": 421929,
+      "sha256": "7929465761a9afda2c2f53963ad53e7754d85f56c0bc38436797313503f1ee65"
+    },
+    "candidaturas/municipios/4311734.json": {
+      "bytes": 421335,
+      "sha256": "603926d4287eb6b5b72fb898e2f7a3ce1a8ae34d3e981d3fe737b3d9d647d19d"
+    },
+    "candidaturas/municipios/4311759.json": {
+      "bytes": 423955,
+      "sha256": "854f4f843fd8c0b6f5c7647c7ef7b967e51dfeb5b593cb6ec3466873b28b92e0"
+    },
+    "candidaturas/municipios/4311775.json": {
+      "bytes": 424201,
+      "sha256": "1ec89e8f8725cb495f6dea595c2920d107ca85e82180ff93c63744bf69dc1891"
+    },
+    "candidaturas/municipios/4311791.json": {
+      "bytes": 421663,
+      "sha256": "bda3520fe2b1c0bc3409411d6697e13179ee844493596c9200825eaa191715c5"
+    },
+    "candidaturas/municipios/4311809.json": {
+      "bytes": 434748,
+      "sha256": "2b8377e30d9cfc1ffef7c2c2d1605383f94f53738ef29f83af02ca744025faf8"
+    },
+    "candidaturas/municipios/4311908.json": {
+      "bytes": 421247,
+      "sha256": "6f7cf91f5b12d956179cb41ff33c3ca678340ef42b56bea7b6b315671401a556"
+    },
+    "candidaturas/municipios/4311981.json": {
+      "bytes": 424823,
+      "sha256": "082e612dca9eb03f8eed691932ae8dde68c60f0b196ba79830e778627fec8efe"
+    },
+    "candidaturas/municipios/4312005.json": {
+      "bytes": 419457,
+      "sha256": "38ac81c9b556f750676b2e2f184b12f10895a71c51b45001bcb352b027a40d14"
+    },
+    "candidaturas/municipios/4312054.json": {
+      "bytes": 421640,
+      "sha256": "64d4cbe153c63bed0dde85bf6ec10a929a0c1034dca7fe526419931b16c9d533"
+    },
+    "candidaturas/municipios/4312104.json": {
+      "bytes": 422798,
+      "sha256": "0e3a473d92535c5cf4543e17e6122f9edd08a3e3f17222cdf2f5b77a685b6661"
+    },
+    "candidaturas/municipios/4312138.json": {
+      "bytes": 421000,
+      "sha256": "a4cb311b1a33d18613f19b4986f9722ab5f169053a34e4c2764b7a8fc17d1574"
+    },
+    "candidaturas/municipios/4312153.json": {
+      "bytes": 423211,
+      "sha256": "d3b95834e9ad67be8a83cc9425bc74d8ce6d960c51ed874e86ef24910f3c3379"
+    },
+    "candidaturas/municipios/4312179.json": {
+      "bytes": 419016,
+      "sha256": "a90f456152787dc529f6ced3e8a7b946d16d19ad395b69e53386e2179c6a1c63"
+    },
+    "candidaturas/municipios/4312203.json": {
+      "bytes": 421123,
+      "sha256": "e5bfeeb5d602a56dde776790a48dbbc21b3c7f924bf7ccf0bf4786f6d691597a"
+    },
+    "candidaturas/municipios/4312252.json": {
+      "bytes": 426796,
+      "sha256": "a4b91d1d9c7bd29621451c087f74e5726fbc0382d63a8ebc043964ba4cad8c2c"
+    },
+    "candidaturas/municipios/4312302.json": {
+      "bytes": 422664,
+      "sha256": "75e01e312413b32386e5dc0b22f05ece5c46941569cdb4a17740c4a10b97f222"
+    },
+    "candidaturas/municipios/4312351.json": {
+      "bytes": 419181,
+      "sha256": "68ad1cae01c3a8405d6b759653ff8ac05c7e74f5a11875baa327153e9f3aa44d"
+    },
+    "candidaturas/municipios/4312377.json": {
+      "bytes": 420333,
+      "sha256": "200b5597bfa4b4da3d2f1043c29b4970c7d17707c698bab411bf811e8d2236d1"
+    },
+    "candidaturas/municipios/4312385.json": {
+      "bytes": 420878,
+      "sha256": "c6b1f2e20db0e947aa3b739713345fa7b8482a4c2874f486d85794a9c46e7df6"
+    },
+    "candidaturas/municipios/4312401.json": {
+      "bytes": 440405,
+      "sha256": "890873963313f7cad8b7b64ce45f18fc4c4323b21440691605d677e7c199b942"
+    },
+    "candidaturas/municipios/4312427.json": {
+      "bytes": 420473,
+      "sha256": "b5b7c77dcdc1fb209ce3c9fd05ee7599f275dede4e050061c09fed05bee8da3d"
+    },
+    "candidaturas/municipios/4312443.json": {
+      "bytes": 422672,
+      "sha256": "b5f7f847acf366fff21d2769557f45b9bbe8a04ddf219320ab391f6cb5a6ad62"
+    },
+    "candidaturas/municipios/4312450.json": {
+      "bytes": 423371,
+      "sha256": "199e7579ba79951d2711bbd7a04fa0ec1071003e2cf2f0bd9f52ce49e7721404"
+    },
+    "candidaturas/municipios/4312476.json": {
+      "bytes": 424757,
+      "sha256": "80c7570d92197119e77ac38a55c2f789b16a4ad98c6e683a0871359ff03c58d9"
+    },
+    "candidaturas/municipios/4312500.json": {
+      "bytes": 427568,
+      "sha256": "3b2f008c955b26ff6335da481333b3e4865ff242ab4f749b9306175d9b7a55c4"
+    },
+    "candidaturas/municipios/4312609.json": {
+      "bytes": 422220,
+      "sha256": "960486b8253f16bed2aa3d3a3a3fd521af4da961d344bcc30eb405a6ff6bdd30"
+    },
+    "candidaturas/municipios/4312617.json": {
+      "bytes": 421321,
+      "sha256": "e1656770a0c5fbbc865d36fe7df12704716524fbcc28340ecabfef27d970ccea"
+    },
+    "candidaturas/municipios/4312625.json": {
+      "bytes": 419742,
+      "sha256": "08301af735488890917a37165426f3cafe1acf3dfd0ee540bbb879ace1b4ab29"
+    },
+    "candidaturas/municipios/4312658.json": {
+      "bytes": 430199,
+      "sha256": "f3f8051a4c57e7e68e5b19d5d9aef097a70c144c492ec06430f5e9c555b8c174"
+    },
+    "candidaturas/municipios/4312674.json": {
+      "bytes": 419770,
+      "sha256": "01e8bfa61bb54f7fdc796df4fe43f773644c12836adc3fd13ec80f800d643a63"
+    },
+    "candidaturas/municipios/4312708.json": {
+      "bytes": 425510,
+      "sha256": "bf20d49da8fdaba30bb2bed15ca772a98de779d9b9495c9654ef7831cab7c38b"
+    },
+    "candidaturas/municipios/4312757.json": {
+      "bytes": 420499,
+      "sha256": "0518b46994638734047e93ccc0549daac0bdf87e165977f764c238a34664cbe9"
+    },
+    "candidaturas/municipios/4312807.json": {
+      "bytes": 423333,
+      "sha256": "86f6c5475c57d9aa017e7cbe1a50dd37f1cf118c22eac83eff3fcd962a2f5e69"
+    },
+    "candidaturas/municipios/4312906.json": {
+      "bytes": 425413,
+      "sha256": "acce5ec4d3d7ed5538f2ffd67584954dd8b306b2708b6de1c3a1d82f66452b6d"
+    },
+    "candidaturas/municipios/4312955.json": {
+      "bytes": 420348,
+      "sha256": "1422fbeff82c9d8067d9cbc8f40f3fb9435065e137707969cc73853daefb4737"
+    },
+    "candidaturas/municipios/4313003.json": {
+      "bytes": 420962,
+      "sha256": "4205d25a73459f5b276f6d479866b87507ceb7b05d6c2fd909f213f1032f7e7b"
+    },
+    "candidaturas/municipios/4313011.json": {
+      "bytes": 420222,
+      "sha256": "4f028e3084ca8601cd7c4c3b5516659f04395688037d537696634e4323ce4b13"
+    },
+    "candidaturas/municipios/4313037.json": {
+      "bytes": 421451,
+      "sha256": "221a8308e6d72e21d0ea038cf6ce90e43b96520ffdcd70b5aacc5de63ba44509"
+    },
+    "candidaturas/municipios/4313060.json": {
+      "bytes": 431023,
+      "sha256": "00be88dc8d15f1d4ee033cdbf3577d35a84bc70f2f96ea65620bb8bf5ec3fe0e"
+    },
+    "candidaturas/municipios/4313086.json": {
+      "bytes": 420437,
+      "sha256": "c093698a6e87ab1cc9e3f98b53b7081a95ddd7ff2ee662f85aefa91c9ab21937"
+    },
+    "candidaturas/municipios/4313102.json": {
+      "bytes": 423627,
+      "sha256": "e2b12ab6ef9424594c47d5075ee48a1b7cccffb001d41deeeeab0c5d0c02a918"
+    },
+    "candidaturas/municipios/4313201.json": {
+      "bytes": 435067,
+      "sha256": "06f458c3b6b9d1c7e679cec3b5829ec2db86489b4a6b6d7b3bc0bc7629f2668b"
+    },
+    "candidaturas/municipios/4313300.json": {
+      "bytes": 433167,
+      "sha256": "a9a95aa5f91ce9845972479af0a117a45445440b86098cfeb6f69a83cf646400"
+    },
+    "candidaturas/municipios/4313334.json": {
+      "bytes": 420039,
+      "sha256": "5e8f92ab03a8e145714ea77bc7229867cff5dcb680ef2d15a04e99c63d09eb9b"
+    },
+    "candidaturas/municipios/4313359.json": {
+      "bytes": 421454,
+      "sha256": "a7a462f301d68fa468bd617fc38169b1e254eb991ed05df4dc9ba121bf1a114a"
+    },
+    "candidaturas/municipios/4313375.json": {
+      "bytes": 436138,
+      "sha256": "e18236c91f5c492bc90ccf7d6b8ad4930c38f4cd574a3e74bea8d137745cc4c3"
+    },
+    "candidaturas/municipios/4313391.json": {
+      "bytes": 421998,
+      "sha256": "f81af1e8c01e0223da0a278656ef37fab2723dcd124821c58c5c2a7a733f06a4"
+    },
+    "candidaturas/municipios/4313409.json": {
+      "bytes": 449130,
+      "sha256": "e8b0fd238378386630a6137f99e00dba011df3edc3891cd18e48f4e882262d05"
+    },
+    "candidaturas/municipios/4313425.json": {
+      "bytes": 420769,
+      "sha256": "74ddf45f02a63bedb7330b4ddd1a7079ea713a2e9810467298113a62a266446a"
+    },
+    "candidaturas/municipios/4313441.json": {
+      "bytes": 419641,
+      "sha256": "26a4523eef30b8d26d5218132822999cf31ce73f0bdbfe398832974646907c67"
+    },
+    "candidaturas/municipios/4313466.json": {
+      "bytes": 419510,
+      "sha256": "cd80f429d1f01594841b886d4713b5e1ce5155513738aa9c47494eae851f6dc6"
+    },
+    "candidaturas/municipios/4313490.json": {
+      "bytes": 421093,
+      "sha256": "c68e6525503c639a06e88949b815366f89ad7fe895703f19a15bbe9b207a1ceb"
+    },
+    "candidaturas/municipios/4313508.json": {
+      "bytes": 438939,
+      "sha256": "265f56fffdc3f953c75c2636c5846c62ed0a18a1e7777cd82d265550a9fd08cf"
+    },
+    "candidaturas/municipios/4313607.json": {
+      "bytes": 421037,
+      "sha256": "0823c2bb5c61eb4b49cb066a52432776e54c573c637610b82c3917a175406f61"
+    },
+    "candidaturas/municipios/4313656.json": {
+      "bytes": 430179,
+      "sha256": "56966e81edd096fc35ebf7a881cdc9c4d08449aa0932881e0e98711a7026838b"
+    },
+    "candidaturas/municipios/4313706.json": {
+      "bytes": 434674,
+      "sha256": "7abf1faaf8dc04075edc9191b32b07705f6d08f651be56b9798a8c6890d40b5c"
+    },
+    "candidaturas/municipios/4313805.json": {
+      "bytes": 424259,
+      "sha256": "83a339ab9c6096dd08f682afda49136838c5dbe8b672ef55c280324f84b8ddfe"
+    },
+    "candidaturas/municipios/4313904.json": {
+      "bytes": 435612,
+      "sha256": "cf201d8f3a32856a3c9cfdf4bb5778d0a4295a3ae2c60111708de9b570741e66"
+    },
+    "candidaturas/municipios/4313953.json": {
+      "bytes": 426644,
+      "sha256": "8c04d3abc6b66acb33ed09cf9dd9ceb4f9f933b92c1157a2f6b00c39d03daafc"
+    },
+    "candidaturas/municipios/4314001.json": {
+      "bytes": 425471,
+      "sha256": "1c2ba2161b8d7db7f9b98f89e8be9118806c9b2ef739572cd2e6799f77d64132"
+    },
+    "candidaturas/municipios/4314027.json": {
+      "bytes": 424676,
+      "sha256": "81aa76ac31f115825a08f7bc582b02df300e8ebb33c32862217a0f17f9bdc183"
+    },
+    "candidaturas/municipios/4314035.json": {
+      "bytes": 424071,
+      "sha256": "cc0586f0eee600d86e08bec4b228b819795fcc317503d671eb30240a0ced7cdb"
+    },
+    "candidaturas/municipios/4314050.json": {
+      "bytes": 435782,
+      "sha256": "697f46a215e63ecc880b2cc84743022be3f2cb5ab002cdbb780ed656530790d7"
+    },
+    "candidaturas/municipios/4314068.json": {
+      "bytes": 421985,
+      "sha256": "d43602b9561618b9db00a1c8d67a15eff2e5dcce28b046537b0b20530dfcdd11"
+    },
+    "candidaturas/municipios/4314076.json": {
+      "bytes": 422229,
+      "sha256": "339f47e564eccb9b1ae059014ef8c817d07f48204cd999107c8863c5cbc0ef69"
+    },
+    "candidaturas/municipios/4314100.json": {
+      "bytes": 445255,
+      "sha256": "556fe67dc8b5d0dde7801be9ce30fc2501567d96a0796e56da9953f449623c62"
+    },
+    "candidaturas/municipios/4314134.json": {
+      "bytes": 419535,
+      "sha256": "811b4624b67b34adc0627f8256ee4ff280d4f5f760b0f15b11c8f2518d92fd3e"
+    },
+    "candidaturas/municipios/4314159.json": {
+      "bytes": 425429,
+      "sha256": "4239c58ffb85cbd19a0f144185e0ecb4d8d2bca6a57629779ca464fa078c5298"
+    },
+    "candidaturas/municipios/4314175.json": {
+      "bytes": 420193,
+      "sha256": "89a9fcc9d5403dc5bf3f1c83a5f10c9358412101b8ca601c636277837efb03e5"
+    },
+    "candidaturas/municipios/4314209.json": {
+      "bytes": 425569,
+      "sha256": "c33fe478b4cb91df0afa578b1089662847ea9d6eb29112ed3b42989582ad294e"
+    },
+    "candidaturas/municipios/4314308.json": {
+      "bytes": 422163,
+      "sha256": "846e66518969f1376877f507d995b9945a5378e636adf48d8fac0d344769c47f"
+    },
+    "candidaturas/municipios/4314407.json": {
+      "bytes": 449062,
+      "sha256": "2f952d10ebcc8e6d362bb4348fc53266412a07a2a2647c36f44d2be55c5cc030"
+    },
+    "candidaturas/municipios/4314423.json": {
+      "bytes": 425267,
+      "sha256": "db130cf173f8dac6e0f0e33eb47f2b0e08ff14413d737abd09e8f568e80e8a55"
+    },
+    "candidaturas/municipios/4314456.json": {
+      "bytes": 420137,
+      "sha256": "14a1efd6f8862ec2c2310d98e318b69147e512a53cfec05844efdcbbaa1a1b2c"
+    },
+    "candidaturas/municipios/4314464.json": {
+      "bytes": 419967,
+      "sha256": "f54538e0c2110e68e5e0ef8ed532461cf79984641ad3310885edc12b438d1769"
+    },
+    "candidaturas/municipios/4314472.json": {
+      "bytes": 421321,
+      "sha256": "ed4d0e0d5f47465e3c259564a1bfd442168c6d2693307bcab359c2ecb613cc33"
+    },
+    "candidaturas/municipios/4314498.json": {
+      "bytes": 420911,
+      "sha256": "a980c36fb306afc0fa86c8fc23e04a2be177213ef830059c08926075738cc5f1"
+    },
+    "candidaturas/municipios/4314506.json": {
+      "bytes": 427165,
+      "sha256": "287f42596a07c53f216407d59e689584fbf0e0bf4ffa27b7381fe2fe45f5c971"
+    },
+    "candidaturas/municipios/4314548.json": {
+      "bytes": 420454,
+      "sha256": "3e66e1b839e3e95bd2ceb8ce566fa053c4d9c3ec883164dc0ff3353ac915fe03"
+    },
+    "candidaturas/municipios/4314555.json": {
+      "bytes": 420372,
+      "sha256": "7fdc94c8b955a4aafb01681a5e0f25bf2068fd3d023072e7a77ca4f6b80ebada"
+    },
+    "candidaturas/municipios/4314605.json": {
+      "bytes": 429425,
+      "sha256": "d0fdc0be0fc24bd3628d4c042178720263fb5226a519d9af90cc4a8ce1363f5a"
+    },
+    "candidaturas/municipios/4314704.json": {
+      "bytes": 425267,
+      "sha256": "258ff204e6e7fc784a4e7c0e38bd1b324a9a52d8e98c99f79038a79bab39c15b"
+    },
+    "candidaturas/municipios/4314753.json": {
+      "bytes": 421734,
+      "sha256": "65219358dbdacbe8e328d344eab9bf098de0ad946e5a43f0e785c3f6c896b83e"
+    },
+    "candidaturas/municipios/4314779.json": {
+      "bytes": 420131,
+      "sha256": "56bffd3a2763c39941b18be8984ae9d8c8e42b1c402c459e7de65b761df7c52e"
+    },
+    "candidaturas/municipios/4314787.json": {
+      "bytes": 418722,
+      "sha256": "7942d4a8e2d4b9e6754a5bde0f5e32e5887907019dd37765e87d4c516933ae47"
+    },
+    "candidaturas/municipios/4314803.json": {
+      "bytes": 437331,
+      "sha256": "f55773084295248456be699e42df63a87093081df988a39957e3557bea9432fa"
+    },
+    "candidaturas/municipios/4314902.json": {
+      "bytes": 454253,
+      "sha256": "db661a27edde1a54f5250db6647887345adbfbd48dd86399c1a8e5ebb47342e6"
+    },
+    "candidaturas/municipios/4315008.json": {
+      "bytes": 421042,
+      "sha256": "07d5fecefc327482e7d984d9686148aaca7524c6130cdc0aede477bb477cf73a"
+    },
+    "candidaturas/municipios/4315057.json": {
+      "bytes": 420323,
+      "sha256": "494fd190bd91b9facb6b796a3d25a76e1f39bc18e965c783ee7f06e4d7978fff"
+    },
+    "candidaturas/municipios/4315073.json": {
+      "bytes": 418867,
+      "sha256": "638e88b6fa22239ff65bb50eef40f6acdb3b779fa7872b2ae299ec677bde1d0e"
+    },
+    "candidaturas/municipios/4315107.json": {
+      "bytes": 425362,
+      "sha256": "2a312e8466a47cc080f482dbf335d4765d419fb5cce45bb082e9da115d461f6d"
+    },
+    "candidaturas/municipios/4315131.json": {
+      "bytes": 420183,
+      "sha256": "9980087b26555068461fc218552ae306bc3f0675a694e824d5416769f1f8f784"
+    },
+    "candidaturas/municipios/4315149.json": {
+      "bytes": 422546,
+      "sha256": "e15942aa9250e9559a7238ae817e0c9bda9884f61b9dceb0cc9323e5dea1cfe3"
+    },
+    "candidaturas/municipios/4315156.json": {
+      "bytes": 423841,
+      "sha256": "2fe0a08c5314480c27da5f02433696c1cba9191c60b9c670e3e6888c5af8d832"
+    },
+    "candidaturas/municipios/4315172.json": {
+      "bytes": 419746,
+      "sha256": "72dde3e5e9a669b11d688170bb173267eb49c47386902b7351520daf55c0a1ba"
+    },
+    "candidaturas/municipios/4315206.json": {
+      "bytes": 421856,
+      "sha256": "86b77df14e2d67e223d7a61f608e3ac7b5fbb8dd54763516331bb34a6ae015d9"
+    },
+    "candidaturas/municipios/4315305.json": {
+      "bytes": 432152,
+      "sha256": "b6feeee33750578b9a9901e7ac9c80022cb9211d03d9e8ba5c985e44cdb240b2"
+    },
+    "candidaturas/municipios/4315313.json": {
+      "bytes": 419560,
+      "sha256": "5953d8cd2e64e513cb7117c02f15073faf37c7a97e8c8011e8f7d392717a5ff4"
+    },
+    "candidaturas/municipios/4315321.json": {
+      "bytes": 419998,
+      "sha256": "a95a211db4431259cbeccdff7e5559c515af9e20a3fb5d547dc5bdb73874f4f3"
+    },
+    "candidaturas/municipios/4315354.json": {
+      "bytes": 421010,
+      "sha256": "51f0765ebef69d969df3e9bf7eb58c669d2c285636e6d38525837f2f819c23d7"
+    },
+    "candidaturas/municipios/4315404.json": {
+      "bytes": 423775,
+      "sha256": "86412a56f9fb903277c7ff3f7aff78d7c1d778b7ec29c76d7b705eedd8b249c7"
+    },
+    "candidaturas/municipios/4315453.json": {
+      "bytes": 420256,
+      "sha256": "2775be49146ab62e4eca8a4172576fd400cc066aeaf56cf8e8a88686fef8ef5e"
+    },
+    "candidaturas/municipios/4315503.json": {
+      "bytes": 427656,
+      "sha256": "824e2e578d7f829159449b3bf685dbc8d02d9370a6002588594bba33cc70ec82"
+    },
+    "candidaturas/municipios/4315552.json": {
+      "bytes": 420053,
+      "sha256": "f991c23c8670c8aa864d692e8a951c627f4c37bebcb5ac3a7e3f3242f059b110"
+    },
+    "candidaturas/municipios/4315602.json": {
+      "bytes": 445586,
+      "sha256": "9d1641dce3a4cacfb3afabed8d007bb5e290460affbb2a0b06ba702a5cdf4df0"
+    },
+    "candidaturas/municipios/4315701.json": {
+      "bytes": 433932,
+      "sha256": "3f8de1c1d92e067bcd6e73dde3b39ef595d6c521b7d8cc9b230f5c0fcb14e80d"
+    },
+    "candidaturas/municipios/4315750.json": {
+      "bytes": 423213,
+      "sha256": "7f481d5de5dc98a11b87f0a9c9ed3d1b51d137ae2767ae899fe9810a3a287e2a"
+    },
+    "candidaturas/municipios/4315800.json": {
+      "bytes": 425535,
+      "sha256": "5f9604a4b01e49e1caa20e671c0b16516872376ac7e49cea4404be9d12dd9a73"
+    },
+    "candidaturas/municipios/4315909.json": {
+      "bytes": 423558,
+      "sha256": "f23e2344f2b2276c6a0552913bfd350eb0e2ec528b32555a31157f8bbade8623"
+    },
+    "candidaturas/municipios/4315958.json": {
+      "bytes": 420876,
+      "sha256": "59fcd7e0a2136e00ea78587486a0add97d43e72b0ac2f64851c758ccf1fce0f6"
+    },
+    "candidaturas/municipios/4316006.json": {
+      "bytes": 431951,
+      "sha256": "328f38daf19c7afc1147aab65a1be22a05aa0e9cf123cb6f4c3362b2406ce116"
+    },
+    "candidaturas/municipios/4316105.json": {
+      "bytes": 423505,
+      "sha256": "f2d2be2679763f593e593be6fa6c5242a516257572bdc3311215689a57af932a"
+    },
+    "candidaturas/municipios/4316204.json": {
+      "bytes": 421531,
+      "sha256": "1bf64e559a514599be06dcc6726d9ec6c05d8c251729657a11e3b3a918e7634a"
+    },
+    "candidaturas/municipios/4316303.json": {
+      "bytes": 423036,
+      "sha256": "eb26a1fbd7c5df4186637c0083bce4990b3de3ad2cd9d40110656f855bc9f881"
+    },
+    "candidaturas/municipios/4316402.json": {
+      "bytes": 434119,
+      "sha256": "ba8cc102c62bb4dfe95b4c84a9d7a6bc8cc24a86d15c1c75444f146e24f2c2eb"
+    },
+    "candidaturas/municipios/4316428.json": {
+      "bytes": 420858,
+      "sha256": "8150927dd900f62059156f9483a0f5b6d7a8528c915d44f26cd3cbaacb5683bb"
+    },
+    "candidaturas/municipios/4316436.json": {
+      "bytes": 420791,
+      "sha256": "982862b716c59baeb7acbfcef75e506d9a94098eb2c31dabcb3345612ba36126"
+    },
+    "candidaturas/municipios/4316451.json": {
+      "bytes": 426461,
+      "sha256": "357cb0fed298bf65c7f50fc1b6ad4b4904db0af1ca2d81fd6951356fb57f1f44"
+    },
+    "candidaturas/municipios/4316477.json": {
+      "bytes": 420926,
+      "sha256": "b3e9e349a1f10b007edcb6aa513d521db0c37ca87ef5cb8af9181c73396a168c"
+    },
+    "candidaturas/municipios/4316501.json": {
+      "bytes": 425894,
+      "sha256": "6c2b862c947774eb1ad2696be721d56ac4d6c13cc073b9a550bf924bd3b1628a"
+    },
+    "candidaturas/municipios/4316600.json": {
+      "bytes": 427796,
+      "sha256": "27409bbd7f2b690421915325d5f9cb0335b3daac96183b34aa33c1559b85c921"
+    },
+    "candidaturas/municipios/4316709.json": {
+      "bytes": 425058,
+      "sha256": "b728308d6cb7dc82ecfe7d5929fb003a8de41b526f247df21a2be295fdbdc92c"
+    },
+    "candidaturas/municipios/4316733.json": {
+      "bytes": 419630,
+      "sha256": "8a9f7aa1c9ceaab05c33a01970f8ff7dd21a10e2bb50f522b9f18a80383254e5"
+    },
+    "candidaturas/municipios/4316758.json": {
+      "bytes": 424353,
+      "sha256": "a143fa3564a79d85ac6fd33333689f058aed63e99c231e702c92c9ba4f1d8a9b"
+    },
+    "candidaturas/municipios/4316808.json": {
+      "bytes": 441998,
+      "sha256": "2e6e08b2f4523e7f31b408c680d3ece3409404c0fe5b02a8be35eb8f22ac982c"
+    },
+    "candidaturas/municipios/4316907.json": {
+      "bytes": 448319,
+      "sha256": "853ef10e44b9c09e65d279daaecf2a5346f82dd4fa0f1acd8f657268ea64c21a"
+    },
+    "candidaturas/municipios/4316956.json": {
+      "bytes": 423797,
+      "sha256": "c612160a6ebf6439aaa4372a6774524a32eaf49f152ca685c3bd95e61f89b11f"
+    },
+    "candidaturas/municipios/4316972.json": {
+      "bytes": 422116,
+      "sha256": "0a6aad7f5500386f2a4284f31849a3aedaab5117f5efb662ab901b55a3253a8d"
+    },
+    "candidaturas/municipios/4317004.json": {
+      "bytes": 425124,
+      "sha256": "9d5fc7c8a4074564cddafe9730d02f705d90f54c6dec35c42febb4dda2edb771"
+    },
+    "candidaturas/municipios/4317103.json": {
+      "bytes": 440143,
+      "sha256": "51220531d50220a49d0c3e2f9d05f72e918cc1fcc44c2c3b728c26061ab8a281"
+    },
+    "candidaturas/municipios/4317202.json": {
+      "bytes": 437139,
+      "sha256": "96fb2a7bee237675b3051904813588ee165b076455707e07ef89fab0203f5e01"
+    },
+    "candidaturas/municipios/4317251.json": {
+      "bytes": 419453,
+      "sha256": "9d0b8d07f28c0ddacdeb64a127e59ae1269c2fb801ac89723c7f82e41add0f2d"
+    },
+    "candidaturas/municipios/4317301.json": {
+      "bytes": 432521,
+      "sha256": "85edf55c8f1bf9e277e10b17997a8b56295689b54294840a3a6a0ea71f57eb6f"
+    },
+    "candidaturas/municipios/4317400.json": {
+      "bytes": 435749,
+      "sha256": "b41505436432892d0cbbf294ee4bc652ff71fd1d3ba6361cf76831fb3e50a300"
+    },
+    "candidaturas/municipios/4317509.json": {
+      "bytes": 438808,
+      "sha256": "315f8aa73e89284b01ec0722de1ef68b68f56578c7fc30fb74bea5d18616cafc"
+    },
+    "candidaturas/municipios/4317558.json": {
+      "bytes": 419590,
+      "sha256": "caee35f3fac4fecd5f92609f94c094d82ca4992f55bc68cb4ef8189e2782f47e"
+    },
+    "candidaturas/municipios/4317608.json": {
+      "bytes": 436353,
+      "sha256": "32ed5f0a3ef2bdb78c7181702a025025cf9d0a5c9a05b33b52e48fabd0abaa10"
+    },
+    "candidaturas/municipios/4317707.json": {
+      "bytes": 424709,
+      "sha256": "4604879f4103daca07d0544e0dd2a5cc2696c4387f41dd6c86d015a10e44692b"
+    },
+    "candidaturas/municipios/4317756.json": {
+      "bytes": 420821,
+      "sha256": "9ce7eed4206d01890551aad01edec2cbb6eb0f72f16c37cb8c2c8592d8c7bd19"
+    },
+    "candidaturas/municipios/4317806.json": {
+      "bytes": 427409,
+      "sha256": "935dec8af55be22d96782565e8def0b61291ec6f497f85b26b20158a18e97781"
+    },
+    "candidaturas/municipios/4317905.json": {
+      "bytes": 428274,
+      "sha256": "17c332111badfb02e011e5f1be8d4bc4dea435a20da1180770f790336d2d05d5"
+    },
+    "candidaturas/municipios/4317954.json": {
+      "bytes": 419844,
+      "sha256": "ac472bb6d66b1cdf37f4d989683c575f9158df7052e544e39d5fdc2ce38aea47"
+    },
+    "candidaturas/municipios/4318002.json": {
+      "bytes": 436478,
+      "sha256": "ee1aaa507963cbae54fd02f03756f94492becdad5fdd19b684dcef34aa5265ba"
+    },
+    "candidaturas/municipios/4318051.json": {
+      "bytes": 421489,
+      "sha256": "69ae0eda921f875d78a7705104f9395a6203d1974201ceebb69e458c92c5c7e5"
+    },
+    "candidaturas/municipios/4318101.json": {
+      "bytes": 429296,
+      "sha256": "6ab76d097c892135bdb96c4a7c58fe1316aa5f7f9778341cc52fc28d62630abf"
+    },
+    "candidaturas/municipios/4318200.json": {
+      "bytes": 433069,
+      "sha256": "8cf95ef8b8b8dad6a495c6abc3f6aa330ff156b4638bd3ddd07d972a108babe4"
+    },
+    "candidaturas/municipios/4318309.json": {
+      "bytes": 437493,
+      "sha256": "a0190d9bb50c821c722c1fb032dad67432c4f71d61d96c3c9a6325a25a17e2cf"
+    },
+    "candidaturas/municipios/4318408.json": {
+      "bytes": 433116,
+      "sha256": "2da6fa702d33e26a991ba62a46b26ad0aa8f2bdbbf9dcc239b4ed59c588ab9c6"
+    },
+    "candidaturas/municipios/4318424.json": {
+      "bytes": 421573,
+      "sha256": "9f526a9b16e3bd89a2b68f95743f148ab7ccc5da8eea9b5a2b25a2495b67d055"
+    },
+    "candidaturas/municipios/4318432.json": {
+      "bytes": 421615,
+      "sha256": "c84fa6f6e33f7e60b9ce66268b8c64d23ce8387b9cd8f4b46543bc93a1febe3e"
+    },
+    "candidaturas/municipios/4318440.json": {
+      "bytes": 420067,
+      "sha256": "8195e79cf80051a6a130e151f742d9f34e6f4e38289ab6c004c96b728e254dfb"
+    },
+    "candidaturas/municipios/4318457.json": {
+      "bytes": 420405,
+      "sha256": "e4a936c0b65ba037567f4c5298192d1ce1dff983d0daa511d326c5dee29183e5"
+    },
+    "candidaturas/municipios/4318465.json": {
+      "bytes": 420571,
+      "sha256": "767c3296f671dcb08a3316d751d8a8e3f3a8aaa6521176daf19eb3fca5b7687a"
+    },
+    "candidaturas/municipios/4318481.json": {
+      "bytes": 424167,
+      "sha256": "23c690d5024c08e796a7be9a05c6e7418749f5cb102accf44a49e238216e3c55"
+    },
+    "candidaturas/municipios/4318499.json": {
+      "bytes": 420647,
+      "sha256": "cd82a7996c984d51bc87de3922c218db783ca320179dc260bba222433b85bfcb"
+    },
+    "candidaturas/municipios/4318507.json": {
+      "bytes": 431405,
+      "sha256": "cb2734d0f9c7d0e4d0a241bcf70eed9fd7dd9eb5903b42f805c9259bc64347cf"
+    },
+    "candidaturas/municipios/4318606.json": {
+      "bytes": 424521,
+      "sha256": "343c97e9c8c7a8d9aff0471af3ebc1f9da1de2a53d5dae360bd061160482c4c0"
+    },
+    "candidaturas/municipios/4318614.json": {
+      "bytes": 421827,
+      "sha256": "af3a7a9a0eebbd9a53d688a89b3d22e8e9ccaf3145b4325a2a17098e0a56638d"
+    },
+    "candidaturas/municipios/4318622.json": {
+      "bytes": 420310,
+      "sha256": "20e9b809386dc32c9b7cad67ce8e1b584a79996dc6045a9308bcf58ac881729f"
+    },
+    "candidaturas/municipios/4318705.json": {
+      "bytes": 449673,
+      "sha256": "52ce6a47e40aa1ad797102f97831f314d49ea2af023f64ee4620f510b71b2cda"
+    },
+    "candidaturas/municipios/4318804.json": {
+      "bytes": 433901,
+      "sha256": "2514b87e7f09cb3ff86ba098c8c13772c26ac08d6dc06a2b009cc2304b3782b8"
+    },
+    "candidaturas/municipios/4318903.json": {
+      "bytes": 433227,
+      "sha256": "e6edeb2ae5b3b970ee6d32ef86ad02b0ea5c3312703dd770a5aa264222c9eeef"
+    },
+    "candidaturas/municipios/4319000.json": {
+      "bytes": 431746,
+      "sha256": "81dd542750dd07325f9fcf106e0d6c87c018b54299ba22332dbdeb553f7d21bb"
+    },
+    "candidaturas/municipios/4319109.json": {
+      "bytes": 422624,
+      "sha256": "cfa4a1c240c9dccb939e2f33689252c1af244cc83d044a666e2195cd9530abf9"
+    },
+    "candidaturas/municipios/4319125.json": {
+      "bytes": 421531,
+      "sha256": "84b10b2d8f1b9b5a9d8db4f84cab40f655950a63e4024e41c03eb73781175884"
+    },
+    "candidaturas/municipios/4319158.json": {
+      "bytes": 423281,
+      "sha256": "3258a5e81605decc469b5c8f7be2a7ee3e0b2f9d2892fb86295772fb035bcf3e"
+    },
+    "candidaturas/municipios/4319208.json": {
+      "bytes": 422231,
+      "sha256": "ba71030a5c4cd602c9eb35bda96293e177b8ee80c8c422d781cfc7d898113d77"
+    },
+    "candidaturas/municipios/4319307.json": {
+      "bytes": 423296,
+      "sha256": "d69795b95fae715256dc1df3c5c0bd03c387dd8a721a0b2c24677ac2355f0408"
+    },
+    "candidaturas/municipios/4319356.json": {
+      "bytes": 423504,
+      "sha256": "f23111f42d14700bf87dfab891cb664768f6df352e1cdff4c49eb6f144b8284e"
+    },
+    "candidaturas/municipios/4319364.json": {
+      "bytes": 418530,
+      "sha256": "34ec8ef07bafbee0e3337e9c5838e3890c3a2e8da20cdbdaa6513edc14769523"
+    },
+    "candidaturas/municipios/4319372.json": {
+      "bytes": 421225,
+      "sha256": "4e56ab55c354089a05150bd4d45d38c5aab27cbb5b02126e5252295f85c2bcb3"
+    },
+    "candidaturas/municipios/4319406.json": {
+      "bytes": 428126,
+      "sha256": "32d928bd5f6a6610d3b1ab8a5a24f09227d9bd18ce9ed9319b2d7a5c42153b32"
+    },
+    "candidaturas/municipios/4319505.json": {
+      "bytes": 435293,
+      "sha256": "2c6ba256ff87165d8120c3095c3e6e6f2f6a32eab33e12702866c8912216aa5d"
+    },
+    "candidaturas/municipios/4319604.json": {
+      "bytes": 432682,
+      "sha256": "68311b458eaad4c226b3a92d1d43895072658b303a73417ccf9dcac205d4b4d7"
+    },
+    "candidaturas/municipios/4319703.json": {
+      "bytes": 420633,
+      "sha256": "6e5ad419cdfcc89e2ab973dc5d807e7de6668e516d169eb6dc73541b58c7fbfa"
+    },
+    "candidaturas/municipios/4319711.json": {
+      "bytes": 420125,
+      "sha256": "00ed2da59ffc3cbfe5107f57afa1659e7075d264542381bdb40c84fef5a4f0ea"
+    },
+    "candidaturas/municipios/4319737.json": {
+      "bytes": 419577,
+      "sha256": "00ec3d599b7ff384d3d9375c8a7df0a896c4e4bb9eab9113e5b793155179668d"
+    },
+    "candidaturas/municipios/4319752.json": {
+      "bytes": 422264,
+      "sha256": "e3e370f8b212182d36112aab8018187c8fd554998bd6bd806563c81402a75bb9"
+    },
+    "candidaturas/municipios/4319802.json": {
+      "bytes": 425624,
+      "sha256": "7f283009851005d32fbda94c1a99ddf7c6447dcac0e86164d596be1c3a79624c"
+    },
+    "candidaturas/municipios/4319901.json": {
+      "bytes": 440232,
+      "sha256": "7f127f00ae472524c47426ad48dae0b6b31864dd03dc4b347837667ffcd397d0"
+    },
+    "candidaturas/municipios/4320008.json": {
+      "bytes": 444555,
+      "sha256": "5f3e22af048e48e131bbf8c8c34c8af9d029a455702b09927c5508fae0309232"
+    },
+    "candidaturas/municipios/4320107.json": {
+      "bytes": 431897,
+      "sha256": "76d098d41fb9d3750ec6858ad362bcada1dbd5faf446f76d91fa5562bdcda123"
+    },
+    "candidaturas/municipios/4320206.json": {
+      "bytes": 426391,
+      "sha256": "af596443be89c69a1835e69e9473b278ca6658448fe1fbe72332ea5e17c7f666"
+    },
+    "candidaturas/municipios/4320230.json": {
+      "bytes": 421072,
+      "sha256": "6638786bc906efd01613b81946374f390395a96bcfac64fc6624d350d67b61ea"
+    },
+    "candidaturas/municipios/4320263.json": {
+      "bytes": 422766,
+      "sha256": "acdbd61671e0de5474a6438faa6c34e8ec36a34e2a6552b5c264f60bb0a41e28"
+    },
+    "candidaturas/municipios/4320305.json": {
+      "bytes": 422237,
+      "sha256": "1264c61a480acf8bcfebdda1f417444aa88c8c7e91ea0ac94c94bc7d090ee69e"
+    },
+    "candidaturas/municipios/4320321.json": {
+      "bytes": 419388,
+      "sha256": "2edfc05d9a5670f0501f132de13b129a00cc75c565a11e64286a981b2a2faa4b"
+    },
+    "candidaturas/municipios/4320354.json": {
+      "bytes": 423300,
+      "sha256": "7a579f59b19e7d214d334adb37d8b45e0d365762cd7f46d2f0e5040e142ab2f9"
+    },
+    "candidaturas/municipios/4320404.json": {
+      "bytes": 429705,
+      "sha256": "eb71a06ffaa290dae301d0961b270cc19b4f985267ffdf446bd0fae7718af2a2"
+    },
+    "candidaturas/municipios/4320453.json": {
+      "bytes": 420005,
+      "sha256": "833117bfecf4e85d7aa4c016da947e969dd1778f36f05aeda2ffeca2ec973b6c"
+    },
+    "candidaturas/municipios/4320503.json": {
+      "bytes": 422702,
+      "sha256": "7f32a162729bfc42ba24107c548339555e8b75d67a97bf149cb444d83b77f2f2"
+    },
+    "candidaturas/municipios/4320552.json": {
+      "bytes": 423992,
+      "sha256": "3d73ac978d84a3f536cf6e6937e44c35e479c7f5f1001a408cb38d0555876cda"
+    },
+    "candidaturas/municipios/4320578.json": {
+      "bytes": 420062,
+      "sha256": "6c87d2fc9cae882b0fe013eabf3ecf198138edc7aba1f13ddf69d368212aa242"
+    },
+    "candidaturas/municipios/4320602.json": {
+      "bytes": 420233,
+      "sha256": "b62281cd057936f3874598fe1c644802c527735d857fc38bd075fece0dbf0b4d"
+    },
+    "candidaturas/municipios/4320651.json": {
+      "bytes": 421202,
+      "sha256": "e38939fc8c2f35fd49db35a74f46942df22df0d3a97f788716bce71266c5d7a7"
+    },
+    "candidaturas/municipios/4320677.json": {
+      "bytes": 423023,
+      "sha256": "b70181e63cb358d6afaf7dc32dc4854ef93bd12bb564db31329149ac603022cf"
+    },
+    "candidaturas/municipios/4320701.json": {
+      "bytes": 427287,
+      "sha256": "4acd58e4a0096720918ec814c69b495a06ca589802d259db5e1c70499fde68a7"
+    },
+    "candidaturas/municipios/4320800.json": {
+      "bytes": 431950,
+      "sha256": "79a0e78aff07e9cabfe5bfff666f3676062ddf8992a6ef7100be7b52f7e7d582"
+    },
+    "candidaturas/municipios/4320859.json": {
+      "bytes": 423773,
+      "sha256": "ad6cf3a8033648c04ad0910c2b659cd0ab853b1ceb5bf53dfe080ff043e7b60d"
+    },
+    "candidaturas/municipios/4320909.json": {
+      "bytes": 430816,
+      "sha256": "0a605795d0a24d39c764d3042f0506e55e3627fc0894b1f7b51c336181619c32"
+    },
+    "candidaturas/municipios/4321006.json": {
+      "bytes": 424713,
+      "sha256": "9f436a058f19e380bc4bf3bda2878089746ffe64c24799bef063a66b33124af1"
+    },
+    "candidaturas/municipios/4321105.json": {
+      "bytes": 428494,
+      "sha256": "9281698e71544d50abef136ce8f08646fc916adf212c0fef25bd696986f5cf3e"
+    },
+    "candidaturas/municipios/4321204.json": {
+      "bytes": 438137,
+      "sha256": "29feb5a785d0f9aff77d070a51e1e0e3d9102f18d4d94758dfb559b775235762"
+    },
+    "candidaturas/municipios/4321303.json": {
+      "bytes": 432101,
+      "sha256": "f082f532fa3f15ec639a1bb0b3ba8165349b8d0c52f33fadf76da8722773c89e"
+    },
+    "candidaturas/municipios/4321329.json": {
+      "bytes": 421750,
+      "sha256": "2b4e0d56f2081283566e53af4534ac762778ca5bf6671c2cacab9237aaa49019"
+    },
+    "candidaturas/municipios/4321352.json": {
+      "bytes": 423086,
+      "sha256": "8a34fb9c7998a4fe6abffb4bf381149f776f7ee78e85ef42c78031081265282a"
+    },
+    "candidaturas/municipios/4321402.json": {
+      "bytes": 426855,
+      "sha256": "b7d991edcde58b176dc9d608907be1be9e40cbbfc4d9ba8c40f2f7041393248d"
+    },
+    "candidaturas/municipios/4321436.json": {
+      "bytes": 427405,
+      "sha256": "d2af7c8ad6df848a4b59f1cda9589b9f38d1742b9e17c04256727fcd7a985866"
+    },
+    "candidaturas/municipios/4321451.json": {
+      "bytes": 435406,
+      "sha256": "07b22548e503a8d391155e52029def01f21b584ad75c6965fd083373c909b494"
+    },
+    "candidaturas/municipios/4321469.json": {
+      "bytes": 421015,
+      "sha256": "8c2dddda9bdb4fddb51e3eb5b014d0a4569dd138bef691bb72eb89ba8c384cbd"
+    },
+    "candidaturas/municipios/4321477.json": {
+      "bytes": 422606,
+      "sha256": "dd7c0bb392fa31ea2899ec6aafc8d6e1686e0740ff6caa61e8125369419dbd30"
+    },
+    "candidaturas/municipios/4321493.json": {
+      "bytes": 421220,
+      "sha256": "32e5cb183b3f9ec93f01bb25e9de0c7bb5a897161650f42e7f86e46baa0cf367"
+    },
+    "candidaturas/municipios/4321501.json": {
+      "bytes": 439677,
+      "sha256": "4b22b860441acf469e4d011ad2767a34fb7e78c5c5eac0a7b037c83a0818accd"
+    },
+    "candidaturas/municipios/4321600.json": {
+      "bytes": 440966,
+      "sha256": "a88a2fccf2191d4f05bee794dc73b880e78611781b27fd71bea437763182c12b"
+    },
+    "candidaturas/municipios/4321626.json": {
+      "bytes": 420294,
+      "sha256": "58bc579402e7f8d8a77c60c533f883987c9a03ca7d734a279b84aed495b3fe10"
+    },
+    "candidaturas/municipios/4321634.json": {
+      "bytes": 419851,
+      "sha256": "c83a99c0b56149284c770359279939b0b46974f0d4f5b7733343705186a4c68b"
+    },
+    "candidaturas/municipios/4321667.json": {
+      "bytes": 426052,
+      "sha256": "1c441f056905a2de16a988a3be55eda5e73ee0a9569bd8e7d43a0a7db9159023"
+    },
+    "candidaturas/municipios/4321709.json": {
+      "bytes": 431420,
+      "sha256": "12a47310b35cfc017bd744999e0b294cb6b4c5f4daef9043a268042669679242"
+    },
+    "candidaturas/municipios/4321808.json": {
+      "bytes": 432355,
+      "sha256": "7841deeaea07427edbb20c017e68d0c44da6c3b634d3c21fc59853216750685d"
+    },
+    "candidaturas/municipios/4321832.json": {
+      "bytes": 422010,
+      "sha256": "23f48fec903a466dbfe94cb44c361b4022e85e69cf6e4208d07a91debbae7839"
+    },
+    "candidaturas/municipios/4321857.json": {
+      "bytes": 421290,
+      "sha256": "0bb7c9916ad3db79203c30d3e8b3ebcc7a84bdaad2615c4bce2a90d921afe188"
+    },
+    "candidaturas/municipios/4321907.json": {
+      "bytes": 431544,
+      "sha256": "15fb4b80ed426435e85f24506f5e88a4f4df7dd639cba5ab6ac2d88a6bd95d7e"
+    },
+    "candidaturas/municipios/4321956.json": {
+      "bytes": 423432,
+      "sha256": "1483ba17673a828c8894efc5b8acd538b7037563ef003cd6f4198c226fb797a1"
+    },
+    "candidaturas/municipios/4322004.json": {
+      "bytes": 435391,
+      "sha256": "74a6116c41ddecddb1d7ba67d862ce7ac035703602b0ff011539ce4af7a5cf66"
+    },
+    "candidaturas/municipios/4322103.json": {
+      "bytes": 422452,
+      "sha256": "8848d9a977d5f721c691b57bd39755d3044a05e2fa67f961e8ba7173f10f3aef"
+    },
+    "candidaturas/municipios/4322152.json": {
+      "bytes": 420016,
+      "sha256": "04d46ef1b3807f061bb864f121d6e21008e8ab67cbbb18ed417d7564773a3694"
+    },
+    "candidaturas/municipios/4322186.json": {
+      "bytes": 419145,
+      "sha256": "9e04c9f03005ac9d901852026f395bd3ed8e08182c53a6ef276fffe36ef9156c"
+    },
+    "candidaturas/municipios/4322202.json": {
+      "bytes": 431377,
+      "sha256": "9728e95fd2fe0c183e16d6a4c9031c27115da030219642e7e27492c6a7eab405"
+    },
+    "candidaturas/municipios/4322251.json": {
+      "bytes": 424403,
+      "sha256": "888bcc095157499e99835bc5a5d3abce86a8619f34622d66d088de8dcd491058"
+    },
+    "candidaturas/municipios/4322301.json": {
+      "bytes": 423541,
+      "sha256": "da09df2e74725cb2c99b59f8bd71dcb30b91c12bdde109447a8b723de202ab47"
+    },
+    "candidaturas/municipios/4322327.json": {
+      "bytes": 420735,
+      "sha256": "f109c33c0950e0a886967cfa47d8ab1bb6790cc9a38ccad1198f7dd1de698183"
+    },
+    "candidaturas/municipios/4322343.json": {
+      "bytes": 419718,
+      "sha256": "73613129db4053085535d9dd680a5ed65404a854ba892c63cca75ddbde452afa"
+    },
+    "candidaturas/municipios/4322350.json": {
+      "bytes": 419206,
+      "sha256": "aeaa3aa2a92ec52a48a3b4292556f4354668c84b197fa5ecab38627370ba46f6"
+    },
+    "candidaturas/municipios/4322376.json": {
+      "bytes": 420651,
+      "sha256": "ddbb8c351316d0385ca279b18212c7733a8fa34bbf52b3b364cf5819e63fba6c"
+    },
+    "candidaturas/municipios/4322400.json": {
+      "bytes": 440782,
+      "sha256": "cd2157327db16e047a5536436355aab70e71413857125b7ada4ccbf11e0abbb3"
+    },
+    "candidaturas/municipios/4322509.json": {
+      "bytes": 435518,
+      "sha256": "06e9a4b198dcb8845ca70f075078f7264db438d859264ed435bb7208a39d1e3f"
+    },
+    "candidaturas/municipios/4322525.json": {
+      "bytes": 419572,
+      "sha256": "d064e255c3cd578aa15ef3a98231ff14f3fffefdc5bb8402c8fb6bd7a1fd9826"
+    },
+    "candidaturas/municipios/4322533.json": {
+      "bytes": 423820,
+      "sha256": "25e599faff2a7765b7eaadb7651faf5316081b2790b84f9fe74f6be2d505641a"
+    },
+    "candidaturas/municipios/4322541.json": {
+      "bytes": 424360,
+      "sha256": "c3f9302a47b66f85eda3be68516e1c5789aad9f45a696e3252b99b934088e243"
+    },
+    "candidaturas/municipios/4322558.json": {
+      "bytes": 420273,
+      "sha256": "8badd3ec4f35d1a9a388ec4b3f79a269dcc7166714ebde2b3fc552a3b053e845"
+    },
+    "candidaturas/municipios/4322608.json": {
+      "bytes": 438076,
+      "sha256": "8f40bd497bafc2e7a1becb5cba73200db11caa87892858f3c038ab414891d185"
+    },
+    "candidaturas/municipios/4322707.json": {
+      "bytes": 431498,
+      "sha256": "15df03e6aca9fb1781c628972e5831f5ee8cf522c7161d3c662111b6de751c80"
+    },
+    "candidaturas/municipios/4322806.json": {
+      "bytes": 432938,
+      "sha256": "04a68b32483a1d45a649b4c2f6c58262ce814b47c06c871eef5d9fa5a9095994"
+    },
+    "candidaturas/municipios/4322855.json": {
+      "bytes": 420515,
+      "sha256": "a766d8eddc8c4adf56efe7ba8b9c7290e9343611e850cbe987e0c1f13df011a3"
+    },
+    "candidaturas/municipios/4322905.json": {
+      "bytes": 419808,
+      "sha256": "0426448cf954e9e5af7cb0e7d73e44ed1277f21207fa9f9c729c14fd508f3ca1"
+    },
+    "candidaturas/municipios/4323002.json": {
+      "bytes": 449994,
+      "sha256": "c7e793a2cfb088f7ebd6fc587a49c7b96da06e61106b5168b26da2cd55d8b0c9"
+    },
+    "candidaturas/municipios/4323101.json": {
+      "bytes": 421568,
+      "sha256": "d102bbbbd6fcb01b61dda8509b03b7551440c75fd1285e4b534799e3e9774b71"
+    },
+    "candidaturas/municipios/4323200.json": {
+      "bytes": 421059,
+      "sha256": "e48ca8539cd0a6f74bacfbc0ec5e7080438154b264e5a9fab87fc1aa3f7c29a7"
+    },
+    "candidaturas/municipios/4323309.json": {
+      "bytes": 423338,
+      "sha256": "fd5511b7e9c6442750d62701b9cf7f4dab4a93715a3d7347ab8a379b433a99b9"
+    },
+    "candidaturas/municipios/4323358.json": {
+      "bytes": 419551,
+      "sha256": "a2e14f0dc79ee06c083d3e3dea3e3ae163bfbe33842951755f4298d26329219f"
+    },
+    "candidaturas/municipios/4323408.json": {
+      "bytes": 421837,
+      "sha256": "58ed46ae155b969fe2f00d7717a2dec63932843ded7a64ad7b38932c8282adc0"
+    },
+    "candidaturas/municipios/4323457.json": {
+      "bytes": 423087,
+      "sha256": "9ed2bcf652c1617868508e18bbc04b766ed65da2eb0427f62aac71e2393a4c31"
+    },
+    "candidaturas/municipios/4323507.json": {
+      "bytes": 420261,
+      "sha256": "001c01207325f79fcfd56c1d5f595118ab937fd9dc10d88f81f1acc10754bc8a"
+    },
+    "candidaturas/municipios/4323606.json": {
+      "bytes": 420136,
+      "sha256": "e0b5160a25fa9a0666475c2744107772204e5f1096b6e3e188d79c507ed16e71"
+    },
+    "candidaturas/municipios/4323705.json": {
+      "bytes": 421265,
+      "sha256": "49cd037821569b3d1b33e618345b46d5dd52e6b18fe7d3b2884d859c75140992"
+    },
+    "candidaturas/municipios/4323754.json": {
+      "bytes": 421426,
+      "sha256": "5d6e26b5703b7a7537145617c3f4c7763195e5df6c1639c33886d63b7339ec71"
+    },
+    "candidaturas/municipios/4323770.json": {
+      "bytes": 422256,
+      "sha256": "a2e9b2fb1b903d68bf03fe6dffe736d162b62e3486c18d91f23cabfd3873e818"
+    },
+    "candidaturas/municipios/4323804.json": {
+      "bytes": 435316,
+      "sha256": "80c82641bd8056cec6eb570447450e77f532897e1a6db843ee0903d96e5c30f0"
+    },
+    "candidaturas/estado/cargo_1.json": {
+      "bytes": 3171,
+      "sha256": "088ef1d47d8549b60858b1afa9f0117a625a7aed440af5a52cfacff8aaffd10d"
+    },
+    "candidaturas/estado/cargo_3.json": {
+      "bytes": 1726,
+      "sha256": "ec0fd08da4045203e0a2a0c44f01855a2e15d21b4b414a572d7911dd6fad7747"
+    },
+    "candidaturas/estado/cargo_5.json": {
+      "bytes": 3213,
+      "sha256": "55fda1cda7bb3b5da9413af8d9fd2561411f0befc463ab4b87fdc3daf254e0a6"
+    },
+    "candidaturas/estado/cargo_6.json": {
+      "bytes": 109589,
+      "sha256": "a66a153d69adea6f1917c34992b3345fbe99bd9048c304b5b8fe0f3fe3ff6fff"
+    },
+    "candidaturas/estado/cargo_7.json": {
+      "bytes": 131049,
+      "sha256": "4f9c06d60f779c910e625fe56872c09706ff7e21475972d42fa33a7d084a0ba7"
+    }
+  }
+}

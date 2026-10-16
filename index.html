@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atlas Eleitoral RS 2026</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet"
+    href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet"
+    href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">RIO GRANDE DO SUL · 2026</div>
+      <h1>Atlas Eleitoral</h1>
+      <p>Resultados eleitorais e distribuição territorial dos votos</p>
+    </div>
+    <div class="top-meta">
+      <strong>497 municípios</strong>
+      <span>Dados eleitorais auditados · versão experimental</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="filters">
+      <div class="field">
+        <label for="cargo">Cargo</label>
+        <select id="cargo">
+          <option value="1">Presidente</option>
+          <option value="3">Governador</option>
+          <option value="5">Senador</option>
+          <option value="6">Deputado federal</option>
+          <option value="7">Deputado estadual</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="municipio">Município</label>
+        <select id="municipio">
+          <option value="">Todo o Rio Grande do Sul</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="indicador">Indicador do mapa</label>
+        <select id="indicador">
+          <option value="votos_nominais_brutos">Votos nominais brutos</option>
+          <option value="votos_validos_confirmados">Votos válidos confirmados</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="partido">Partido</label>
+        <select id="partido">
+          <option value="">Todos os partidos</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="modo-mapa">Visualização do mapa</label>
+        <select id="modo-mapa">
+          <option value="areas">Áreas municipais</option>
+          <option value="pontos">Pontos de votação</option>
+          <option value="calor">Calor — densidade de locais</option>
+          <option value="clusters">Clusters de locais</option>
+        </select>
+      </div>
+      <div class="field compact">
+        <label>Locais de votação</label>
+        <p class="check">7.748 pontos geográficos disponíveis; 135 locais em revisão.</p>
+      </div>
+    </section>
+
+    <div id="estado" class="status" role="status">Carregando arquivos do Atlas...</div>
+
+    <section class="kpis">
+      <div class="kpi"><span>Recorte territorial</span><strong id="kpi-territorio">RS</strong></div>
+      <div class="kpi"><span>Votos nominais brutos</span><strong id="kpi-brutos">—</strong></div>
+      <div class="kpi"><span>Votos válidos confirmados</span><strong id="kpi-validos">—</strong></div>
+      <div class="kpi"><span>Locais cadastrados</span><strong id="kpi-locais">—</strong></div>
+    </section>
+
+    <section class="dashboard">
+      <div class="panel map-panel">
+        <div class="panel-heading">
+          <div><h2>Distribuição municipal</h2><p id="legenda-mapa">Votos nominais brutos</p></div>
+          <button id="limpar" type="button">Ver todo o RS</button>
+        </div>
+        <div id="mapa"></div>
+        <div id="mapa-escala" class="map-foot"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <div><h2>Ranking de candidaturas</h2><p id="sub-candidatos">Selecione um cargo</p></div>
+        </div>
+        <div class="chart-scroll">
+          <div id="grafico-candidatos"></div>
+        </div>
+        <div class="panel-foot" id="nota-candidatos"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <div><h2>Partidos</h2><p id="sub-partidos">Resultados por partido</p></div>
+        </div>
+        <div class="chart-scroll">
+          <div id="grafico-partidos"></div>
+        </div>
+        <div class="panel-foot">Resultados partidários disponíveis para os cargos proporcionais (6 e 7). Votos de legenda são incluídos em votos válidos do partido.</div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <div><h2>Cobertura territorial</h2><p>Limites da espacialização</p></div>
+        </div>
+        <div class="method">
+          <p><strong>7.883</strong> locais cadastrados no TSE.</p>
+          <p><strong>7.748</strong> pontos na camada geográfica principal.</p>
+          <p><strong>135</strong> locais com coordenadas em revisão, sem exibição como localização exata.</p>
+          <p><strong>7.622</strong> locais com registros eleitorais nas bases por ponto.</p>
+          <p>Os totais municipais provêm das bases eleitorais municipais. Uma posição no mapa nunca transfere votos entre municípios.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel full">
+      <div class="panel-heading">
+        <div><h2>Tabela de candidaturas</h2><p id="titulo-tabela">Resultados do recorte selecionado</p></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Candidato(a)</th><th>Partido</th><th>Votos nominais</th><th>Votos válidos</th><th>Destinação auditada</th>
+          </tr></thead>
+          <tbody id="tabela-candidatos"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      Atlas Eleitoral RS 2026 · versão de desenvolvimento.
+      Os rankings apresentam resultados apurados, não projeções.
+      Fontes eleitorais preservadas e checagens de integridade documentadas.
+    </footer>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

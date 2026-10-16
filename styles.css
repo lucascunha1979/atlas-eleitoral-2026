@@ -1,0 +1,58 @@
+*{box-sizing:border-box}
+:root{--bg:#f2f5f9;--paper:#fff;--ink:#182c45;--muted:#62748a;--line:#e1e8f0;--navy:#132d50;--blue:#2163a3}
+body{margin:0;background:var(--bg);font:14px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink)}
+.topbar{background:var(--navy);color:#fff;padding:22px clamp(18px,3vw,50px);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.eyebrow{font-size:11px;font-weight:750;letter-spacing:2px;color:#9bc7e8}
+h1{font-size:29px;margin:2px 0 0;line-height:1.2}
+.topbar p{margin:5px 0 0;color:#bfd1e1}
+.top-meta{text-align:right;display:flex;flex-direction:column;gap:4px}
+.top-meta strong{font-size:17px}.top-meta span{font-size:12px;color:#bfd1e1}
+main{max-width:1900px;margin:auto;padding:20px clamp(12px,2vw,36px)}
+.filters{display:grid;grid-template-columns:1fr 1.4fr 1.3fr 1fr;gap:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px;margin-bottom:15px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field>label:first-child{font-weight:650;font-size:12px;color:var(--muted)}
+select,button{font:inherit}
+select{width:100%;height:41px;border:1px solid #ced9e5;border-radius:7px;background:#fff;padding:0 11px;color:var(--ink)}
+.check{display:flex;align-items:center;gap:7px;min-height:41px}
+.status{padding:9px 13px;margin-bottom:14px;border-radius:7px;background:#e6f0fb;color:#214d7a}
+.status.error{background:#feecec;color:#922b2b}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:16px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:15px 18px;display:flex;flex-direction:column;gap:4px;min-height:94px}
+.kpi span{color:var(--muted);font-size:12px}.kpi strong{font-size:23px;line-height:1.3;overflow-wrap:anywhere}
+.dashboard{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:stretch}
+.panel{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.panel-heading{padding:15px 18px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.panel-heading h2{font-size:16px;margin:0}.panel-heading p{font-size:12px;color:var(--muted);margin:3px 0 0}
+button{background:#edf3fb;border:1px solid #d5e2f1;border-radius:7px;color:var(--navy);padding:8px 12px;cursor:pointer}
+button:hover{background:#dcebf9}
+#mapa{height:510px;width:100%;background:#edf3f7}
+.map-foot{padding:9px 15px;color:var(--muted);font-size:12px}
+.chart-scroll{height:460px;overflow-y:auto;overflow-x:hidden;padding:8px 12px 14px}
+.panel-foot{padding:11px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.method{padding:17px 22px}.method p{margin:0 0 14px}.method strong{color:var(--blue)}
+.full{margin-top:16px}.table-wrap{max-height:490px;overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{text-align:left;padding:10px 15px;border-bottom:1px solid var(--line);font-size:12px}
+th{position:sticky;top:0;background:#f6f8fb;z-index:1}
+td:nth-child(3),td:nth-child(4){font-variant-numeric:tabular-nums}
+footer{color:var(--muted);text-align:center;margin:23px 0;font-size:12px}
+@media(max-width:1100px){.dashboard{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.topbar{align-items:flex-start;flex-direction:column}.top-meta{text-align:left}.filters{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}#mapa{height:420px}.kpi strong{font-size:18px}}
+
+/* Atlas V2 */
+.filters{grid-template-columns:repeat(3,minmax(0,1fr))}
+.field.compact{justify-content:flex-end}
+.field.compact .check{font-size:12px;color:var(--muted);margin:0}
+#mapa{height:560px}
+.chart-scroll{height:500px}
+.map-panel{min-width:0}
+@media(max-width:1100px){
+  .filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+  .filters{grid-template-columns:1fr}
+  #mapa{height:430px}
+}
+
+.empty-chart{padding:24px;color:#62748a}
+select:disabled{background:#f2f4f7;color:#7b8897}
