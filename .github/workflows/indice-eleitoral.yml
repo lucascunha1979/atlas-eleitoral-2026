@@ -1,0 +1,31 @@
+name: Atualizar indice eleitoral municipal
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/gerar_indice_eleitoral.py'
+      - 'dados/candidaturas/municipios/**'
+      - '.github/workflows/indice-eleitoral.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  indices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Gerar e validar indice
+        run: python3 scripts/gerar_indice_eleitoral.py
+      - name: Publicar indice gerado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dados/indice_eleitoral_municipal.json
+          if git diff --cached --quiet; then
+            echo "Indice já atualizado"
+          else
+            git commit -m "Atualiza índice municipal auditado de candidatos e partidos"
+            git push
+          fi
