@@ -17,7 +17,7 @@ const s = {
   cargo:"1", municipio:"", partido:"", indicador:"votos_nominais_brutos",
   modo:"areas", geo:null, municipal:[], partidos:[], cadastro:[],
   locais:null, nomes:new Map(), map:null, camada:null, pontos:null,
-  limites:null, versaoRequisicao:0
+  limites:null, versaoRequisicao:0, execPartidos:new Map(), mapSeq:0
 };
 
 function aviso(msg,erro=false){
@@ -85,10 +85,12 @@ function votoPartidoMunicipio(){
 function atualizarPartidosDisponiveis(){
   const seletor=$("partido");
   const anterior=s.partido;
-  const ativo=proporcional(s.cargo);
-  seletor.disabled=!ativo;
+  const ativo=true;
+  seletor.disabled=false;
   const conjuntos=new Map();
-  if(ativo){
+  if(!proporcional(s.cargo)){
+    for(const p of (s.execPartidos.get(s.cargo)||[]))conjuntos.set(p,p);
+  }else if(ativo){
     for(const r of s.partidos){
       if(r.cd_cargo!==s.cargo)continue;
       // O seletor mostra os partidos do cargo em todo RS.
@@ -101,7 +103,7 @@ function atualizarPartidosDisponiveis(){
   seletor.replaceChildren();
   const geral=document.createElement("option");
   geral.value="";
-  geral.textContent=ativo?"Todos os partidos":"Não disponível neste cargo";
+  geral.textContent="Todos os partidos";
   seletor.appendChild(geral);
   for(const [id,nome] of [...conjuntos].sort((a,b)=>
     a[1].localeCompare(b[1],"pt-BR"))){
@@ -109,7 +111,7 @@ function atualizarPartidosDisponiveis(){
     op.value=id;op.textContent=nome;
     seletor.appendChild(op);
   }
-  s.partido=ativo&&conjuntos.has(anterior)?anterior:"";
+  s.partido=conjuntos.has(anterior)?anterior:"";
   seletor.value=s.partido;
 }
 function kpis(){
@@ -124,10 +126,45 @@ function kpis(){
     s.cadastro.filter(r=>!s.municipio||r.CD_MUN===s.municipio).length
   );
 }
-function cor(v,max){
-  if(!Number.isFinite(v)||v<=0)return "#e6edf4";
-  const intensidade=Math.sqrt(v/Math.max(max,1));
-  return `hsl(208 65% ${90-intensidade*57}%)`;
+const coresJenks=["#e5f0f8","#a5d1e4","#62aecf","#2779b0","#104477"];
+const classeSemDados="#e9e9e9";
+function quebrasJenks(valores,k=5){
+  const x=valores.filter(v=>Number.isFinite(v)&&v>0).sort((a,b)=>a-b);
+  if(!x.length)return [];
+  const n=x.length, K=Math.min(k,n), ps=[0],ps2=[0];
+  for(const v of x){ps.push(ps.at(-1)+v);ps2.push(ps2.at(-1)+v*v);}
+  const custo=(a,b)=>{const cnt=b-a, soma=ps[b]-ps[a];return ps2[b]-ps2[a]-soma*soma/cnt;};
+  const dp=Array.from({length:K+1},()=>Array(n+1).fill(Infinity));
+  const prev=Array.from({length:K+1},()=>Array(n+1).fill(0));
+  dp[0][0]=0;
+  for(let c=1;c<=K;c++)for(let j=c;j<=n;j++){
+    for(let i=c-1;i<j;i++){
+      const valor=dp[c-1][i]+custo(i,j);
+      if(valor<dp[c][j]){dp[c][j]=valor;prev[c][j]=i;}
+    }
+  }
+  const cortes=[];let j=n;
+  for(let c=K;c>=1;c--){cortes.unshift(x[j-1]);j=prev[c][j];}
+  return cortes;
+}
+function legendaJenks(cortes,percentual=false){
+  const el=$("legenda-jenks");el.replaceChildren();
+  const titulo=document.createElement("strong");titulo.textContent="Jenks · "+cortes.length+" classes";el.appendChild(titulo);
+  let inferior=0;
+  cortes.forEach((max,i)=>{
+    const item=document.createElement("span");item.className="legend-item";
+    const sw=document.createElement("span");sw.className="legend-swatch";sw.style.background=coresJenks[i];
+    const lab=document.createElement("span");
+    const format=v=>percentual?v.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%":fmt.format(Math.round(v));
+    lab.textContent=(i===0?"> 0":"> "+format(inferior))+" até "+format(max);
+    item.append(sw,lab);el.appendChild(item);inferior=max;
+  });
+  const outro=document.createElement("span");outro.className="legend-item";
+  const caixa=document.createElement("span");caixa.className="legend-swatch";caixa.style.background=classeSemDados;
+  const t=document.createElement("span");t.textContent="Zero/sem dado";outro.append(caixa,t);el.appendChild(outro);
+}
+function corJenks(v,cortes){if(!Number.isFinite(v)||v<=0||!cortes.length)return classeSemDados;
+  const ind=cortes.findIndex(c=>v<=c);return coresJenks[Math.max(0,ind<0?cortes.length-1:ind)];
 }
 function removerCamada(){
   if(s.camada){s.map.removeLayer(s.camada);s.camada=null;}
@@ -135,21 +172,31 @@ function removerCamada(){
 function areaMunicipal(){
   removerCamada();
   const valores=new Map();
-  if(proporcional(s.cargo)&&s.partido){
-    for(const [id,n] of votoPartidoMunicipio())valores.set(id,n);
+  const cargoMun=s.municipal.filter(x=>x.cd_cargo===s.cargo);
+  const totalRS=cargoMun.reduce((a,r)=>a+num(r.votos_validos_confirmados),0);
+  if(s.partido&&!proporcional(s.cargo)){
+    // Sem série municipal de votos partidários executivos validada no pacote.
+    // Não apresentar totais gerais como se fossem do partido selecionado.
+  }else if(proporcional(s.cargo)&&s.partido){
+    const votos=votoPartidoMunicipio();
+    for(const r of cargoMun){const p=votos.get(r.cd_municipio_ibge)||0;
+      valores.set(r.cd_municipio_ibge,s.indicador==="pct_validos"
+        ?(num(r.votos_validos_confirmados)?100*p/num(r.votos_validos_confirmados):0):p);}
   }else{
     const campo=s.indicador;
-    for(const r of s.municipal.filter(x=>x.cd_cargo===s.cargo))
-      valores.set(r.cd_municipio_ibge,num(r[campo]));
+    for(const r of cargoMun){const valor=campo==="pct_validos"
+       ?(totalRS?100*num(r.votos_validos_confirmados)/totalRS:0):num(r[campo]);
+       valores.set(r.cd_municipio_ibge,valor);}
   }
-  const max=Math.max(1,...valores.values());
+  const cortes=quebrasJenks([...valores.values()]);
+  legendaJenks(cortes,s.indicador==="pct_validos");
   s.camada=L.geoJSON(s.geo,{
     style:f=>{
       const id=texto(f.properties.cd_municipio_ibge);
       return {
         color:id===s.municipio?"#e29a2d":"#70849a",
         weight:id===s.municipio?3:0.65,
-        fillColor:cor(valores.get(id)||0,max),
+        fillColor:corJenks(valores.get(id)||0,cortes),
         fillOpacity:.87
       };
     },
@@ -157,7 +204,7 @@ function areaMunicipal(){
       const id=texto(f.properties.cd_municipio_ibge);
       const votos=valores.get(id)||0;
       l.bindTooltip(
-        `${limpar(nomeMunicipio(id))}<br>${fmt.format(votos)} votos`,
+        `${limpar(nomeMunicipio(id))}<br>${s.partido&&!proporcional(s.cargo)?"Dados municipais do partido não disponíveis":(s.indicador==="pct_validos"?votos.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%":fmt.format(votos)+" votos")}`,
         {sticky:true}
       );
       l.on("click",()=>{
@@ -167,12 +214,14 @@ function areaMunicipal(){
       });
     }
   }).addTo(s.map);
-  $("mapa-escala").textContent=s.partido&&proporcional(s.cargo)
-    ? "Áreas por votos válidos do partido selecionado, neste cargo."
-    : "Áreas por totais municipais do cargo e indicador selecionados.";
+  $("mapa-escala").textContent=s.partido&&!proporcional(s.cargo)
+    ? "Sem dados municipais por partido para este cargo neste pacote. Não foram inventadas distribuições."
+    : s.indicador==="pct_validos" ? (s.partido?"Percentual dos votos válidos do partido sobre os votos válidos do cargo no município.":"Participação do município nos votos válidos do RS para este cargo (não é a votação de um candidato).")
+    : s.partido?"Votos válidos do partido no município.":"Totais municipais do cargo selecionado.";
 }
 async function camadaDeLocais(){
   removerCamada();
+  $("legenda-jenks").replaceChildren();
   if(!s.locais)s.locais=await buscar("dados/locais.geojson");
   const pontos=s.locais.features.filter(f=>
     f.geometry?.type==="Point" &&
@@ -275,15 +324,16 @@ function atualizarRankingPartidos(){
 function atualizarTabela(linhas){
   const tbody=$("tabela-candidatos");
   tbody.replaceChildren();
+  const baseValidos=registrosMunicipais().reduce((a,r)=>a+num(r.votos_validos_confirmados),0);
   for(const r of linhas.slice(0,100)){
     const tr=document.createElement("tr");
     for(const c of [
       "nome_candidato_final","sg_partido",
       "votos_nominais_brutos","votos_validos_confirmados",
-      "destinacao_auditada"
+      "pct_do_cargo","destinacao_auditada"
     ]){
       const td=document.createElement("td");
-      td.textContent=c.startsWith("votos_")
+      td.textContent=c==="pct_do_cargo" ? (baseValidos?(100*num(r.votos_validos_confirmados)/baseValidos).toLocaleString("pt-BR",{maximumFractionDigits:2})+"%":"—") : c.startsWith("votos_")
         ?fmt.format(num(r[c])):(r[c]??"Não informado");
       tr.appendChild(td);
     }
@@ -299,10 +349,10 @@ async function atualizarCandidaturas(){
     const todos=await buscar(url);
     if(token!==s.versaoRequisicao)return;
     let linhas=todos.filter(r=>r.cd_cargo===s.cargo);
-    if(s.partido&&proporcional(s.cargo)){
-      const siglas=new Set(s.partidos.filter(r=>
+    if(s.partido){
+      const siglas=proporcional(s.cargo)?new Set(s.partidos.filter(r=>
         r.cd_cargo===s.cargo && r.nr_partido===s.partido
-      ).map(r=>r.sg_partido));
+      ).map(r=>r.sg_partido)):new Set([s.partido]);
       linhas=linhas.filter(r=>siglas.has(r.sg_partido));
     }
     const rank=new Map();
@@ -356,6 +406,8 @@ async function iniciar(){
       buscarTexto("dados/cadastro_locais.csv")
     ]);
     s.geo=geo;s.municipal=mun;s.partidos=part;
+    const execListas=await Promise.all(["1","3","5"].map(c=>buscar(`dados/candidaturas/estado/cargo_${c}.json`)));
+    ["1","3","5"].forEach((cargo,i)=>s.execPartidos.set(cargo,[...new Set(execListas[i].map(r=>r.sg_partido).filter(Boolean))].sort()));
     s.cadastro=csvSimples(csv);
     if(geo.features.length!==497||s.cadastro.length!==7883)
       throw new Error("Universo territorial incompatível.");
@@ -401,6 +453,7 @@ async function iniciar(){
       s.modo=e.target.value;
       atualizarTudo();
     });
+    $("imprimir").addEventListener("click",()=>window.print());
     $("limpar").addEventListener("click",()=>{
       s.municipio="";
       $("municipio").value="";
