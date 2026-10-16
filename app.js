@@ -17,7 +17,7 @@ const s = {
   cargo:"1", municipio:"", partido:"", indicador:"votos_nominais_brutos",
   modo:"areas", geo:null, municipal:[], partidos:[], cadastro:[],
   locais:null, nomes:new Map(), map:null, camada:null, pontos:null,
-  limites:null, versaoRequisicao:0, execPartidos:new Map(), mapSeq:0
+  limites:null, versaoRequisicao:0, execPartidos:new Map(), mapSeq:0, indice:[], candidato:""
 };
 
 function aviso(msg,erro=false){
@@ -83,36 +83,31 @@ function votoPartidoMunicipio(){
   return mp;
 }
 function atualizarPartidosDisponiveis(){
-  const seletor=$("partido");
-  const anterior=s.partido;
-  const ativo=true;
-  seletor.disabled=false;
-  const conjuntos=new Map();
-  if(!proporcional(s.cargo)){
-    for(const p of (s.execPartidos.get(s.cargo)||[]))conjuntos.set(p,p);
-  }else if(ativo){
-    for(const r of s.partidos){
-      if(r.cd_cargo!==s.cargo)continue;
-      // O seletor mostra os partidos do cargo em todo RS.
-      // A filtragem por município ocorre depois.
-      if(!conjuntos.has(r.nr_partido)){
-        conjuntos.set(r.nr_partido,r.sg_partido||r.nr_partido);
-      }
+  const seletor=$("partido"), anterior=s.partido;
+  const p=new Map();
+  if(s.indice.length){
+    for(const r of s.indice)if(r.cargo===s.cargo && r.tipo==="partido" && r.partido)p.set(r.partido,r.partido);
+  }else if(proporcional(s.cargo)){
+    for(const r of s.partidos)if(r.cd_cargo===s.cargo && r.sg_partido)p.set(r.sg_partido,r.sg_partido);
+  }else{
+    for(const sig of s.execPartidos.get(s.cargo)||[])p.set(sig,sig);
+  }
+  seletor.replaceChildren(new Option("Todos os partidos",""));
+  for(const sig of [...p.keys()].sort((a,b)=>a.localeCompare(b,"pt-BR")))seletor.appendChild(new Option(sig,sig));
+  s.partido=p.has(anterior)?anterior:"";seletor.value=s.partido;
+}
+function atualizarCandidatosDisponiveis(){
+  const seletor=$("candidato"), anterior=s.candidato, op=new Map();
+  if(s.indice.length){
+    for(const r of s.indice)if(r.cargo===s.cargo && r.tipo==="candidato"
+      && (!s.partido||r.partido===s.partido) && (!s.municipio||r.ibge===s.municipio)){
+      const key=r.sq||r.numero+"|"+r.nome;
+      op.set(key,(r.nome||r.numero)+" · "+(r.partido||"Sem partido"));
     }
   }
-  seletor.replaceChildren();
-  const geral=document.createElement("option");
-  geral.value="";
-  geral.textContent="Todos os partidos";
-  seletor.appendChild(geral);
-  for(const [id,nome] of [...conjuntos].sort((a,b)=>
-    a[1].localeCompare(b[1],"pt-BR"))){
-    const op=document.createElement("option");
-    op.value=id;op.textContent=nome;
-    seletor.appendChild(op);
-  }
-  s.partido=conjuntos.has(anterior)?anterior:"";
-  seletor.value=s.partido;
+  seletor.replaceChildren(new Option("Todas as candidaturas",""));
+  for(const [key,nome] of [...op].sort((a,b)=>a[1].localeCompare(b[1],"pt-BR")))seletor.appendChild(new Option(nome,key));
+  s.candidato=op.has(anterior)?anterior:"";seletor.value=s.candidato;
 }
 function kpis(){
   const linhas=registrosMunicipais();
@@ -174,39 +169,56 @@ function areaMunicipal(){
   const valores=new Map();
   const cargoMun=s.municipal.filter(x=>x.cd_cargo===s.cargo);
   const totalRS=cargoMun.reduce((a,r)=>a+num(r.votos_validos_confirmados),0);
-  if(s.partido&&!proporcional(s.cargo)){
-    // Sem série municipal de votos partidários executivos validada no pacote.
-    // Não apresentar totais gerais como se fossem do partido selecionado.
-  }else if(proporcional(s.cargo)&&s.partido){
-    const votos=votoPartidoMunicipio();
-    for(const r of cargoMun){const p=votos.get(r.cd_municipio_ibge)||0;
-      valores.set(r.cd_municipio_ibge,s.indicador==="pct_validos"
-        ?(num(r.votos_validos_confirmados)?100*p/num(r.votos_validos_confirmados):0):p);}
-  }else{
-    const campo=s.indicador;
-    for(const r of cargoMun){const valor=campo==="pct_validos"
-       ?(totalRS?100*num(r.votos_validos_confirmados)/totalRS:0):num(r[campo]);
-       valores.set(r.cd_municipio_ibge,valor);}
+  const temFiltro=Boolean(s.partido||s.candidato);
+  let sub=new Map();
+  if(temFiltro&&s.indice.length){
+    for(const r of s.indice){
+      if(r.cargo!==s.cargo)continue;
+      if(s.candidato){
+        if(r.tipo!=="candidato"||(r.sq||r.numero+"|"+r.nome)!==s.candidato)continue;
+      }else if(r.tipo!=="partido")continue;
+      if(s.partido&&r.partido!==s.partido)continue;
+      sub.set(r.ibge,(sub.get(r.ibge)||0)+num(s.indicador==="votos_nominais_brutos"?r.brutos:r.validos));
+    }
   }
+  // Para os cargos proporcionais, manter resultados partidários
+  // disponíveis mesmo antes de a agregação gerada ser publicada.
+  if(temFiltro&&!s.indice.length&&proporcional(s.cargo)&&s.partido&&!s.candidato){
+    for(const r of s.partidos)if(r.cd_cargo===s.cargo&&r.sg_partido===s.partido)
+      sub.set(r.cd_municipio_ibge,(sub.get(r.cd_municipio_ibge)||0)+num(
+        s.indicador==="votos_nominais_brutos"?r.nominais_brutos:r.votos_validos_partido));
+  }
+  const semIndice=temFiltro&&!s.indice.length&&(!proporcional(s.cargo)||s.candidato);
+  for(const r of cargoMun){
+    const id=r.cd_municipio_ibge, den=num(r.votos_validos_confirmados);
+    const filtro=temFiltro?(sub.get(id)||0):num(
+      s.indicador==="votos_nominais_brutos"?r.votos_nominais_brutos:r.votos_validos_confirmados);
+    let v;
+    if(semIndice)v=null;
+    else if(s.indicador==="pct_concorrencia")v=den?100*filtro/den:0;
+    else if(s.indicador==="pct_validos")v=temFiltro?(den?100*filtro/den:0)
+      :(totalRS?100*den/totalRS:0);
+    else v=filtro;
+    valores.set(id,v);
+  }
+  const tema=semIndice?"AGUARDANDO ÍNDICE ELEITORAL · ":s.candidato?"Candidatura selecionada · ":s.partido?"Partido selecionado · ":"";
+  $("legenda-mapa").textContent=tema+nomesCargos[s.cargo];
   const cortes=quebrasJenks([...valores.values()]);
-  legendaJenks(cortes,s.indicador==="pct_validos");
+  legendaJenks(cortes,s.indicador.startsWith("pct_"));
   s.camada=L.geoJSON(s.geo,{
     style:f=>{
       const id=texto(f.properties.cd_municipio_ibge);
       return {
         color:id===s.municipio?"#e29a2d":"#70849a",
         weight:id===s.municipio?3:0.65,
-        fillColor:corJenks(valores.get(id)||0,cortes),
+        fillColor:corJenks(valores.get(id),cortes),
         fillOpacity:.87
       };
     },
     onEachFeature:(f,l)=>{
       const id=texto(f.properties.cd_municipio_ibge);
-      const votos=valores.get(id)||0;
-      l.bindTooltip(
-        `${limpar(nomeMunicipio(id))}<br>${s.partido&&!proporcional(s.cargo)?"Dados municipais do partido não disponíveis":(s.indicador==="pct_validos"?votos.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%":fmt.format(votos)+" votos")}`,
-        {sticky:true}
-      );
+      const votos=valores.get(id);
+      l.bindTooltip(limpar(nomeMunicipio(id))+"<br>"+(votos===null?"Dados ainda não disponíveis":s.indicador.startsWith("pct_")?votos.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%":fmt.format(votos)+" votos"),{sticky:true});
       l.on("click",()=>{
         s.municipio=id;
         $("municipio").value=id;
@@ -214,10 +226,8 @@ function areaMunicipal(){
       });
     }
   }).addTo(s.map);
-  $("mapa-escala").textContent=s.partido&&!proporcional(s.cargo)
-    ? "Sem dados municipais por partido para este cargo neste pacote. Não foram inventadas distribuições."
-    : s.indicador==="pct_validos" ? (s.partido?"Percentual dos votos válidos do partido sobre os votos válidos do cargo no município.":"Participação do município nos votos válidos do RS para este cargo (não é a votação de um candidato).")
-    : s.partido?"Votos válidos do partido no município.":"Totais municipais do cargo selecionado.";
+  $("mapa-escala").textContent=semIndice?"Índice municipal por candidato/partido ainda em geração no GitHub.":temFiltro?"Mapa pelo filtro selecionado, com cinco classes Jenks e voto nominal ou válido conforme o indicador.":"Mapa municipal por cargo; para distribuir votos por partido ou candidatura, selecione um filtro.";
+
 }
 async function camadaDeLocais(){
   removerCamada();
@@ -349,12 +359,8 @@ async function atualizarCandidaturas(){
     const todos=await buscar(url);
     if(token!==s.versaoRequisicao)return;
     let linhas=todos.filter(r=>r.cd_cargo===s.cargo);
-    if(s.partido){
-      const siglas=proporcional(s.cargo)?new Set(s.partidos.filter(r=>
-        r.cd_cargo===s.cargo && r.nr_partido===s.partido
-      ).map(r=>r.sg_partido)):new Set([s.partido]);
-      linhas=linhas.filter(r=>siglas.has(r.sg_partido));
-    }
+    if(s.partido)linhas=linhas.filter(r=>r.sg_partido===s.partido);
+    if(s.candidato)linhas=linhas.filter(r=>(r.sq_candidato||r.nr_candidato+"|"+r.nome_candidato_final)===s.candidato);
     const rank=new Map();
     for(const r of linhas){
       const id=[r.sq_candidato,r.nr_candidato,r.nome_candidato_final].join("|");
@@ -406,6 +412,7 @@ async function iniciar(){
       buscarTexto("dados/cadastro_locais.csv")
     ]);
     s.geo=geo;s.municipal=mun;s.partidos=part;
+    try{s.indice=await buscar("dados/indice_eleitoral_municipal.json");}catch(e){console.warn("Índice em geração:",e.message);}
     const execListas=await Promise.all(["1","3","5"].map(c=>buscar(`dados/candidaturas/estado/cargo_${c}.json`)));
     ["1","3","5"].forEach((cargo,i)=>s.execPartidos.set(cargo,[...new Set(execListas[i].map(r=>r.sg_partido).filter(Boolean))].sort()));
     s.cadastro=csvSimples(csv);
@@ -434,11 +441,11 @@ async function iniciar(){
     s.versaoMapa=0;
     $("cargo").addEventListener("change",e=>{
       s.cargo=e.target.value;
-      atualizarPartidosDisponiveis();
+      atualizarPartidosDisponiveis();atualizarCandidatosDisponiveis();
       atualizarTudo();
     });
     $("municipio").addEventListener("change",e=>{
-      s.municipio=e.target.value;
+      s.municipio=e.target.value;atualizarCandidatosDisponiveis();
       atualizarTudo(true);
     });
     $("indicador").addEventListener("change",e=>{
@@ -446,9 +453,10 @@ async function iniciar(){
       atualizarTudo();
     });
     $("partido").addEventListener("change",e=>{
-      s.partido=e.target.value;
+      s.partido=e.target.value;atualizarCandidatosDisponiveis();
       atualizarTudo();
     });
+    $("candidato").addEventListener("change",e=>{s.candidato=e.target.value;atualizarTudo();});
     $("modo-mapa").addEventListener("change",e=>{
       s.modo=e.target.value;
       atualizarTudo();
@@ -459,7 +467,7 @@ async function iniciar(){
       $("municipio").value="";
       atualizarTudo(true);
     });
-    atualizarPartidosDisponiveis();
+    atualizarPartidosDisponiveis();atualizarCandidatosDisponiveis();
     atualizarTudo();
     aviso("Atlas V2 carregado. Utilize os filtros e selecione uma visualização.");
   }catch(e){
