@@ -47,6 +47,7 @@
         <select id="indicador">
           <option value="votos_nominais_brutos">Votos nominais brutos</option>
           <option value="votos_validos_confirmados">Votos válidos confirmados</option>
+          <option value="pct_validos">Percentual dos votos válidos do cargo (%)</option>
         </select>
       </div>
       <div class="field">
@@ -70,6 +71,7 @@
       </div>
     </section>
 
+    <div class="scope-note">Abrangência disponível nesta versão: <strong>RS e municípios</strong>. Bairros, distritos, brancos, nulos e abstenções aguardam integração de bases validadas.</div>
     <div id="estado" class="status" role="status">Carregando arquivos do Atlas...</div>
 
     <section class="kpis">
@@ -83,10 +85,10 @@
       <div class="panel map-panel">
         <div class="panel-heading">
           <div><h2>Distribuição municipal</h2><p id="legenda-mapa">Votos nominais brutos</p></div>
-          <button id="limpar" type="button">Ver todo o RS</button>
+          <div class="map-actions"><button id="imprimir" type="button">Salvar em PDF</button><button id="limpar" type="button">Ver todo o RS</button></div>
         </div>
         <div id="mapa"></div>
-        <div id="mapa-escala" class="map-foot"></div>
+        <div id="legenda-jenks" class="jenks-legend" aria-label="Legenda cartográfica"></div><div id="mapa-escala" class="map-foot"></div>
       </div>
 
       <div class="panel">
@@ -130,7 +132,7 @@
       <div class="table-wrap">
         <table>
           <thead><tr>
-            <th>Candidato(a)</th><th>Partido</th><th>Votos nominais</th><th>Votos válidos</th><th>Destinação auditada</th>
+            <th>Candidato(a)</th><th>Partido</th><th>Votos nominais</th><th>Votos válidos</th><th>% dos válidos do cargo</th><th>Destinação auditada</th>
           </tr></thead>
           <tbody id="tabela-candidatos"></tbody>
         </table>
