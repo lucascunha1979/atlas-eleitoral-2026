@@ -43,12 +43,30 @@
         </select>
       </div>
       <div class="field">
+        <label for="abrangencia">Abrangência territorial</label>
+        <select id="abrangencia">
+          <option value="municipios">Municípios</option>
+          <option value="distritos">Distritos</option>
+          <option value="bairros">Bairros</option>
+          <option value="locais">Locais de votação</option>
+        </select>
+      </div>
+      <div class="field">
         <label for="indicador">Indicador do mapa</label>
         <select id="indicador">
           <option value="votos_nominais_brutos">Votos nominais brutos</option>
           <option value="votos_validos_confirmados">Votos válidos confirmados</option>
           <option value="pct_validos">Percentual dos votos válidos do cargo (%)</option>
           <option value="pct_concorrencia">Votos do filtro / votos válidos do cargo (%)</option>
+          <option value="brancos">Votos brancos</option>
+          <option value="nulos">Votos nulos</option>
+          <option value="brancos_nulos">Brancos + nulos</option>
+          <option value="aptos">Eleitorado apto</option>
+          <option value="comparecimento">Comparecimento</option>
+          <option value="abstencoes">Abstenções</option>
+          <option value="pct_comparecimento">Comparecimento (%)</option>
+          <option value="pct_abstencao">Abstenção (%)</option>
+          <option value="pct_brancos_nulos_comparecimento">Brancos + nulos / comparecimento (%)</option>
         </select>
       </div>
       <div class="field">
@@ -81,7 +99,7 @@
       </div>
     </section>
 
-    <div class="scope-note" id="aviso-cobertura">Abrangência disponível nesta versão: <strong>RS e municípios</strong>. Bairros, distritos, brancos, nulos e abstenções aguardam integração de bases validadas.</div>
+    <div class="scope-note" id="aviso-cobertura">Municípios, distritos, bairros e locais: participação eleitoral territorializada. Votos de candidatos e partidos por bairro/distrito/local exigem dados eleitorais específicos dessas abrangências.</div>
     <div id="estado" class="status" role="status">Carregando arquivos do Atlas...</div>
 
     <section class="kpis">
@@ -135,6 +153,10 @@
       </div>
     </section>
 
+    <section class="panel full" id="painel-ranking-territorial">
+      <div class="panel-heading"><div><h2>Ranking territorial</h2><p id="titulo-ranking-territorial">Acompanhando os filtros selecionados</p></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Posição</th><th>Território</th><th>Município</th><th>Valor do indicador</th><th>Aptos</th><th>Comparecimento</th><th>Brancos</th><th>Nulos</th></tr></thead><tbody id="ranking-territorial"></tbody></table></div>
+    </section>
     <section class="panel full">
       <div class="panel-heading">
         <div><h2>Tabela de candidaturas</h2><p id="titulo-tabela">Resultados do recorte selecionado</p></div>
