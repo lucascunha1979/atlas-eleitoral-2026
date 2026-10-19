@@ -320,8 +320,10 @@ async function camadaDeLocais(){
     }
     const max=Math.max(0,...dens.map(r=>r[2]));
     if(!dens.length){$("mapa-escala").textContent="Nenhum voto positivo identificado no recorte; verifique o filtro.";return;}
-    s.camada=L.heatLayer(dens.map(r=>[r[0],r[1],max?r[2]/max:0]),
-      {radius:34,blur:24,maxZoom:12,max:1}).addTo(s.map);
+    // Percentuais baixos não devem desaparecer devido à escala linear entre 0 e 1.
+    // Raiz quadrada apenas para intensidade visual; dados continuam intactos.
+    s.camada=L.heatLayer(dens.map(r=>[r[0],r[1],max?Math.max(.26,Math.sqrt(r[2]/max)):0]),
+      {radius:43,blur:26,maxZoom:12,max:1,minOpacity:.43}).addTo(s.map);
     $("legenda-mapa").textContent="Calor municipal · "+nomesCargos[s.cargo];
     $("mapa-escala").textContent="Interpolação visual de valores MUNICIPAIS; cada ponto é o centro do município, não um local de votação. "+(s.indicador.startsWith("pct_")?"Intensidade proporcional ao percentual.":"Intensidade proporcional ao total de votos.")+" Para calor por estabelecimento, é necessária a base de votos por local publicada.";
     return;
@@ -473,8 +475,42 @@ async function atualizarCandidaturas(){
   }
 }
 
+
+async function gerarRelatorioImprimivel(){
+  const cargo=s.cargo, partido=s.partido, candidato=s.candidato, mun=s.municipio;
+  const isPct=s.indicador.startsWith("pct_");
+  const denom=new Map(),valor=new Map();
+  const corpo=s.municipal.filter(r=>r.cd_cargo===cargo&&(!mun||r.cd_municipio_ibge===mun));
+  for(const r of s.partidos)if(r.cd_cargo===cargo){
+    const id=texto(r.cd_municipio_ibge);
+    denom.set(id,Math.max(denom.get(id)||0,num(r.denominador_validos_confirmados)));
+    if(proporcional(cargo)&&!candidato&&(!partido||r.sg_partido===partido))
+      valor.set(id,(valor.get(id)||0)+votosPorTipo(r));
+  }
+  if(!proporcional(cargo)||candidato){
+    if(partido||candidato){
+      const lista=await buscarCandidaturasMunicipais(cargo,partido,candidato);
+      for(const r of lista){const id=texto(r.cd_municipio_ibge);valor.set(id,(valor.get(id)||0)+num(r.votos_validos_confirmados));}
+    }else for(const r of corpo)valor.set(texto(r.cd_municipio_ibge),num(r.votos_validos_confirmados));
+  }
+  const rows=corpo.map(r=>{
+    const id=texto(r.cd_municipio_ibge), votos=valor.get(id)||0;
+    const base=denom.get(id)||num(r.denominador_validos_confirmados)||num(r.votos_validos_confirmados);
+    return {nome:nomeMunicipio(id),votos,pct:base?100*votos/base:null};
+  }).sort((a,b)=>isPct?(b.pct??-1)-(a.pct??-1):b.votos-a.votos);
+  const escapeHTML=limpar;
+  const textoTabela=rows.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+escapeHTML(r.nome)+'</td><td>'+fmt.format(r.votos)+'</td><td>'+(r.pct===null?'Sem denominador':r.pct.toLocaleString("pt-BR",{maximumFractionDigits:3})+'%')+'</td></tr>').join('');
+  const html='<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Atlas RS 2026 — Relatório</title><style>body{font:12px Arial;padding:20px;color:#132d50}h1{font-size:19px}table{width:100%;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid #ddd;padding:5px}thead{display:table-header-group}tr{break-inside:avoid}th{background:#dae8f4}@page{size:A4 landscape;margin:15mm}small{color:#555}</style></head><body><h1>Atlas Eleitoral RS 2026 — Ranking municipal</h1><p>'+escapeHTML(nomesCargos[cargo])+' | '+escapeHTML(recorte())+' | Partido: '+escapeHTML(partido||'Todos')+' | '+(isPct?'Ordenado por percentual':'Ordenado por votos')+'</p><p><small>Modalidade: '+escapeHTML(s.tipoVotacao)+'; dados eleitorais municipais. Os demais territórios aguardam integração.</small></p><table><thead><tr><th>Pos.</th><th>Município</th><th>Votos</th><th>% válidos</th></tr></thead><tbody>'+textoTabela+'</tbody></table><p><small>Para PDF, use Imprimir → Salvar como PDF.</small></p></body></html>';
+  const win=window.open("","_blank");
+  if(!win)throw new Error("Permita janelas pop-up para exportar o relatório.");
+  win.document.open();win.document.write(html);win.document.close();win.focus();
+  win.setTimeout(()=>win.print(),350);
+}
 async function gerarRelatorioPDF(){
-  if(!window.jspdf?.jsPDF)throw new Error("Biblioteca PDF indisponível.");
+  const pdfDisponivel=Boolean(window.jspdf?.jsPDF&&window.jspdf?.jsPDF.prototype.autoTable);
+  if(!pdfDisponivel){
+    return gerarRelatorioImprimivel();
+  }
   const doc=new window.jspdf.jsPDF({orientation:"landscape",unit:"mm",format:"a4"});
   const isPct=s.indicador.startsWith("pct_");
   const criterio=isPct?"Percentual dos válidos do cargo":"Votos absolutos";
