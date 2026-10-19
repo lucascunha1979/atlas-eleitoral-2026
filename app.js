@@ -70,7 +70,7 @@ function registrosPartidos(){
   if(!proporcional(s.cargo))return [];
   return s.partidos.filter(r=>r.cd_cargo===s.cargo &&
     (!s.municipio||r.cd_municipio_ibge===s.municipio) &&
-    (!s.partido||r.nr_partido===s.partido));
+    (!s.partido||r.sg_partido===s.partido));
 }
 function votosPorTipo(r){
   if(s.tipoVotacao==="nominais")return num(r.nominais_validos);
@@ -416,7 +416,7 @@ function atualizarTudo(aplicarZoom=false){
   atualizarCandidaturas();
   atualizarMapa();
   if(aplicarZoom)zoom();
-  $("legenda-mapa").textContent=
+  if(s.modo!=="areas")$("legenda-mapa").textContent=
     `${nomesCargos[s.cargo]} · ${recorte()}`;
 }
 async function iniciar(){
