@@ -258,10 +258,40 @@ async function camadaDeLocais(){
   if(s.modo==="calor"){
     if(typeof L.heatLayer!=="function")
       throw new Error("Biblioteca de mapa de calor indisponível.");
-    s.camada=L.heatLayer(
-      pontos.map(f=>[f.geometry.coordinates[1],f.geometry.coordinates[0],1]),
-      {radius:19,blur:15,maxZoom:12}
-    ).addTo(s.map);
+    // Interpolação visual municipal: centróides dos municípios, NÃO pontos com voto local.
+    const porMunicipio=new Map();
+    if(proporcional(s.cargo)&&s.partido&&!s.candidato){
+      for(const r of s.partidos){
+        if(r.cd_cargo!==s.cargo||r.sg_partido!==s.partido)continue;
+        porMunicipio.set(r.cd_municipio_ibge,(porMunicipio.get(r.cd_municipio_ibge)||0)+votosPorTipo(r));
+      }
+    }else if(!s.partido&&!s.candidato){
+      for(const r of s.municipal){
+        if(r.cd_cargo!==s.cargo)continue;
+        porMunicipio.set(r.cd_municipio_ibge,num(r.votos_validos_confirmados));
+      }
+    }else{
+      throw new Error("Calor eleitoral para esta candidatura indisponível sem dados territoriais completos.");
+    }
+    const dens=[];
+    const dadosMun=new Map(s.municipal.filter(r=>r.cd_cargo===s.cargo).map(r=>[r.cd_municipio_ibge,r]));
+    for(const f of s.geo.features){
+      const id=texto(f.properties.cd_municipio_ibge);
+      if(s.municipio&&id!==s.municipio)continue;
+      const bruto=porMunicipio.get(id)||0;
+      const mun=dadosMun.get(id);
+      const den=proporcional(s.cargo)?Math.max(0,...s.partidos.filter(r=>r.cd_cargo===s.cargo&&r.cd_municipio_ibge===id).map(r=>num(r.denominador_validos_confirmados))):num(mun?.votos_validos_confirmados);
+      const valor=s.indicador.startsWith("pct_")?(den?100*bruto/den:0):bruto;
+      if(!Number.isFinite(valor)||valor<=0)continue;
+      const center=L.geoJSON(f).getBounds().getCenter();
+      dens.push([center.lat,center.lng,valor]);
+    }
+    const max=Math.max(0,...dens.map(r=>r[2]));
+    s.camada=L.heatLayer(dens.map(r=>[r[0],r[1],max?r[2]/max:0]),
+      {radius:34,blur:24,maxZoom:12,max:1}).addTo(s.map);
+    $("legenda-mapa").textContent="Calor municipal · "+nomesCargos[s.cargo];
+    $("mapa-escala").textContent="Interpolação visual de valores MUNICIPAIS; cada ponto é o centro do município, não um local de votação. "+(s.indicador.startsWith("pct_")?"Intensidade proporcional ao percentual.":"Intensidade proporcional ao total de votos.")+" Para calor por estabelecimento, é necessária a base de votos por local publicada.";
+    return;
   }else if(s.modo==="clusters"){
     if(typeof L.markerClusterGroup!=="function")
       throw new Error("Biblioteca de clusters indisponível.");
@@ -292,9 +322,6 @@ async function camadaDeLocais(){
     }
   }
   $("mapa-escala").textContent=`${fmt.format(pontos.length)} locais geográficos no recorte. `+
-    (s.modo==="calor"
-      ?"Calor = concentração de locais, não quantidade de votos. "
-      :"")+
     "Os 135 locais em revisão não são exibidos como posições exatas. "+
     "O filtro partidário não redistribui votos entre estabelecimentos.";
 }
@@ -309,7 +336,7 @@ async function atualizarMapa(){
     }
   }catch(e){aviso("Mapa: "+e.message,true);}
 }
-function grafico(div,linhas,chaveRotulo,chaveValor){
+function grafico(div,linhas,chaveRotulo,chaveValor,percentual=false){
   const el=$(div);
   if(!linhas.length){
     Plotly.purge(el);
@@ -326,9 +353,9 @@ function grafico(div,linhas,chaveRotulo,chaveValor){
     x:arr.map(x=>num(x[chaveValor])),
     y:arr.map(x=>texto(x[chaveRotulo]).slice(0,33)),
     marker:{color:"#2163a3"},
-    text:arr.map(x=>fmt.format(num(x[chaveValor]))),
+    text:arr.map(x=>percentual?num(x[chaveValor]).toLocaleString("pt-BR",{maximumFractionDigits:2})+"%":fmt.format(num(x[chaveValor]))),
     textposition:"outside",cliponaxis:false,
-    hovertemplate:"%{y}<br>%{x:,} votos<extra></extra>"
+    hovertemplate:percentual?"%{y}<br>%{x:.2f}%<extra></extra>":"%{y}<br>%{x:,} votos<extra></extra>"
   }],{
     height:altura,margin:{l:195,r:70,t:10,b:30},
     paper_bgcolor:"#fff",plot_bgcolor:"#fff",
@@ -344,7 +371,13 @@ function atualizarRankingPartidos(){
       agrupado.set(id,{nome:r.sg_partido||id,votos:0});
     agrupado.get(id).votos+=votosPorTipo(r);
   }
-  grafico("grafico-partidos",[...agrupado.values()],"nome","votos");
+  const totalCargo=s.partidos.filter(r=>r.cd_cargo===s.cargo&&(!s.municipio||r.cd_municipio_ibge===s.municipio));
+  const denominadorPorMunicipio=new Map();
+  for(const r of totalCargo)denominadorPorMunicipio.set(r.cd_municipio_ibge,Math.max(denominadorPorMunicipio.get(r.cd_municipio_ibge)||0,num(r.denominador_validos_confirmados)));
+  const den=[...denominadorPorMunicipio.values()].reduce((x,y)=>x+y,0);
+  const lista=[...agrupado.values()].map(r=>({...r,pct:den?100*r.votos/den:0}));
+  const isPct=s.indicador.startsWith("pct_");
+  grafico("grafico-partidos",lista,"nome",isPct?"pct":"votos",isPct);
   $("sub-partidos").textContent=
     `${nomesCargos[s.cargo]} · ${recorte()}`+
     (!proporcional(s.cargo)?" · Sem base partidária para este cargo":
@@ -387,7 +420,10 @@ async function atualizarCandidaturas(){
         rank.set(id,{nome:r.nome_candidato_final||r.nr_candidato,votos:0});
       rank.get(id).votos+=num(r.votos_validos_confirmados);
     }
-    grafico("grafico-candidatos",[...rank.values()],"nome","votos");
+    const denMunicipios=registrosMunicipais().reduce((x,r)=>x+num(r.denominador_validos_confirmados||r.votos_validos_confirmados),0);
+    const ranking=[...rank.values()].map(r=>({...r,pct:denMunicipios?100*r.votos/denMunicipios:0}));
+    const isPct=s.indicador.startsWith("pct_");
+    grafico("grafico-candidatos",ranking,"nome",isPct?"pct":"votos",isPct);
     const ordenadas=linhas.slice().sort((a,b)=>
       num(b.votos_validos_confirmados)-num(a.votos_validos_confirmados));
     atualizarTabela(ordenadas);
