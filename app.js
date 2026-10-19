@@ -312,14 +312,15 @@ async function camadaDeLocais(){
       if(s.municipio&&id!==s.municipio)continue;
       const bruto=porMunicipio.get(id)||0;
       const mun=dadosMun.get(id);
-      const den=proporcional(s.cargo)?Math.max(0,...s.partidos.filter(r=>r.cd_cargo===s.cargo&&r.cd_municipio_ibge===id).map(r=>num(r.denominador_validos_confirmados))):num(mun?.votos_validos_confirmados);
+      const denPart=proporcional(s.cargo)?s.partidos.filter(r=>r.cd_cargo===s.cargo&&r.cd_municipio_ibge===id).reduce((acc,r)=>Math.max(acc,num(r.denominador_validos_confirmados)),0):0;
+      const den=denPart>0?denPart:num(mun?.denominador_validos_confirmados)||num(mun?.votos_validos_confirmados);
       const valor=s.indicador.startsWith("pct_")?(den?100*bruto/den:0):bruto;
       if(!Number.isFinite(valor)||valor<=0)continue;
       const center=L.geoJSON(f).getBounds().getCenter();
       dens.push([center.lat,center.lng,valor]);
     }
     const max=Math.max(0,...dens.map(r=>r[2]));
-    if(!dens.length){$("mapa-escala").textContent="Nenhum voto positivo identificado no recorte; verifique o filtro.";return;}
+    if(!dens.length){$("mapa-escala").textContent="Não há votos positivos com denominador disponível neste filtro. Confira dados e filtros.";aviso("Sem valores positivos representáveis para o calor deste filtro.",true);return;}
     // Percentuais baixos não devem desaparecer devido à escala linear entre 0 e 1.
     // Raiz quadrada apenas para intensidade visual; dados continuam intactos.
     s.camada=L.heatLayer(dens.map(r=>[r[0],r[1],max?Math.max(.26,Math.sqrt(r[2]/max)):0]),
