@@ -172,6 +172,25 @@ function legendaJenks(cortes,percentual=false){
 function corJenks(v,cortes){if(!Number.isFinite(v)||v<=0||!cortes.length)return classeSemDados;
   const ind=cortes.findIndex(c=>v<=c);return coresJenks[Math.max(0,ind<0?cortes.length-1:ind)];
 }
+async function buscarCandidaturasMunicipais(cargo,partido,candidato){
+  const codigos=s.municipio?[s.municipio]:s.geo.features.map(f=>texto(f.properties.cd_municipio_ibge));
+  const registros=[];
+  let cursor=0;
+  const trabalhadores=Array.from({length:8},async()=>{
+    while(cursor<codigos.length){
+      const id=codigos[cursor++];
+      const lista=await buscar(`dados/candidaturas/municipios/${id}.json`);
+      for(const r of lista){
+        if(r.cd_cargo!==cargo)continue;
+        if(partido&&r.sg_partido!==partido)continue;
+        if(candidato&&(r.sq_candidato||r.nr_candidato+"|"+r.nome_candidato_final)!==candidato)continue;
+        registros.push(r);
+      }
+    }
+  });
+  await Promise.all(trabalhadores);
+  return registros;
+}
 function removerCamada(){
   if(s.camada){s.map.removeLayer(s.camada);s.camada=null;}
 }
@@ -250,8 +269,8 @@ function areaMunicipal(){
 async function camadaDeLocais(){
   removerCamada();
   $("legenda-jenks").replaceChildren();
-  if(!s.locais)s.locais=await buscar("dados/locais.geojson");
-  const pontos=s.locais.features.filter(f=>
+  if(s.modo!=="calor"&&!s.locais)s.locais=await buscar("dados/locais.geojson");
+  const pontos=(s.locais?.features||[]).filter(f=>
     f.geometry?.type==="Point" &&
     (!s.municipio||texto(f.properties.CD_MUN)===s.municipio)
   );
@@ -270,8 +289,21 @@ async function camadaDeLocais(){
         if(r.cd_cargo!==s.cargo)continue;
         porMunicipio.set(r.cd_municipio_ibge,num(r.votos_validos_confirmados));
       }
+    }else if(s.indice.length){
+      for(const r of s.indice){
+        if(r.cargo!==s.cargo)continue;
+        if(s.candidato){if(r.tipo!=="candidato"||(r.sq||r.numero+"|"+r.nome)!==s.candidato)continue;}
+        else if(r.tipo!=="partido")continue;
+        if(s.partido&&r.partido!==s.partido)continue;
+        porMunicipio.set(r.ibge,(porMunicipio.get(r.ibge)||0)+num(r.validos));
+      }
     }else{
-      throw new Error("Calor eleitoral para esta candidatura indisponível sem dados territoriais completos.");
+      // Buscar as candidaturas municipais sob demanda para o filtro selecionado.
+      const candidaturas=await buscarCandidaturasMunicipais(s.cargo,s.partido,s.candidato);
+      for(const r of candidaturas){
+        const id=texto(r.cd_municipio_ibge);
+        porMunicipio.set(id,(porMunicipio.get(id)||0)+num(r.votos_validos_confirmados));
+      }
     }
     const dens=[];
     const dadosMun=new Map(s.municipal.filter(r=>r.cd_cargo===s.cargo).map(r=>[r.cd_municipio_ibge,r]));
@@ -287,6 +319,7 @@ async function camadaDeLocais(){
       dens.push([center.lat,center.lng,valor]);
     }
     const max=Math.max(0,...dens.map(r=>r[2]));
+    if(!dens.length){$("mapa-escala").textContent="Nenhum voto positivo identificado no recorte; verifique o filtro.";return;}
     s.camada=L.heatLayer(dens.map(r=>[r[0],r[1],max?r[2]/max:0]),
       {radius:34,blur:24,maxZoom:12,max:1}).addTo(s.map);
     $("legenda-mapa").textContent="Calor municipal · "+nomesCargos[s.cargo];
@@ -439,6 +472,56 @@ async function atualizarCandidaturas(){
     aviso("Candidaturas: "+e.message,true);
   }
 }
+
+async function gerarRelatorioPDF(){
+  if(!window.jspdf?.jsPDF)throw new Error("Biblioteca PDF indisponível.");
+  const doc=new window.jspdf.jsPDF({orientation:"landscape",unit:"mm",format:"a4"});
+  const isPct=s.indicador.startsWith("pct_");
+  const criterio=isPct?"Percentual dos válidos do cargo":"Votos absolutos";
+  const titulo=nomesCargos[s.cargo]+" · "+recorte();
+  const subtitulo=(s.partido?"Partido: "+s.partido+" · ":"")+(s.candidato?"Candidatura: "+s.candidato+" · ":"")+criterio;
+  const cabecalho=()=>{
+    doc.setFontSize(15);doc.text("Atlas Eleitoral RS 2026 — Relatório do filtro",14,16);
+    doc.setFontSize(10);doc.text(titulo,14,23);doc.text(subtitulo.slice(0,125),14,29);
+  };
+  cabecalho();
+  const rows=[];
+  const partidos=s.partidos.filter(r=>r.cd_cargo===s.cargo&&(!s.partido||r.sg_partido===s.partido)&&(!s.municipio||r.cd_municipio_ibge===s.municipio));
+  const porMunicipio=new Map();
+  const denominadores=new Map();
+  if(proporcional(s.cargo)&&!s.candidato){
+    for(const r of partidos){
+      const id=texto(r.cd_municipio_ibge);
+      porMunicipio.set(id,(porMunicipio.get(id)||0)+votosPorTipo(r));
+    }
+    for(const r of s.partidos)if(r.cd_cargo===s.cargo){
+      const id=texto(r.cd_municipio_ibge);
+      denominadores.set(id,Math.max(denominadores.get(id)||0,num(r.denominador_validos_confirmados)));
+    }
+  }else if(s.partido||s.candidato){
+    const lista=await buscarCandidaturasMunicipais(s.cargo,s.partido,s.candidato);
+    for(const r of lista)porMunicipio.set(texto(r.cd_municipio_ibge),(porMunicipio.get(texto(r.cd_municipio_ibge))||0)+num(r.votos_validos_confirmados));
+  }else{
+    for(const r of s.municipal)if(r.cd_cargo===s.cargo)porMunicipio.set(texto(r.cd_municipio_ibge),num(r.votos_validos_confirmados));
+  }
+  for(const r of s.municipal)if(r.cd_cargo===s.cargo){
+    const id=texto(r.cd_municipio_ibge);if(s.municipio&&id!==s.municipio)continue;
+    const votos=porMunicipio.get(id)||0;
+    const den=denominadores.get(id)||num(r.denominador_validos_confirmados)||num(r.votos_validos_confirmados);
+    const pct=den?100*votos/den:null;
+    rows.push({nome:nomeMunicipio(id),votos,pct});
+  }
+  rows.sort((a,b)=>isPct?(b.pct??-1)-(a.pct??-1)||b.votos-a.votos:b.votos-a.votos);
+  doc.setFontSize(9);
+  doc.text("Abrangência: municípios | "+rows.length+" unidades | Ranking integral",14,36);
+  doc.autoTable({
+    startY:40,head:[["Posição","Município","Votos válidos do filtro","Percentual dos válidos"]],
+    body:rows.map((r,i)=>[String(i+1),r.nome,fmt.format(r.votos),r.pct===null?"Não disponível":r.pct.toLocaleString("pt-BR",{maximumFractionDigits:3})+"%"]),
+    styles:{fontSize:8},headStyles:{fillColor:[25,64,106]},margin:{top:22,left:14,right:14},
+    didDrawPage:()=>{const n=doc.internal.getNumberOfPages();doc.setFontSize(8);doc.text("Fonte: bases eleitorais auditadas · Sem atribuição artificial de votos · Página "+n,14,200);}
+  });
+  doc.save("atlas_rs2026_"+s.cargo+"_"+(s.municipio||"RS")+"_ranking_municipal.pdf");
+}
 function zoom(){
   if(!s.municipio){s.map.fitBounds(s.limites);return;}
   const f=s.geo.features.find(x=>
@@ -518,7 +601,7 @@ async function iniciar(){
       s.modo=e.target.value;
       atualizarTudo();
     });
-    $("imprimir").addEventListener("click",()=>window.print());
+    $("imprimir").addEventListener("click",async()=>{try{aviso("Gerando relatório PDF municipal...");await gerarRelatorioPDF();aviso("Relatório municipal gerado. Distritos e bairros dependem da integração territorial.");}catch(e){aviso("PDF: "+e.message,true);}});
     $("limpar").addEventListener("click",()=>{
       s.municipio="";
       $("municipio").value="";
