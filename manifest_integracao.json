@@ -1,0 +1,31 @@
+{
+  "etapa": "integracao_dados_web_participacao",
+  "escopo": "somente dados de participacao e geometria de distritos e bairros",
+  "observacao": "nao contem votos de candidaturas e partidos territorializados, estes permanecem no Parquet original",
+  "arquivos": {
+    "dados/distritos.geojson": {
+      "registros": 1254,
+      "sha256": "82ee676e979e77bef3416bd4d87c2642f2c6abe9a3dbef5812ebefe14aeef28e"
+    },
+    "dados/bairros.geojson": {
+      "registros": 2240,
+      "sha256": "ddc6dd3cde5127767b0443a58de4ecee22927420a3e35be469ee8cda933e0da1"
+    },
+    "dados/participacao/municipios.json": {
+      "registros": 2485,
+      "sha256": "35219e6b83bbe261bdbc62960fc26d9f39932dee3379c1e5f39d348814776413"
+    },
+    "dados/participacao/distritos.json": {
+      "registros": 5649,
+      "sha256": "bdd32c9899e458b7144418452c3879b6ba1f84218aae48c0c5c648c634484c74"
+    },
+    "dados/participacao/bairros.json": {
+      "registros": 6328,
+      "sha256": "a8861daac825594f1b8a1c3fc801c6b3740fbd6fc8cc57c7ec63af7cbebe7ca3"
+    },
+    "dados/participacao/locais.json": {
+      "registros": 38980,
+      "sha256": "2b4907e6a1ff5285edc25b64a14eec3131b937830e50883207ed38ab30059391"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+Atlas RS 2026: pacote com geometrias e participacao por abrangencia. Extraia a pasta dados/ na raiz do repositorio. Os indicadores eleitorais de candidaturas e partidos por distritos, bairros e locais precisam conversao dos parquets e integracao no frontend. Nao publicar este zip como arquivo unico esperando que Pages descompacte.
