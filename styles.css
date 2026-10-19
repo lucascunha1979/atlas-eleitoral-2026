@@ -64,3 +64,5 @@ select:disabled{background:#f2f4f7;color:#7b8897}
 .map-actions{display:flex;gap:8px;flex-wrap:wrap}
 .scope-note{padding:10px 14px;border:1px solid #d8e3ef;background:#fff;border-radius:8px;margin-bottom:12px;color:#53677b;font-size:12px}
 @media print{.filters,.status,.scope-note,.map-actions,footer{display:none!important} body{background:white}main{padding:0}.dashboard{display:block}.panel{break-inside:avoid;margin-bottom:12px}.chart-scroll,.table-wrap{overflow:visible!important;height:auto!important;max-height:none!important}#mapa{height:420px!important}.kpis{grid-template-columns:repeat(4,1fr)}}
+
+[hidden]{display:none!important}
