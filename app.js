@@ -17,7 +17,7 @@ const s = {
   cargo:"1", municipio:"", partido:"", indicador:"votos_nominais_brutos",
   modo:"areas", geo:null, municipal:[], partidos:[], cadastro:[],
   locais:null, nomes:new Map(), map:null, camada:null, pontos:null,
-  limites:null, versaoRequisicao:0, execPartidos:new Map(), mapSeq:0, indice:[], candidato:""
+  limites:null, versaoRequisicao:0, execPartidos:new Map(), mapSeq:0, indice:[], candidato:"", tipoVotacao:"total"
 };
 
 function aviso(msg,erro=false){
@@ -72,13 +72,24 @@ function registrosPartidos(){
     (!s.municipio||r.cd_municipio_ibge===s.municipio) &&
     (!s.partido||r.nr_partido===s.partido));
 }
+function votosPorTipo(r){
+  if(s.tipoVotacao==="nominais")return num(r.nominais_validos);
+  if(s.tipoVotacao==="legenda")return num(r.votos_legenda);
+  return num(r.votos_validos_partido);
+}
+function atualizarTipoVotacao(){
+  const disponivel=proporcional(s.cargo)&&!s.candidato;
+  $("campo-tipo-votacao").hidden=!disponivel;
+  $("tipo-votacao").disabled=!disponivel;
+  $("tipo-votacao").value=s.tipoVotacao;
+}
 function votoPartidoMunicipio(){
   const mp=new Map();
   for(const r of s.partidos){
     if(r.cd_cargo!==s.cargo)continue;
     if(s.partido && r.nr_partido!==s.partido)continue;
     const ibge=r.cd_municipio_ibge;
-    mp.set(ibge,(mp.get(ibge)||0)+num(r.votos_validos_partido));
+    mp.set(ibge,(mp.get(ibge)||0)+votosPorTipo(r));
   }
   return mp;
 }
@@ -169,9 +180,14 @@ function areaMunicipal(){
   const valores=new Map();
   const cargoMun=s.municipal.filter(x=>x.cd_cargo===s.cargo);
   const totalRS=cargoMun.reduce((a,r)=>a+num(r.votos_validos_confirmados),0);
+  const denominadores=new Map();
+  for(const r of s.partidos)if(r.cd_cargo===s.cargo){
+    const ibge=r.cd_municipio_ibge;
+    denominadores.set(ibge,Math.max(denominadores.get(ibge)||0,num(r.denominador_validos_confirmados)));
+  }
   const temFiltro=Boolean(s.partido||s.candidato);
   let sub=new Map();
-  if(temFiltro&&s.indice.length){
+  if(temFiltro&&s.indice.length&&!(proporcional(s.cargo)&&s.partido&&!s.candidato)){
     for(const r of s.indice){
       if(r.cargo!==s.cargo)continue;
       if(s.candidato){
@@ -183,14 +199,13 @@ function areaMunicipal(){
   }
   // Para os cargos proporcionais, manter resultados partidários
   // disponíveis mesmo antes de a agregação gerada ser publicada.
-  if(temFiltro&&!s.indice.length&&proporcional(s.cargo)&&s.partido&&!s.candidato){
+  if(temFiltro&&proporcional(s.cargo)&&s.partido&&!s.candidato){
     for(const r of s.partidos)if(r.cd_cargo===s.cargo&&r.sg_partido===s.partido)
-      sub.set(r.cd_municipio_ibge,(sub.get(r.cd_municipio_ibge)||0)+num(
-        s.indicador==="votos_nominais_brutos"?r.nominais_brutos:r.votos_validos_partido));
+      sub.set(r.cd_municipio_ibge,(sub.get(r.cd_municipio_ibge)||0)+votosPorTipo(r));
   }
   const semIndice=temFiltro&&!s.indice.length&&(!proporcional(s.cargo)||s.candidato);
   for(const r of cargoMun){
-    const id=r.cd_municipio_ibge, den=num(r.votos_validos_confirmados);
+    const id=r.cd_municipio_ibge, den=denominadores.get(id)||num(r.votos_validos_confirmados);
     const filtro=temFiltro?(sub.get(id)||0):num(
       s.indicador==="votos_nominais_brutos"?r.votos_nominais_brutos:r.votos_validos_confirmados);
     let v;
@@ -201,7 +216,10 @@ function areaMunicipal(){
     else v=filtro;
     valores.set(id,v);
   }
-  const tema=semIndice?"AGUARDANDO ÍNDICE ELEITORAL · ":s.candidato?"Candidatura selecionada · ":s.partido?"Partido selecionado · ":"";
+  const modoLegenda=proporcional(s.cargo)&&s.partido&&!s.candidato?(
+    s.tipoVotacao==="nominais"?"Votos nominais válidos · ":
+    s.tipoVotacao==="legenda"?"Votos de legenda · ":"Nominais + legenda · "):"";
+  const tema=semIndice?"AGUARDANDO ÍNDICE ELEITORAL · ":s.candidato?"Candidatura selecionada · ":s.partido?modoLegenda:"";
   $("legenda-mapa").textContent=tema+nomesCargos[s.cargo];
   const cortes=quebrasJenks([...valores.values()]);
   legendaJenks(cortes,s.indicador.startsWith("pct_"));
@@ -321,15 +339,16 @@ function grafico(div,linhas,chaveRotulo,chaveValor){
 function atualizarRankingPartidos(){
   const agrupado=new Map();
   for(const r of registrosPartidos()){
-    const id=r.nr_partido;
+    const id=r.sg_partido||r.nr_partido;
     if(!agrupado.has(id))
       agrupado.set(id,{nome:r.sg_partido||id,votos:0});
-    agrupado.get(id).votos+=num(r.votos_validos_partido);
+    agrupado.get(id).votos+=votosPorTipo(r);
   }
   grafico("grafico-partidos",[...agrupado.values()],"nome","votos");
   $("sub-partidos").textContent=
     `${nomesCargos[s.cargo]} · ${recorte()}`+
-    (!proporcional(s.cargo)?" · Sem base partidária para este cargo":"");
+    (!proporcional(s.cargo)?" · Sem base partidária para este cargo":
+     " · "+(s.tipoVotacao==="nominais"?"Votos nominais válidos":s.tipoVotacao==="legenda"?"Votos de legenda":"Nominais válidos + legenda"));
 }
 function atualizarTabela(linhas){
   const tbody=$("tabela-candidatos");
@@ -391,6 +410,7 @@ function zoom(){
   if(f)s.map.fitBounds(L.geoJSON(f).getBounds().pad(.12),{maxZoom:11});
 }
 function atualizarTudo(aplicarZoom=false){
+  atualizarTipoVotacao();
   kpis();
   atualizarRankingPartidos();
   atualizarCandidaturas();
@@ -457,6 +477,7 @@ async function iniciar(){
       atualizarTudo();
     });
     $("candidato").addEventListener("change",e=>{s.candidato=e.target.value;atualizarTudo();});
+    $("tipo-votacao").addEventListener("change",e=>{s.tipoVotacao=e.target.value;atualizarTudo();});
     $("modo-mapa").addEventListener("change",e=>{
       s.modo=e.target.value;
       atualizarTudo();
