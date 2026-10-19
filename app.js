@@ -65,7 +65,7 @@ function csvSimples(str){
 const indicadoresParticipacao=new Set(["brancos","nulos","brancos_nulos","aptos","comparecimento","abstencoes","pct_comparecimento","pct_abstencao","pct_brancos_nulos_comparecimento"]);
 const rotulosParticipacao={brancos:"Votos brancos",nulos:"Votos nulos",brancos_nulos:"Brancos + nulos",aptos:"Eleitorado apto",comparecimento:"Comparecimento",abstencoes:"Abstenções",pct_comparecimento:"Comparecimento (%)",pct_abstencao:"Abstenção (%)",pct_brancos_nulos_comparecimento:"Brancos e nulos / comparecimento (%)"};
 const nomeAbrangencia={municipios:"Municípios",distritos:"Distritos",bairros:"Bairros",locais:"Locais de votação"};
-const chaveLocal=(m,z,l)=>[texto(m).replace(/^0+(?=\\d)/,""),texto(z).replace(/^0+(?=\\d)/,""),texto(l).replace(/^0+(?=\\d)/,"")].join("|");
+const chaveLocal=(m,z,l)=>[texto(m).replace(/^0+(?=\d)/,""),texto(z).replace(/^0+(?=\d)/,""),texto(l).replace(/^0+(?=\d)/,"")].join("|");
 async function dadosParticipacao(tipo){
   if(!s.participacaoCache[tipo])s.participacaoCache[tipo]=await buscar("dados/participacao/"+tipo+".json");
   return s.participacaoCache[tipo];
