@@ -12,7 +12,22 @@
   <link rel="stylesheet"
     href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <link rel="stylesheet" href="styles.css">
-</head>
+<style>
+  .mapa-expandido{position:fixed!important;inset:8px!important;z-index:20000!important;background:#fff!important;display:flex!important;flex-direction:column!important;overflow:auto!important}
+  .mapa-expandido #mapa{flex:1!important;height:auto!important;min-height:55vh!important}
+  .mapa-expandido .panel-heading{flex-shrink:0}
+  .controle-calor{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:8px 12px;font:12px system-ui}
+  .controle-calor input{accent-color:#315f9c;width:140px}
+  .controle-calor small{color:#556575}
+  #metodologia-dialogo{width:min(860px,92vw);max-height:86vh;padding:0;border:1px solid #cbd5e1;border-radius:12px;box-shadow:0 18px 65px #0004}
+  #metodologia-dialogo::backdrop{background:#102030aa}
+  .metodo-topo{position:sticky;top:0;background:white;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid #e5e7eb}
+  .metodo-topo h2{font-size:18px;margin:0}
+  .metodo-topo button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:7px;cursor:pointer}
+  .metodo-corpo{padding:8px 24px 26px;font:14px/1.65 system-ui;color:#25364b}
+  .metodo-corpo h3{font-size:15px;margin:20px 0 5px;color:#113a68}
+  .metodo-corpo p{margin:6px 0}
+</style></head>
 <body>
   <div id="aviso-versao-territorial" style="position:sticky;top:0;z-index:99999;background:#153e75;color:white;text-align:center;font:600 14px system-ui;padding:10px;border-bottom:3px solid #f5c542">
     VERSÃO DE TESTE · MAPAS TERRITORIAIS 2026 · BRANCH DE DESENVOLVIMENTO
@@ -61,8 +76,8 @@
         <select id="indicador">
           <option value="votos_nominais_brutos">Votos nominais brutos</option>
           <option value="votos_validos_confirmados">Votos válidos confirmados</option>
-          <option value="pct_validos">Percentual dos votos válidos do cargo (%)</option>
-          <option value="pct_concorrencia">Votos do filtro / votos válidos do cargo (%)</option>
+          <option value="pct_validos">Participação percentual nos votos válidos (%)</option>
+          <option value="pct_concorrencia">Percentual do candidato/partido no cargo (%)</option>
           <option value="brancos">Votos brancos</option>
           <option value="nulos">Votos nulos</option>
           <option value="brancos_nulos">Brancos + nulos</option>
@@ -115,13 +130,13 @@
     </section>
 
     <section class="dashboard">
-      <div class="panel map-panel">
+      <div class="panel map-panel" id="painel-mapa">
         <div class="panel-heading">
           <div><h2>Distribuição municipal</h2><p id="legenda-mapa">Votos nominais brutos</p></div>
-          <div class="map-actions"><button id="imprimir" type="button">Salvar em PDF</button><button id="limpar" type="button">Ver todo o RS</button></div>
+          <div class="map-actions"><button id="expandir-mapa" type="button">Ampliar mapa</button><button id="metodologia-abrir" type="button">Metodologia</button><button id="imprimir" type="button">Salvar em PDF</button><button id="limpar" type="button">Ver todo o RS</button></div>
         </div>
         <div id="mapa"></div>
-        <div id="legenda-jenks" class="jenks-legend" aria-label="Legenda cartográfica"></div><div id="mapa-escala" class="map-foot"></div>
+        <div class="controle-calor"><label for="calor-raio">Detalhamento do mapa de calor</label> <input id="calor-raio" type="range" min="9" max="35" value="14" step="1"> <span id="calor-raio-valor">14</span><small>Menor valor = manchas mais localizadas. O calor é uma representação visual, não uma medida de distância.</small></div><div id="legenda-jenks" class="jenks-legend" aria-label="Legenda cartográfica"></div><div id="mapa-escala" class="map-foot"></div>
       </div>
 
       <div class="panel">
@@ -191,5 +206,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
   <script src="teste-territorial/app.js"></script>
-</body>
+<dialog id="metodologia-dialogo" aria-label="Notas metodológicas">
+  <div class="metodo-topo"><h2>Notas metodológicas — Atlas Eleitoral RS 2026</h2><button id="metodologia-fechar" type="button">Fechar ✕</button></div>
+  <div class="metodo-corpo">
+    <h3>O que os mapas mostram?</h3>
+    <p>O mapa de áreas colore municípios, distritos e bairros segundo o valor do indicador selecionado. O mapa de pontos representa os locais de votação. O mapa de calor mostra concentração visual suavizada; a extensão das manchas e suas cores não são limites territoriais nem representam votos fora dos pontos de origem.</p>
+    <h3>O que significam os percentuais?</h3>
+    <p><strong>Participação percentual nos votos válidos (%):</strong> na seleção de uma candidatura ou partido, compara seus votos válidos com o total de votos válidos do respectivo cargo no território. Sem filtro, pode representar a participação da unidade territorial no total de referência conforme a escala; consulte o rótulo da legenda.</p>
+    <p><strong>Percentual do candidato/partido no cargo (%):</strong> divide os votos válidos selecionados pelos votos válidos confirmados do cargo naquele território e multiplica por 100. Exemplo ilustrativo: 80 votos de um candidato entre 200 votos válidos do cargo correspondem a 40%.</p>
+    <p>Com candidatura ou partido selecionado, esses dois indicadores podem produzir o mesmo percentual. Eles foram mantidos para compatibilidade com as análises existentes; o importante é conferir o denominador de cada mapa.</p>
+    <h3>Participação eleitoral</h3>
+    <p><strong>Aptos</strong> são os eleitores habilitados; <strong>comparecimento</strong> corresponde aos que compareceram; <strong>abstenções</strong> correspondem aos aptos que não compareceram. <strong>Brancos</strong> e <strong>nulos</strong> são contabilizados separadamente, conforme o cargo.</p>
+    <h3>Votos de candidaturas e partidos</h3>
+    <p>Votos nominais brutos e votos válidos confirmados são medidas distintas. Nos cargos proporcionais, os votos de legenda são contabilizados no total válido do partido, mas não como votos nominais de uma candidatura. Os dados por bairro e distrito são agregados a partir dos locais de votação associados a esses territórios.</p>
+    <h3>Limites e cobertura</h3>
+    <p>O universo tem 497 municípios. A soma dos votos territorializados pode ser inferior ao total municipal; votos sem associação territorial não são redistribuídos. <strong>Zero voto</strong> não deve ser confundido com <strong>ausência de informação</strong>. A geometria dos mapas não substitui a conferência das bases municipais.</p>
+    <h3>Como interpretar o calor?</h3>
+    <p>O controle de detalhamento modifica somente a apresentação visual, nunca a contagem de votos. Para comparar valores exatos, prefira mapas de áreas, pontos e rankings. O calor não constitui estimativa de votos em locais sem dados.</p>
+  </div>
+</dialog></body>
 </html>
