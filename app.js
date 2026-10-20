@@ -513,6 +513,9 @@ async function mapaVotosTerritoriais(token){
     // O denominador é próprio do local/cargo, não somado por candidatura ou partido.
     const den=num(r.denominador_validos_confirmados);
     denominadores.set(territorio,Math.max(denominadores.get(territorio)||0,den));
+    // Território com apuração conhecida e nenhum voto para o filtro = zero.
+    // Território sem associação na fonte = ausência de dados.
+    presenca.add(territorio);
     let aceitar=!s.partido||texto(r.sg_partido)===s.partido;
     if(s.candidato){
       const chave=texto(r.sq_candidato||r.nr_candidato+"|"+r.nome_candidato_final);
@@ -528,7 +531,6 @@ async function mapaVotosTerritoriais(token){
       votos=s.indicador==="votos_nominais_brutos"?
         num(r.votos_nominais_brutos):num(r.votos_validos_confirmados);
     }
-    presenca.add(territorio);
     agregados.set(territorio,(agregados.get(territorio)||0)+votos);
     soma+=votos;
   }
