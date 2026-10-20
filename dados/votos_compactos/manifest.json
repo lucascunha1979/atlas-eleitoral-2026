@@ -1,0 +1,95 @@
+{
+  "projeto": "Atlas Eleitoral RS 2026",
+  "bloco": "06",
+  "versao": "compacta_v1",
+  "status": "AGUARDANDO_INTEGRACAO_FRONTEND",
+  "formato": "json_gzip_colunas_linhas",
+  "campos_chave_local": [
+    "cd_municipio",
+    "nr_zona",
+    "nr_local_votacao"
+  ],
+  "arquivos": {
+    "candidaturas_1": {
+      "arquivo": "candidaturas_cargo_1.json.gz",
+      "registros": 48986,
+      "bytes": 1032118,
+      "sha256": "cd9dc7b901f5e2ccd4c077a87c85771b873fb283b8080e8481727345952fe899",
+      "tipo": "candidaturas",
+      "cargo": "1",
+      "nome_cargo": "Presidente"
+    },
+    "candidaturas_3": {
+      "arquivo": "candidaturas_cargo_3.json.gz",
+      "registros": 34251,
+      "bytes": 723827,
+      "sha256": "e0413ee624721c0beb71221382b009642b8bff85e9298fe072f7f84dbbc8b6e1",
+      "tipo": "candidaturas",
+      "cargo": "3",
+      "nome_cargo": "Governador"
+    },
+    "candidaturas_5": {
+      "arquivo": "candidaturas_cargo_5.json.gz",
+      "registros": 66320,
+      "bytes": 1431300,
+      "sha256": "31dd9a476a0114c5fc6ce728a98e471f2c73d68f3cd4a8db3e64ef9268184336",
+      "tipo": "candidaturas",
+      "cargo": "5",
+      "nome_cargo": "Senador"
+    },
+    "candidaturas_6": {
+      "arquivo": "candidaturas_cargo_6.json.gz",
+      "registros": 468021,
+      "bytes": 10443964,
+      "sha256": "4b0e60dc32f161bb141053aaddc69c6ff57333a5edfdf5c0e9337064be79404e",
+      "tipo": "candidaturas",
+      "cargo": "6",
+      "nome_cargo": "Deputado Federal"
+    },
+    "candidaturas_7": {
+      "arquivo": "candidaturas_cargo_7.json.gz",
+      "registros": 554195,
+      "bytes": 12550921,
+      "sha256": "e1277d84c29cf95e040f778389052a8cf3e40ce95675dee7b8c6aedd8d1de75f",
+      "tipo": "candidaturas",
+      "cargo": "7",
+      "nome_cargo": "Deputado Estadual"
+    },
+    "partidos_6": {
+      "arquivo": "partidos_cargo_6.json.gz",
+      "registros": 113495,
+      "bytes": 1794572,
+      "sha256": "9657c4b56d864449499133d180c4e93c205b7bb13ae6e5784f172870132cadef",
+      "tipo": "partidos",
+      "cargo": "6",
+      "nome_cargo": "Deputado Federal"
+    },
+    "partidos_7": {
+      "arquivo": "partidos_cargo_7.json.gz",
+      "registros": 104401,
+      "bytes": 1672084,
+      "sha256": "a4eef0000eb6657dbcac6bbce5b17350e7b2fb7ef4e19e637dffc4995821169f",
+      "tipo": "partidos",
+      "cargo": "7",
+      "nome_cargo": "Deputado Estadual"
+    }
+  },
+  "observacoes": [
+    "Dados por local de votacao, nao por secao.",
+    "Dados municipais integrais permanecem nas bases existentes.",
+    "Votos nao territorializados nao foram redistribuidos.",
+    "Ausencia de voto e ausencia de cobertura sao distintas.",
+    "Votos nominais e partidarios preservam campos separados."
+  ],
+  "auditoria": {
+    "municipios": 497,
+    "combinacoes_municipio_cargo": 2485,
+    "candidaturas_auditadas": 503461,
+    "combinacoes_partidarias": 27124,
+    "registros_candidaturas_sem_ponto": 0,
+    "registros_partidos_sem_ponto": 0,
+    "conservacao_bairros": true,
+    "conservacao_distritos": true,
+    "conservacao_partidos": true
+  }
+}
