@@ -483,10 +483,24 @@ async function lerCompacto(tipo,cargo){
 async function mapaVotosTerritoriais(token){
   const tipo=s.abrangencia,cargo=s.cargo;
   const usarPartidos=proporcional(cargo)&&!s.candidato;
-  const [linhas,geometria]=await Promise.all([
+  const [linhas,geometria,baseCandidaturas]=await Promise.all([
     lerCompacto(usarPartidos?"partidos":"candidaturas",cargo),
-    geoTerritorial(tipo)
+    geoTerritorial(tipo),
+    usarPartidos&&tipo!=="locais"?lerCompacto("candidaturas",cargo):Promise.resolve(null)
   ]);
+  // A base de partidos não contém id_bairro/id_distrito.
+  // Recuperar a associação uma única vez pelo local eleitoral auditado.
+  const territorioPorLocal=new Map();
+  if(baseCandidaturas){
+    for(const c of baseCandidaturas){
+      const local=chaveLocal(c.cd_municipio,c.nr_zona,c.nr_local_votacao);
+      const id=identificarTerritorio(c,tipo);
+      if(id)territorioPorLocal.set(local,id);
+    }
+  }
+  const idTerritorio=r=>usarPartidos&&tipo!=="locais"
+    ?territorioPorLocal.get(chaveLocal(r.cd_municipio,r.nr_zona,r.nr_local_votacao))
+    :identificarTerritorio(r,tipo);
   if(token!==s.versaoMapa||tipo!==s.abrangencia||cargo!==s.cargo)return;
   const agregados=new Map();
   const denominadores=new Map();
@@ -494,7 +508,7 @@ async function mapaVotosTerritoriais(token){
   let soma=0;
   for(const r of linhas){
     if(s.municipio&&texto(r.cd_municipio_ibge)!==s.municipio)continue;
-    const territorio=identificarTerritorio(r,tipo);
+    const territorio=idTerritorio(r);
     if(!territorio)continue;
     // O denominador é próprio do local/cargo, não somado por candidatura ou partido.
     const den=num(r.denominador_validos_confirmados);
@@ -523,7 +537,7 @@ async function mapaVotosTerritoriais(token){
   const chavesLocais=new Map();
   for(const r of linhas){
     if(s.municipio&&texto(r.cd_municipio_ibge)!==s.municipio)continue;
-    const id=identificarTerritorio(r,tipo);
+    const id=idTerritorio(r);
     if(!id)continue;
     const local=chaveLocal(r.cd_municipio,r.nr_zona,r.nr_local_votacao);
     const chave=id+"§"+local;
