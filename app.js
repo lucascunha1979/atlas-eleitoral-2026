@@ -457,16 +457,150 @@ async function camadaDeLocais(){
     "Os 135 locais em revisão não são exibidos como posições exatas. "+
     "O filtro partidário não redistribui votos entre estabelecimentos.";
 }
+
+/* INTEGRAÇÃO 2026 — dados compactos por local de votação; não redistribuir votos. */
+const cacheEleitoralCompacto=new Map();
+async function lerCompacto(tipo,cargo){
+  const nome=tipo==="candidaturas"?"candidaturas":"partidos";
+  const url="dados/votos_compactos/"+nome+"_cargo_"+cargo+".json.gz";
+  if(!cacheEleitoralCompacto.has(url)){
+    const tarefa=(async()=>{
+      const resposta=await fetch(url);
+      if(!resposta.ok)throw new Error("Arquivo eleitoral não publicado: "+url+" (HTTP "+resposta.status+")");
+      if(typeof pako==="undefined")throw new Error("Biblioteca GZIP pako não carregada.");
+      const bytes=new Uint8Array(await resposta.arrayBuffer());
+      const objeto=JSON.parse(pako.ungzip(bytes,{to:"string"}));
+      if(!Array.isArray(objeto.columns)||!Array.isArray(objeto.rows))
+        throw new Error("Estrutura GZIP incompatível: "+url);
+      const campos=objeto.columns;
+      return objeto.rows.map(linha=>Object.fromEntries(campos.map((c,i)=>[c,linha[i]])));
+    })();
+    cacheEleitoralCompacto.set(url,tarefa);
+    tarefa.catch(()=>cacheEleitoralCompacto.delete(url));
+  }
+  return cacheEleitoralCompacto.get(url);
+}
+async function mapaVotosTerritoriais(token){
+  const tipo=s.abrangencia,cargo=s.cargo;
+  const usarPartidos=proporcional(cargo)&&!s.candidato;
+  const [linhas,geometria]=await Promise.all([
+    lerCompacto(usarPartidos?"partidos":"candidaturas",cargo),
+    geoTerritorial(tipo)
+  ]);
+  if(token!==s.versaoMapa||tipo!==s.abrangencia||cargo!==s.cargo)return;
+  const agregados=new Map();
+  const denominadores=new Map();
+  const presenca=new Set();
+  let soma=0;
+  for(const r of linhas){
+    if(s.municipio&&texto(r.cd_municipio_ibge)!==s.municipio)continue;
+    const territorio=identificarTerritorio(r,tipo);
+    if(!territorio)continue;
+    // O denominador é próprio do local/cargo, não somado por candidatura ou partido.
+    const den=num(r.denominador_validos_confirmados);
+    denominadores.set(territorio,Math.max(denominadores.get(territorio)||0,den));
+    let aceitar=!s.partido||texto(r.sg_partido)===s.partido;
+    if(s.candidato){
+      const chave=texto(r.sq_candidato||r.nr_candidato+"|"+r.nome_candidato_final);
+      aceitar=aceitar&&chave===s.candidato;
+    }
+    if(!aceitar)continue;
+    let votos;
+    if(usarPartidos){
+      votos=s.tipoVotacao==="legenda"?num(r.votos_legenda):
+        s.tipoVotacao==="nominais"?num(r.nominais_validos):
+        num(r.votos_validos_partido);
+    }else{
+      votos=s.indicador==="votos_nominais_brutos"?
+        num(r.votos_nominais_brutos):num(r.votos_validos_confirmados);
+    }
+    presenca.add(territorio);
+    agregados.set(territorio,(agregados.get(territorio)||0)+votos);
+    soma+=votos;
+  }
+  // Denominadores territoriais precisam somar uma vez por LOCAL, nunca por linha.
+  // Para cargos proporcionais, cada partido repete o denominador do mesmo local.
+  const chavesLocais=new Map();
+  for(const r of linhas){
+    if(s.municipio&&texto(r.cd_municipio_ibge)!==s.municipio)continue;
+    const id=identificarTerritorio(r,tipo);
+    if(!id)continue;
+    const local=chaveLocal(r.cd_municipio,r.nr_zona,r.nr_local_votacao);
+    const chave=id+"§"+local;
+    chavesLocais.set(chave,Math.max(chavesLocais.get(chave)||0,num(r.denominador_validos_confirmados)));
+  }
+  const denTerritorio=new Map();
+  for(const [chave,den] of chavesLocais){
+    const id=chave.split("§")[0];
+    denTerritorio.set(id,(denTerritorio.get(id)||0)+den);
+  }
+  const partes=geometria.features.filter(f=>!s.municipio||texto(f.properties.cd_municipio_ibge??f.properties.CD_MUN)===s.municipio);
+  const valor=(id)=>{
+    if(!presenca.has(id))return null;
+    const v=agregados.get(id)||0;
+    if(s.indicador==="pct_validos"||s.indicador==="pct_concorrencia")
+      return denTerritorio.get(id)?100*v/denTerritorio.get(id):null;
+    return v;
+  };
+  const valores=partes.map(f=>valor(territorioGeo(f,tipo))).filter(v=>v!==null&&v>0);
+  const cortes=quebrasJenks(valores);
+  legendaJenks(cortes,s.indicador.startsWith("pct_"));
+  const rotulo=(s.candidato?"Candidatura":s.partido?"Partido "+s.partido:"Votação")+" · "+nomesCargos[cargo]+" · "+nomeAbrangencia[tipo];
+  $("legenda-mapa").textContent=rotulo;
+  removerCamada();
+  if(tipo==="locais"){
+    const camada=L.layerGroup().addTo(s.map);s.camada=camada;
+    if(s.modo==="calor"&&typeof L.heatLayer==="function"){
+      s.map.removeLayer(camada);
+      const max=Math.max(0,...valores);
+      const pontos=partes.map(f=>{
+        const v=valor(territorioGeo(f,tipo)),p=f.geometry?.coordinates;
+        return v!==null&&v>0&&p?[p[1],p[0],Math.max(.1,Math.sqrt(v/(max||1)))]:null;
+      }).filter(Boolean);
+      s.camada=L.heatLayer(pontos,{radius:22,blur:16,maxZoom:12}).addTo(s.map);
+    }else{
+      for(const f of partes){
+        if(f.geometry?.type!=="Point")continue;
+        const id=territorioGeo(f,tipo),v=valor(id),c=f.geometry.coordinates;
+        const nome=texto(f.properties.NM_LOCAL_VOTACAO||id);
+        const textoV=v===null?"Sem registro territorial":s.indicador.startsWith("pct_")?v.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%":fmt.format(v)+" votos";
+        L.circleMarker([c[1],c[0]],{radius:4,color:"#52677b",weight:.5,fillColor:normalizarCorParticipacao(v,cortes),fillOpacity:.86})
+          .bindTooltip(limpar(nome)+" · "+textoV).addTo(camada);
+      }
+    }
+  }else{
+    s.camada=L.geoJSON({type:"FeatureCollection",features:partes},{
+      style:f=>({color:"#61758b",weight:.7,fillColor:normalizarCorParticipacao(valor(territorioGeo(f,tipo)),cortes),fillOpacity:.84}),
+      onEachFeature:(f,layer)=>{
+        const id=territorioGeo(f,tipo),v=valor(id);
+        const nome=texto(f.properties.nm_distrito||f.properties.nm_bairro||f.properties.nm_municipio||id);
+        const t=v===null?"Sem registro territorial":s.indicador.startsWith("pct_")?v.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%":fmt.format(v)+" votos";
+        layer.bindTooltip(limpar(nome)+" · "+t,{sticky:true});
+      }
+    }).addTo(s.map);
+  }
+  const top=partes.map(f=>({
+    id:territorioGeo(f,tipo),
+    nome:texto(f.properties.nm_distrito||f.properties.nm_bairro||f.properties.NM_LOCAL_VOTACAO||f.properties.nm_municipio||"Território"),
+    mun:texto(f.properties.cd_municipio_ibge??f.properties.CD_MUN),
+    valor:valor(territorioGeo(f,tipo))
+  })).filter(x=>x.valor!==null).sort((a,b)=>b.valor-a.valor).slice(0,250);
+  const t=$("ranking-territorial");t.replaceChildren();
+  $("titulo-ranking-territorial").textContent=rotulo+" · "+top.length+" territórios com registro (até 250 no ranking)";
+  for(let i=0;i<top.length;i++){
+    const x=top[i],tr=document.createElement("tr");
+    const celulas=[String(i+1),x.nome,nomeMunicipio(x.mun),s.indicador.startsWith("pct_")?x.valor.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%":fmt.format(x.valor),"—","—","—","—"];
+    for(const v of celulas){const td=document.createElement("td");td.textContent=v;tr.appendChild(td);}t.appendChild(tr);
+  }
+  $("mapa-escala").textContent=nomeAbrangencia[tipo]+" · "+partes.length+" feições · dados por local de votação; total municipal pode incluir votos fora da territorialização.";
+  $("aviso-cobertura").textContent="Votação territorializada por local, agregada por bairro ou distrito. Município preserva os totais oficiais. Nenhum voto foi redistribuído.";
+}
+
 async function atualizarMapa(){
   const token=++s.versaoMapa;
   try{
     if(indicadoresParticipacao.has(s.indicador)){await mapaParticipacao();return;}
-    if(s.abrangencia!=="municipios"){
-      removerCamada();$("legenda-jenks").replaceChildren();
-      $("mapa-escala").textContent="Votos por candidatura/partido para "+nomeAbrangencia[s.abrangencia]+" ainda não estão publicados. Selecione um indicador de participação ou Municípios.";
-      $("titulo-ranking-territorial").textContent="Selecione brancos, nulos, comparecimento, abstenções ou aptos para a abrangência escolhida.";
-      $("ranking-territorial").replaceChildren();return;
-    }
+    if(s.abrangencia!=="municipios"){await mapaVotosTerritoriais(token);return;}
     if(s.modo==="areas"){areaMunicipal();return;}
     await camadaDeLocais();
     if(token!==s.versaoMapa){
@@ -720,9 +854,6 @@ async function iniciar(){
     s.versaoMapa=0;
     $("abrangencia").addEventListener("change",e=>{
       s.abrangencia=e.target.value;
-      if(s.abrangencia!=="municipios"&&!indicadoresParticipacao.has(s.indicador)){
-        s.indicador="comparecimento";$("indicador").value=s.indicador;
-      }
       atualizarTudo();
     });
     $("cargo").addEventListener("change",e=>{
