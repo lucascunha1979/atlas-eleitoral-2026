@@ -584,6 +584,15 @@ async function mapaVotosTerritoriais(token){
           .bindTooltip(limpar(nome)+" · "+textoV).addTo(camada);
       }
     }
+  }else if(s.modo==="calor"&&typeof L.heatLayer==="function"){
+    const maior=Math.max(0,...valores);
+    const pontos=partes.map(f=>{
+      const v=valor(territorioGeo(f,tipo));
+      if(v===null||v<=0)return null;
+      const centro=L.geoJSON(f).getBounds().getCenter();
+      return [centro.lat,centro.lng,Math.max(.1,Math.sqrt(v/(maior||1)))];
+    }).filter(Boolean);
+    s.camada=L.heatLayer(pontos,{radius:26,blur:19,maxZoom:12}).addTo(s.map);
   }else{
     s.camada=L.geoJSON({type:"FeatureCollection",features:partes},{
       style:f=>({color:"#61758b",weight:.7,fillColor:normalizarCorParticipacao(valor(territorioGeo(f,tipo)),cortes),fillOpacity:.84}),
@@ -825,8 +834,7 @@ function atualizarTudo(aplicarZoom=false){
   atualizarCandidaturas();
   atualizarMapa();
   if(aplicarZoom)zoom();
-  if(s.modo!=="areas")$("legenda-mapa").textContent=
-    `${nomesCargos[s.cargo]} · ${recorte()}`;
+
 }
 async function iniciar(){
   if(location.protocol==="file:"){
