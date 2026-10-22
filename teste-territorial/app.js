@@ -932,6 +932,8 @@ async function iniciar(){
       $("calor-raio-valor").textContent=e.target.value;
       if(s.modo==="calor")atualizarMapa();
     });
+    $("manual-abrir")?.addEventListener("click",()=> $("manual-dialogo").showModal());
+    $("manual-fechar")?.addEventListener("click",()=> $("manual-dialogo").close());
     $("metodologia-abrir")?.addEventListener("click",()=> $("metodologia-dialogo").showModal());
     $("metodologia-fechar")?.addEventListener("click",()=> $("metodologia-dialogo").close());
     $("imprimir").addEventListener("click",async()=>{try{aviso("Gerando relatório PDF municipal...");await gerarRelatorioPDF();aviso("Relatório municipal gerado. Distritos e bairros dependem da integração territorial.");}catch(e){aviso("PDF: "+e.message,true);}});
