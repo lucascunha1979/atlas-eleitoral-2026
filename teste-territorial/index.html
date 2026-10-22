@@ -133,7 +133,7 @@
       <div class="panel map-panel" id="painel-mapa">
         <div class="panel-heading">
           <div><h2>Distribuição municipal</h2><p id="legenda-mapa">Votos nominais brutos</p></div>
-          <div class="map-actions"><button id="expandir-mapa" type="button">Ampliar mapa</button><button id="metodologia-abrir" type="button">Metodologia</button><button id="imprimir" type="button">Salvar em PDF</button><button id="limpar" type="button">Ver todo o RS</button></div>
+          <div class="map-actions"><button id="expandir-mapa" type="button">Ampliar mapa</button><button id="manual-abrir" type="button">Como usar</button><button id="metodologia-abrir" type="button">Metodologia</button><button id="imprimir" type="button">Salvar em PDF</button><button id="limpar" type="button">Ver todo o RS</button></div>
         </div>
         <div id="mapa"></div>
         <div class="controle-calor"><label for="calor-raio">Detalhamento do mapa de calor</label> <input id="calor-raio" type="range" min="9" max="35" value="14" step="1"> <span id="calor-raio-valor">14</span><small>Menor valor = manchas mais localizadas. O calor é uma representação visual, não uma medida de distância.</small></div><div id="legenda-jenks" class="jenks-legend" aria-label="Legenda cartográfica"></div><div id="mapa-escala" class="map-foot"></div>
@@ -194,7 +194,7 @@
     <footer>
       Atlas Eleitoral RS 2026 · versão de desenvolvimento.
       Os rankings apresentam resultados apurados, não projeções.
-      Fontes eleitorais preservadas e checagens de integridade documentadas.
+      Fontes eleitorais preservadas e checagens de integridade documentadas. Fontes: <a href="https://dadosabertos.tse.jus.br/" target="_blank" rel="noopener noreferrer">TSE</a> · <a href="https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html" target="_blank" rel="noopener noreferrer">IBGE</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>.
     </footer>
   </main>
 
@@ -206,6 +206,26 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
   <script src="teste-territorial/app.js"></script>
+
+<dialog id="manual-dialogo" aria-label="Manual de utilização do Atlas Eleitoral">
+  <div class="metodo-topo"><h2>Como usar o Atlas Eleitoral RS 2026</h2><button id="manual-fechar" type="button">Fechar ✕</button></div>
+  <div class="metodo-corpo">
+    <p><strong>Comece aqui:</strong> escolha o cargo e o município. Depois selecione a abrangência territorial e o indicador que deseja visualizar. O mapa e as análises acompanham esses filtros.</p>
+    <h3>1. Escolha o recorte</h3>
+    <p>Em <strong>Cargo</strong>, escolha Presidente, Governador, Senador ou uma das duas eleições para deputado. Em <strong>Município</strong>, selecione uma cidade ou mantenha todo o Rio Grande do Sul. Em <strong>Abrangência territorial</strong>, escolha Municípios, Distritos, Bairros ou Locais de votação.</p>
+    <h3>2. Escolha o que deseja investigar</h3>
+    <p>Em <strong>Indicador do mapa</strong>, selecione votos, percentuais, brancos, nulos, comparecimento, abstenções ou eleitorado apto. Para estudar um resultado específico, escolha também <strong>Partido</strong> e/ou <strong>Candidatura</strong>. Para ver todos, mantenha esses filtros sem seleção.</p>
+    <h3>3. Mude a visualização</h3>
+    <p><strong>Mapa de áreas:</strong> compare territórios pelas cores. <strong>Pontos:</strong> explore a localização dos locais de votação. <strong>Calor:</strong> observe padrões de concentração, ajustando o detalhamento no controle abaixo do mapa. <strong>Clusters:</strong> agrupe pontos próximos para facilitar a navegação. Nem todo modo se aplica da mesma maneira a todas as abrangências.</p>
+    <h3>4. Explore os resultados</h3>
+    <p>Aproxime e afaste o mapa com os botões + e −; passe o mouse sobre as áreas ou pontos para consultar os valores. Use <strong>Ampliar mapa</strong> para explorar melhor as nuances e <strong>Sair da tela cheia</strong> para retornar. Consulte os rankings, os gráficos e a tabela abaixo do mapa.</p>
+    <h3>5. Faça comparações e consulte explicações</h3>
+    <p>Troque um filtro por vez para comparar cargos, partidos, candidaturas e territórios. Para interpretar percentuais, votos nominais, votos de legenda ou diferenças entre totais municipais e locais, abra o botão <strong>Metodologia</strong>.</p>
+    <h3>Exemplo prático</h3>
+    <p>Para visualizar os votos de uma candidatura presidencial em bairros de Porto Alegre, selecione: <strong>Presidente → Porto Alegre → Bairros → Partido → Candidatura → Votos válidos confirmados → Mapa de áreas</strong>. Para observar a concentração, mude somente para <strong>Mapa de calor</strong>.</p>
+    <p><strong>Dica:</strong> para números exatos, dê preferência ao mapa de áreas, aos pontos e às tabelas. O calor é uma representação visual suavizada, não uma contagem por mancha colorida.</p>
+  </div>
+</dialog>
 <dialog id="metodologia-dialogo" aria-label="Notas metodológicas">
   <div class="metodo-topo"><h2>Notas metodológicas — Atlas Eleitoral RS 2026</h2><button id="metodologia-fechar" type="button">Fechar ✕</button></div>
   <div class="metodo-corpo">
@@ -221,7 +241,12 @@
     <p>Votos nominais brutos e votos válidos confirmados são medidas distintas. Nos cargos proporcionais, os votos de legenda são contabilizados no total válido do partido, mas não como votos nominais de uma candidatura. Os dados por bairro e distrito são agregados a partir dos locais de votação associados a esses territórios.</p>
     <h3>Limites e cobertura</h3>
     <p>O universo tem 497 municípios. A soma dos votos territorializados pode ser inferior ao total municipal; votos sem associação territorial não são redistribuídos. <strong>Zero voto</strong> não deve ser confundido com <strong>ausência de informação</strong>. A geometria dos mapas não substitui a conferência das bases municipais.</p>
-    <h3>Como interpretar o calor?</h3>
+        <h3>Fontes e créditos</h3>
+    <p><strong>Dados eleitorais e eleitorado:</strong> Tribunal Superior Eleitoral (TSE), <a href="https://dadosabertos.tse.jus.br/" target="_blank" rel="noopener noreferrer">Portal de Dados Abertos</a> — resultados de 2026, votação, candidaturas e eleitorado. O Atlas utiliza arquivos eleitorais tratados, conferidos e agregados para o Rio Grande do Sul; os resultados são de responsabilidade da fonte original.</p>
+    <p><strong>Malhas territoriais municipais:</strong> Instituto Brasileiro de Geografia e Estatística (IBGE), <a href="https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html" target="_blank" rel="noopener noreferrer">Malhas Territoriais</a>. Distritos e bairros são representados pelas camadas geográficas integradas ao projeto, com correspondências eleitorais auditadas; não se afirma aqui que todos os recortes intramunicipais provenham exclusivamente dessa página do IBGE.</p>
+    <p><strong>Mapa de fundo:</strong> © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">colaboradores do OpenStreetMap</a>, exibido com Leaflet e o serviço de mosaicos configurado no painel.</p>
+    <p><strong>Tratamento e visualização:</strong> Atlas Eleitoral RS 2026. A organização espacial, a agregação territorial, as classificações e os gráficos são procedimentos do projeto, não produtos oficiais do TSE ou do IBGE.</p>
+<h3>Como interpretar o calor?</h3>
     <p>O controle de detalhamento modifica somente a apresentação visual, nunca a contagem de votos. Para comparar valores exatos, prefira mapas de áreas, pontos e rankings. O calor não constitui estimativa de votos em locais sem dados.</p>
   </div>
 </dialog></body>
